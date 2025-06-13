@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GITAM Aero Astro Club
+
+Welcome to the GITAM Aero Astro Club repository! This project aims to establish a robust online presence for the GITAM Aero Astro Club, providing a comprehensive platform for members and visitors alike.
+
+## Project Overview
+
+The GITAM Aero Astro Club website serves as a landing page and a member hub, offering essential features and information tailored for club members. The project is built using React and TypeScript, ensuring a modern and efficient user experience.
+
+## Features
+
+- **Landing Page**: The main entry point for users, showcasing the club's mission, activities, and events.
+- **Member Dashboard**: A dedicated space for club members to access personalized features, updates, and resources.
+- **Reusable Components**: A collection of React components designed for reusability across the application, promoting consistency and efficiency.
+- **Responsive Design**: The website is styled to be responsive, ensuring a seamless experience across various devices.
+
+## Project Structure
+
+```
+gitam-aero-astro-club
+├── src
+│   ├── components        # Reusable React components
+│   ├── pages             # Application pages
+│   │   ├── index.tsx     # Landing page
+│   │   └── dashboard.tsx  # Member dashboard
+│   ├── styles            # CSS styles
+│   │   └── main.css      # Main stylesheet
+│   └── utils             # Utility functions
+├── public
+│   └── index.html        # Main HTML template
+├── package.json          # npm configuration
+├── tsconfig.json         # TypeScript configuration
+└── README.md             # Project documentation
+```
 
 ## Getting Started
 
-First, run the development server:
+To get started with the project, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/gitam-aero-astro-club.git
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Navigate to the project directory:
+   ```
+   cd gitam-aero-astro-club
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Install the dependencies:
+   ```
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Start the development server:
+   ```
+   npm start
+   ```
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Contributions are welcome! If you have suggestions or improvements, please open an issue or submit a pull request.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Thank you for visiting the GITAM Aero Astro Club repository! We hope you find this project useful and engaging.
