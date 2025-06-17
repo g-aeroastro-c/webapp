@@ -3,8 +3,6 @@
 import React, { useState } from "react";
 import { MenuItem, HoveredLink, ProductItem } from "./ui/navbar-menu";
 import { cn } from "@/lib/utils";
-import { a } from "framer-motion/client";
-
 export function NavbarDemo() {
   return (
     <div className="relative w-full flex items-center justify-center">
