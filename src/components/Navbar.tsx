@@ -57,22 +57,19 @@ function Navbar({ className }: { className?: string }) {
             <MenuItem
               setActive={setActive}
               active={active}
-              item={
-                <a
-                  href="about-us"
-                  onClick={() => {
-                    const section = document.getElementById("about-us");
-                    if (section) {
-                      section.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                  className="cursor-pointer dark:text-[#FAFAFA] hover:opacity-90"
-                >
-                  About Us
-                </a>
-              }
-            />
-            <MenuItem setActive={setActive} active={active} item="Projects">
+              item={<a
+                href="about-us"
+                onClick={() => {
+                  const section = document.getElementById("about-us");
+                  if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                  }
+                } }
+                className="cursor-pointer dark:text-[#FAFAFA] hover:opacity-90"
+              >
+                About Us
+              </a>} value={""}            />
+            <MenuItem setActive={setActive} active={active} item="Projects" value={""}>
               <div className="text-sm grid grid-cols-2 gap-10 p-4">
                 <ProductItem
                   title="Algochurn"
@@ -100,7 +97,7 @@ function Navbar({ className }: { className?: string }) {
                 />
               </div>
             </MenuItem>
-            <MenuItem setActive={setActive} active={active} item="Blogs">
+            <MenuItem setActive={setActive} active={active} item="Blogs" value={""}>
               <div className="flex flex-col space-y-4 text-sm">
                 <HoveredLink href="/hobby">Hobby</HoveredLink>
                 <HoveredLink href="/individual">Individual</HoveredLink>
@@ -109,23 +106,20 @@ function Navbar({ className }: { className?: string }) {
               </div>
             </MenuItem>
             <MenuItem 
-              setActive={setActive} 
-              active={active} 
-              item={
-                <a
-                  href="/contactUs"
-                  onClick={() => {
-                    const section = document.getElementById("contactUs");
-                    if (section) {
-                      section.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                  className="cursor-pointer"
-                >
-                  Contact Us
-                </a>
-              }
-            />
+              setActive={setActive}
+              active={active}
+              item={<a
+                href="/contactUs"
+                onClick={() => {
+                  const section = document.getElementById("contactUs");
+                  if (section) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                  }
+                } }
+                className="cursor-pointer"
+              >
+                Contact Us
+              </a>} value={""}            />
           </Menu>
         </div>
         {/* Desktop Auth Buttons */}
@@ -183,7 +177,7 @@ function Navbar({ className }: { className?: string }) {
           >
             {/* Menu */}
             <Menu setActive={setActive}>
-              <MenuItem setActive={setActive} active={active} item="Services">
+              <MenuItem setActive={setActive} active={active} item="Services" value={""}>
                 <div className="flex flex-col space-y-4 text-sm">
                   <HoveredLink href="/web-dev">Web Development</HoveredLink>
                   <HoveredLink href="/interface-design">Interface Design</HoveredLink>
@@ -191,7 +185,7 @@ function Navbar({ className }: { className?: string }) {
                   <HoveredLink href="/branding">Branding</HoveredLink>
                 </div>
               </MenuItem>
-              <MenuItem setActive={setActive} active={active} item="Products">
+              <MenuItem setActive={setActive} active={active} item="Products" value={""}>
                 <div className="text-sm grid grid-cols-1 gap-6 p-2">
                   <ProductItem
                     title="Algochurn"
@@ -219,7 +213,7 @@ function Navbar({ className }: { className?: string }) {
                   />
                 </div>
               </MenuItem>
-              <MenuItem setActive={setActive} active={active} item="Pricing">
+              <MenuItem setActive={setActive} active={active} item="Pricing" value={""}>
                 <div className="flex flex-col space-y-4 text-sm">
                   <HoveredLink href="/hobby">Hobby</HoveredLink>
                   <HoveredLink href="/individual">Individual</HoveredLink>

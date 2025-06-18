@@ -16,16 +16,18 @@ const transition = {
 export const MenuItem = ({
   setActive,
   active,
+  value,
   item,
   children,
 }: {
   setActive: (item: string) => void;
   active: string | null;
-  item: string;
+  value: string;
+  item: React.ReactNode;
   children?: React.ReactNode;
 }) => {
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative ">
+    <div onMouseEnter={() => setActive(value)} className="relative ">
       <motion.p
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-[#FAFAFA] hover:opacity-90"
