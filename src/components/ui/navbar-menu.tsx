@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { maxGeneratorDuration, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 
 
