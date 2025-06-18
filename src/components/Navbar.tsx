@@ -109,7 +109,7 @@ function Navbar({ className }: { className?: string }) {
               setActive={setActive}
               active={active}
               item={<a
-                href="/contactUs"
+                href="#contactUs"
                 onClick={() => {
                   const section = document.getElementById("contactUs");
                   if (section) {
