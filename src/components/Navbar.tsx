@@ -68,7 +68,7 @@ function Navbar({ className }: { className?: string }) {
                 className="cursor-pointer dark:text-[#FAFAFA] hover:opacity-90"
               >
                 About Us
-              </a>} value={""}            />
+              </a>} value={""} />
             <MenuItem setActive={setActive} active={active} item="Projects" value={""}>
               <div className="text-sm grid grid-cols-2 gap-10 p-4">
                 <ProductItem
