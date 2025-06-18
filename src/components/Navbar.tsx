@@ -119,7 +119,7 @@ function Navbar({ className }: { className?: string }) {
                 className="cursor-pointer"
               >
                 Contact Us
-              </a>} value={""}            />
+              </a>} value={""} />
           </Menu>
         </div>
         {/* Desktop Auth Buttons */}
