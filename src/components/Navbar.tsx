@@ -58,7 +58,7 @@ function Navbar({ className }: { className?: string }) {
               setActive={setActive}
               active={active}
               item={<a
-                href="about-us"
+                href="#about-us"
                 onClick={() => {
                   const section = document.getElementById("about-us");
                   if (section) {
