@@ -1,245 +1,380 @@
 "use client";
 
 import React, { useState } from "react";
-import { MenuItem, HoveredLink, ProductItem } from "./ui/navbar-menu";
 import { cn } from "@/lib/utils";
+
 export function NavbarDemo() {
   return (
-    <div className="relative w-full flex items-center justify-center">
-      <Navbar className="top-2" />
-    </div>
+    <>
+      {/* Custom CSS for rich animations */}
+      <style jsx global>{`
+        @keyframes slideInRight {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        
+        .animate-slideInRight {
+          animation: slideInRight 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 300ms ease-out forwards;
+        }
+        
+        /* Custom gradient borders for enhanced visual appeal */
+        .border-gradient-to-r {
+          background: linear-gradient(90deg, transparent, rgba(156, 163, 175, 0.5), transparent);
+          height: 1px;
+        }
+      `}</style>
+      <div className="relative w-full flex items-center justify-center">
+        <Navbar className="top-2" />
+      </div>
+    </>
   );
 }
 
-export const Menu = ({
-  setActive,
-  children,
-  className,
-}: {
-  setActive: (value: string | null) => void;
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <nav
-      onMouseLeave={() => setActive(null)}
-      className={cn(
-        "relative rounded-full border border-transparent dark:bg-[#17191C] dark:border-white/[0.2] bg-[#17191C] text-[#FAFAFA] shadow-input flex justify-center space-x-4 px-8 py-6",
-        className
-      )}
-    >
-      {children}
-    </nav>
-  );
-
-};
-
 function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div
-      className={cn("fixed top-10 inset-x-0 max-w-4xl mx-auto z-50", className)}
-    >
-      <nav className="flex items-center justify-between bg-[#17191C] rounded-full px-5 py-1 shadow-lg relative">
-        {/* Logo */}
-        <div className="flex items-center z-20">
-          <img
-            src="./gaacLogo.png"
-            alt="GITAM Aero Astro Club"
-            className="h-20 w-20 mr-3"
-          />
+    <>
+      <div
+        className={cn("fixed top-10 inset-x-0 max-w-4xl mx-auto z-50 px-4", className)}
+      >        <nav className="flex items-center justify-between bg-[#17191C]/95 backdrop-blur-md rounded-full px-6 py-2 shadow-xl border border-gray-800/30 hover:border-gray-700/50 hover:shadow-[0_8px_32px_rgba(9,192,249,0.12)] transition-all duration-300 relative group">
+        {/* Subtle glow effect on navbar hover */}
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#09C0F9]/5 via-transparent to-[#09C0F9]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>        {/* Desktop Logo with Refined Micro Interactions */}
+        <div className="hidden md:flex items-center z-20 group/logo cursor-pointer">
+          <div className="relative">
+            <img
+              src="./gaacLogo.png"
+              alt="GITAM Aero Astro Club"
+              className="h-14 w-14 transition-all duration-200 ease-out group-hover/logo:scale-105"
+            />
+            {/* Subtle pulse ring on hover */}
+            <div className="absolute inset-0 rounded-full bg-[#09C0F9]/20 scale-90 opacity-0 group-hover/logo:scale-110 group-hover/logo:opacity-100 transition-all duration-300 blur-sm"></div>
+            <div className="absolute inset-0 rounded-full border border-[#09C0F9]/30 scale-100 opacity-0 group-hover/logo:scale-125 group-hover/logo:opacity-100 transition-all duration-500"></div>
+          </div>
         </div>
-        {/* Desktop Menu */}
-        <div className="hidden md:flex flex-1 justify-center">
-          <Menu setActive={setActive} className="bg-[#17191C] text-[#FAFAFA]">
-            <MenuItem
-              setActive={setActive}
-              active={active}
-              item={<a
-                href="about-us"
-                onClick={() => {
+
+        {/* Mobile Centered Logo - Larger and More Prominent */}
+        <div className="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 group/logo cursor-pointer">
+          <div className="relative">
+            <img
+              src="./gaacLogo.png"
+              alt="GITAM Aero Astro Club"
+              className="h-16 w-16 transition-all duration-300 ease-out group-hover/logo:scale-105"
+            />
+            {/* Enhanced pulse ring for mobile */}
+            <div className="absolute inset-0 rounded-full bg-[#09C0F9]/25 scale-90 opacity-0 group-hover/logo:scale-115 group-hover/logo:opacity-100 transition-all duration-400 blur-sm"></div>
+            <div className="absolute inset-0 rounded-full border border-[#09C0F9]/40 scale-100 opacity-0 group-hover/logo:scale-130 group-hover/logo:opacity-100 transition-all duration-600"></div>
+          </div>
+        </div>{/* Desktop Menu with Refined Hover Effects */}
+        <div className="hidden md:flex items-center space-x-1">
+          <a
+            href="#about-us"
+            onClick={(e) => {
+              e.preventDefault();
+              const section = document.getElementById("about-us");
+              if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className="relative text-[#FAFAFA]/90 hover:text-[#FAFAFA] transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg group/link overflow-hidden"
+          >
+            <span className="relative z-10 font-medium text-sm">About Us</span>
+            {/* Simple background on hover */}
+            <div className="absolute inset-0 bg-white/5 scale-95 opacity-0 group-hover/link:scale-100 group-hover/link:opacity-100 transition-all duration-200 rounded-lg"></div>
+            {/* Minimal underline */}
+            <div className="absolute bottom-1 left-1/2 w-0 h-px bg-[#09C0F9] group-hover/link:w-6 group-hover/link:left-1/2 group-hover/link:-translate-x-1/2 transition-all duration-250"></div>
+          </a>
+          <a
+            href="/projects"
+            className="relative text-[#FAFAFA]/90 hover:text-[#FAFAFA] transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg group/link overflow-hidden"
+          >
+            <span className="relative z-10 font-medium text-sm">Projects</span>
+            <div className="absolute inset-0 bg-white/5 scale-95 opacity-0 group-hover/link:scale-100 group-hover/link:opacity-100 transition-all duration-200 rounded-lg"></div>
+            <div className="absolute bottom-1 left-1/2 w-0 h-px bg-[#09C0F9] group-hover/link:w-6 group-hover/link:left-1/2 group-hover/link:-translate-x-1/2 transition-all duration-250"></div>
+          </a>
+          <a
+            href="/blogs"
+            className="relative text-[#FAFAFA]/90 hover:text-[#FAFAFA] transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg group/link overflow-hidden"
+          >
+            <span className="relative z-10 font-medium text-sm">Blogs</span>
+            <div className="absolute inset-0 bg-white/5 scale-95 opacity-0 group-hover/link:scale-100 group-hover/link:opacity-100 transition-all duration-200 rounded-lg"></div>
+            <div className="absolute bottom-1 left-1/2 w-0 h-px bg-[#09C0F9] group-hover/link:w-6 group-hover/link:left-1/2 group-hover/link:-translate-x-1/2 transition-all duration-250"></div>
+          </a>
+          <a
+            href="#contact-us"
+            onClick={(e) => {
+              e.preventDefault();
+              const section = document.getElementById("contact-us");
+              if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+            className="relative text-[#FAFAFA]/90 hover:text-[#FAFAFA] transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg group/link overflow-hidden"
+          >
+            <span className="relative z-10 font-medium text-sm">Contact Us</span>
+            <div className="absolute inset-0 bg-white/5 scale-95 opacity-0 group-hover/link:scale-100 group-hover/link:opacity-100 transition-all duration-200 rounded-lg"></div>
+            <div className="absolute bottom-1 left-1/2 w-0 h-px bg-[#09C0F9] group-hover/link:w-6 group-hover/link:left-1/2 group-hover/link:-translate-x-1/2 transition-all duration-250"></div>
+          </a>
+        </div>        {/* Desktop Auth Buttons with Refined Interactions */}
+        <div className="hidden md:flex items-center space-x-3">
+          <a
+            href="/signin"
+            className="relative text-[#FAFAFA]/90 hover:text-[#FAFAFA] transition-all duration-200 cursor-pointer px-4 py-2 rounded-lg group/signin font-medium text-sm"
+          >
+            <span className="relative z-10">Sign In</span>
+            {/* Subtle background on hover */}
+            <div className="absolute inset-0 bg-white/8 opacity-0 group-hover/signin:opacity-100 transition-opacity duration-200 rounded-lg"></div>
+            {/* Minimal border effect */}
+            <div className="absolute inset-0 border border-transparent group-hover/signin:border-[#09C0F9]/20 rounded-lg transition-colors duration-200"></div>
+          </a>          <a
+            href="/signup"
+            className="relative px-6 py-2.5 rounded-full bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] text-black font-bold text-sm transition-all duration-300 group/signup overflow-hidden active:scale-95 shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25"
+          >
+            {/* Animated shimmer effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover/signup:translate-x-full transition-transform duration-700 ease-in-out"></div>
+            
+            <span className="relative z-10 flex items-center space-x-2">
+              <span>Sign Up Now</span>
+              <svg className="w-4 h-4 group-hover/signup:translate-x-0.5 group-hover/signup:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
+            
+            {/* Subtle pulse on active */}
+            <div className="absolute inset-0 bg-white/20 scale-95 opacity-0 group-active/signup:scale-105 group-active/signup:opacity-100 transition-all duration-150 rounded-full"></div>
+          </a>
+        </div>        {/* Mobile Menu Button with Rich Animations */}
+        <div className="md:hidden flex items-center">
+          {/* Invisible spacer to balance the centered logo */}
+          <div className="w-11 h-11"></div>
+        </div>
+
+        <button
+          className="md:hidden relative z-30 flex items-center justify-center w-11 h-11 rounded-lg transition-all duration-300 bg-white/5 hover:bg-white/10 border border-gray-700/50 hover:border-[#09C0F9]/30 focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none hover:shadow-lg hover:shadow-[#09C0F9]/10 active:scale-95 group/burger"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+          aria-expanded={mobileMenuOpen}
+        >{/* Animated hamburger lines with rich microinteractions */}
+          <div className="flex flex-col space-y-1.5">
+            <span
+              className={cn(
+                "block w-5 h-0.5 bg-white rounded-full transition-all duration-300 ease-out group-hover/burger:bg-[#09C0F9]",
+                mobileMenuOpen ? "rotate-45 translate-y-2 scale-110" : "group-hover/burger:scale-110"
+              )}
+            />
+            <span
+              className={cn(
+                "block w-5 h-0.5 bg-white rounded-full transition-all duration-300 ease-out group-hover/burger:bg-[#09C0F9]",
+                mobileMenuOpen ? "opacity-0 scale-0" : "group-hover/burger:scale-110"
+              )}
+            />
+            <span
+              className={cn(
+                "block w-5 h-0.5 bg-white rounded-full transition-all duration-300 ease-out group-hover/burger:bg-[#09C0F9]",
+                mobileMenuOpen ? "-rotate-45 -translate-y-2 scale-110" : "group-hover/burger:scale-110"
+              )}
+            />
+          </div>
+          
+          {/* Subtle pulse effect on button */}
+          <div className="absolute inset-0 rounded-lg bg-[#09C0F9]/20 scale-90 opacity-0 group-hover/burger:scale-100 group-hover/burger:opacity-100 transition-all duration-300"></div>
+        </button>        </nav>
+      </div>      {/* Mobile Menu Overlay with Smooth Fade Animation */}
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fadeIn"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}      {/* Mobile Menu with Enhanced Animations */}
+      {mobileMenuOpen && (
+        <div 
+          className="fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-[#1A1D21] to-[#151719] border-l border-gray-800/50 shadow-2xl z-50 animate-slideInRight"
+        >
+          {/* Sophisticated swipe indicator with pulse */}
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-16 bg-gradient-to-b from-transparent via-[#09C0F9]/50 to-transparent rounded-r-full animate-pulse"></div>
+          
+          {/* Enhanced Mobile Menu Header */}
+          <div className="flex items-center justify-between p-6 border-b border-gray-800/30 bg-gradient-to-r from-transparent to-[#09C0F9]/5">
+            <div className="flex items-center space-x-3 group/header">
+              <div className="relative">
+                <img
+                  src="./gaacLogo.png"
+                  alt="GAAC"
+                  className="w-10 h-10 transition-all duration-300 group-hover/header:scale-110 group-hover/header:rotate-6"
+                />
+                {/* Subtle glow effect on logo */}
+                <div className="absolute inset-0 rounded-full bg-[#09C0F9]/20 scale-75 opacity-0 group-hover/header:scale-110 group-hover/header:opacity-100 transition-all duration-300 blur-sm"></div>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold text-base group-hover/header:text-[#09C0F9] transition-colors duration-300">GAAC</h3>
+                <p className="text-gray-400 text-sm group-hover/header:text-gray-300 transition-colors duration-300">Aero Astro Club</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 active:bg-white/15 flex items-center justify-center transition-all duration-200 focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none group/close hover:rotate-90 active:scale-95"
+              aria-label="Close menu"
+            >
+              <svg className="w-5 h-5 text-white group-hover/close:text-[#09C0F9] transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>          {/* Enhanced Mobile Navigation Links with Rich Interactions */}
+          <nav className="flex-1 px-6 py-6">
+            <div className="space-y-2">
+              <a
+                href="#about-us"
+                onClick={(e) => {
+                  e.preventDefault();
                   const section = document.getElementById("about-us");
                   if (section) {
                     section.scrollIntoView({ behavior: "smooth" });
                   }
-                } }
-                className="cursor-pointer dark:text-[#FAFAFA] hover:opacity-90"
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center space-x-4 px-4 py-4 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/link focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none transform hover:translate-x-1 active:scale-98"
               >
-                About Us
-              </a>} value={""}            />
-            <MenuItem setActive={setActive} active={active} item="Projects" value={""}>
-              <div className="text-sm grid grid-cols-2 gap-10 p-4">
-                <ProductItem
-                  title="Algochurn"
-                  href="https://algochurn.com"
-                  src="https://assets.aceternity.com/demos/algochurn.webp"
-                  description="Prepare for tech interviews like never before."
-                />
-                <ProductItem
-                  title="Tailwind Master Kit"
-                  href="https://tailwindmasterkit.com"
-                  src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
-                  description="Production ready Tailwind css components for your next project"
-                />
-                <ProductItem
-                  title="Moonbeam"
-                  href="https://gomoonbeam.com"
-                  src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
-                  description="Never write from scratch again. Go from idea to blog in minutes."
-                />
-                <ProductItem
-                  title="Rogue"
-                  href="https://userogue.com"
-                  src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.47.07%E2%80%AFPM.png"
-                  description="Respond to government RFPs, RFIs and RFQs 10x faster using AI"
-                />
-              </div>
-            </MenuItem>
-            <MenuItem setActive={setActive} active={active} item="Blogs" value={""}>
-              <div className="flex flex-col space-y-4 text-sm">
-                <HoveredLink href="/hobby">Hobby</HoveredLink>
-                <HoveredLink href="/individual">Individual</HoveredLink>
-                <HoveredLink href="/team">Team</HoveredLink>
-                <HoveredLink href="/enterprise">Enterprise</HoveredLink>
-              </div>
-            </MenuItem>
-            <MenuItem 
-              setActive={setActive}
-              active={active}
-              item={<a
-                href="/contactUs"
-                onClick={() => {
-                  const section = document.getElementById("contactUs");
+                <div className="relative">
+                  <svg className="w-6 h-6 text-gray-500 group-hover/link:text-[#09C0F9] transition-all duration-300 group-hover/link:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                  </svg>
+                  {/* Icon glow effect */}
+                  <div className="absolute inset-0 bg-[#09C0F9]/20 rounded-full scale-0 group-hover/link:scale-150 transition-transform duration-300 blur-sm"></div>
+                </div>
+                <span className="font-semibold text-base group-hover/link:text-[#09C0F9] transition-colors duration-300">About Us</span>
+                <svg className="w-4 h-4 text-gray-600 group-hover/link:text-[#09C0F9] opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all duration-300 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+
+              <a
+                href="/projects"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center space-x-4 px-4 py-4 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/link focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none transform hover:translate-x-1 active:scale-98"
+              >
+                <div className="relative">
+                  <svg className="w-6 h-6 text-gray-500 group-hover/link:text-[#09C0F9] transition-all duration-300 group-hover/link:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                  <div className="absolute inset-0 bg-[#09C0F9]/20 rounded-full scale-0 group-hover/link:scale-150 transition-transform duration-300 blur-sm"></div>
+                </div>
+                <span className="font-semibold text-base group-hover/link:text-[#09C0F9] transition-colors duration-300">Projects</span>
+                <svg className="w-4 h-4 text-gray-600 group-hover/link:text-[#09C0F9] opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all duration-300 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+
+              <a
+                href="/blogs"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center space-x-4 px-4 py-4 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/link focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none transform hover:translate-x-1 active:scale-98"
+              >
+                <div className="relative">
+                  <svg className="w-6 h-6 text-gray-500 group-hover/link:text-[#09C0F9] transition-all duration-300 group-hover/link:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                  </svg>
+                  <div className="absolute inset-0 bg-[#09C0F9]/20 rounded-full scale-0 group-hover/link:scale-150 transition-transform duration-300 blur-sm"></div>
+                </div>
+                <span className="font-semibold text-base group-hover/link:text-[#09C0F9] transition-colors duration-300">Blogs</span>
+                <svg className="w-4 h-4 text-gray-600 group-hover/link:text-[#09C0F9] opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all duration-300 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+
+              <a
+                href="#contact-us"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const section = document.getElementById("contact-us");
                   if (section) {
                     section.scrollIntoView({ behavior: "smooth" });
                   }
-                } }
-                className="cursor-pointer"
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center space-x-4 px-4 py-4 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/link focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none transform hover:translate-x-1 active:scale-98"
               >
-                Contact Us
-              </a>} value={""}            />
-          </Menu>
-        </div>
-        {/* Desktop Auth Buttons */}
-        <div className="hidden md:flex items-center space-x-3">
-          <a
-            href="/signup"
-            className="px-4 py-2 rounded-full bg-[#09C0F9] text-black font-semibold hover:bg-[#38d3ff] transition"
-          >
-            Sign Up
-          </a>
-          <a
-            href="/signin"
-            className="px-4 py-2 rounded-full border border-[#FAFAFA] text-[#FAFAFA] font-semibold hover:bg-[#09C0F9] hover:text-black transition"
-          >
-            Sign In
-          </a>
-        </div>
-        {/* Burger Menu for Mobile */}
-        <button
-          className="md:hidden flex flex-col justify-center items-center z-20"
-          onClick={() => setMobileOpen((prev) => !prev)}
-          aria-label="Toggle menu"
-        >
-          <span
-            className={cn(
-              "block w-6 h-0.5 bg-white transition-all duration-300",
-              mobileOpen ? "rotate-45 translate-y-1.5" : ""
-            )}
-          />
-          <span
-            className={cn(
-              "block w-6 h-0.5 bg-white transition-all duration-300 my-1",
-              mobileOpen ? "opacity-0" : ""
-            )}
-          />
-          <span
-            className={cn(
-              "block w-6 h-0.5 bg-white transition-all duration-300",
-              mobileOpen ? "-rotate-45 -translate-y-1.5" : ""
-            )}
-          />
-        </button>
-        {/* Mobile Slide Menu */}
-        <div
-          className={cn(
-            "fixed inset-0 bg-[#17191C] bg-opacity-80 z-10 transition-transform duration-300 md:hidden",
-            mobileOpen ? "translate-x-0" : "translate-x-full pointer-events-none"
-          )}
-          style={{ backdropFilter: "blur(4px)" }}
-          onClick={() => setMobileOpen(false)}
-        >
-          <div
-            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-11/12 max-w-sm bg-[#17191C] rounded-2xl shadow-xl mt-24 p-6 flex flex-col items-center space-y-8"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Menu */}
-            <Menu setActive={setActive}>
-              <MenuItem setActive={setActive} active={active} item="Services" value={""}>
-                <div className="flex flex-col space-y-4 text-sm">
-                  <HoveredLink href="/web-dev">Web Development</HoveredLink>
-                  <HoveredLink href="/interface-design">Interface Design</HoveredLink>
-                  <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
-                  <HoveredLink href="/branding">Branding</HoveredLink>
+                <div className="relative">
+                  <svg className="w-6 h-6 text-gray-500 group-hover/link:text-[#09C0F9] transition-all duration-300 group-hover/link:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <div className="absolute inset-0 bg-[#09C0F9]/20 rounded-full scale-0 group-hover/link:scale-150 transition-transform duration-300 blur-sm"></div>
                 </div>
-              </MenuItem>
-              <MenuItem setActive={setActive} active={active} item="Products" value={""}>
-                <div className="text-sm grid grid-cols-1 gap-6 p-2">
-                  <ProductItem
-                    title="Algochurn"
-                    href="https://algochurn.com"
-                    src="https://assets.aceternity.com/demos/algochurn.webp"
-                    description="Prepare for tech interviews like never before."
-                  />
-                  <ProductItem
-                    title="Tailwind Master Kit"
-                    href="https://tailwindmasterkit.com"
-                    src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
-                    description="Production ready Tailwind css components for your next project"
-                  />
-                  <ProductItem
-                    title="Moonbeam"
-                    href="https://gomoonbeam.com"
-                    src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
-                    description="Never write from scratch again. Go from idea to blog in minutes."
-                  />
-                  <ProductItem
-                    title="Rogue"
-                    href="https://userogue.com"
-                    src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.47.07%E2%80%AFPM.png"
-                    description="Respond to government RFPs, RFIs and RFQs 10x faster using AI"
-                  />
-                </div>
-              </MenuItem>
-              <MenuItem setActive={setActive} active={active} item="Pricing" value={""}>
-                <div className="flex flex-col space-y-4 text-sm">
-                  <HoveredLink href="/hobby">Hobby</HoveredLink>
-                  <HoveredLink href="/individual">Individual</HoveredLink>
-                  <HoveredLink href="/team">Team</HoveredLink>
-                  <HoveredLink href="/enterprise">Enterprise</HoveredLink>
-                </div>
-              </MenuItem>
-            </Menu>
-            {/* Auth Buttons */}
-            <div className="flex flex-col space-y-3 w-full">
-              <a
-                href="/signup"
-                className="px-4 py-2 rounded-full bg-[#09C0F9] text-black font-semibold hover:bg-[#38d3ff] transition text-center block"
-              >
-                Sign Up
+                <span className="font-semibold text-base group-hover/link:text-[#09C0F9] transition-colors duration-300">Contact Us</span>
+                <svg className="w-4 h-4 text-gray-600 group-hover/link:text-[#09C0F9] opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all duration-300 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </a>
+
+              {/* Elegant divider with gradient */}
+              <div className="my-6 relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gradient-to-r from-transparent via-gray-700/50 to-transparent"></div>
+                </div>
+                <div className="relative flex justify-center">
+                  <span className="px-4 text-xs text-gray-500 bg-gradient-to-b from-[#1A1D21] to-[#151719]">Authentication</span>
+                </div>
+              </div>
+
               <a
                 href="/signin"
-                className="px-4 py-2 rounded-full border border-[#FAFAFA] text-[#FAFAFA] font-semibold hover:bg-[#09C0F9] hover:text-black transition"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center space-x-4 px-4 py-4 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/link focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none transform hover:translate-x-1 active:scale-98"
               >
-                Sign In
+                <div className="relative">
+                  <svg className="w-6 h-6 text-gray-500 group-hover/link:text-[#09C0F9] transition-all duration-300 group-hover/link:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                  </svg>
+                  <div className="absolute inset-0 bg-[#09C0F9]/20 rounded-full scale-0 group-hover/link:scale-150 transition-transform duration-300 blur-sm"></div>
+                </div>
+                <span className="font-semibold text-base group-hover/link:text-[#09C0F9] transition-colors duration-300">Sign In</span>
+                <svg className="w-4 h-4 text-gray-600 group-hover/link:text-[#09C0F9] opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all duration-300 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </a>
             </div>
+          </nav>          {/* Enhanced Mobile CTA Button with Rich Microanimations */}
+          <div className="p-6 border-t border-gray-800/30 bg-gradient-to-r from-transparent to-[#09C0F9]/5">
+            <a
+              href="/signup"
+              onClick={() => setMobileMenuOpen(false)}
+              className="relative flex items-center justify-center w-full py-4 px-6 bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] active:from-[#0284C7] active:to-[#0369A1] text-black font-bold rounded-xl transition-all duration-300 active:scale-95 group/cta focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25 overflow-hidden"
+            >
+              {/* Dynamic background shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-700 ease-in-out"></div>
+              
+              <span className="relative z-10 flex items-center space-x-2">
+                <span className="text-lg">Sign Up Now</span>
+                <svg className="w-5 h-5 group-hover/cta:translate-x-1 group-hover/cta:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+              
+              {/* Pulse effect on active */}
+              <div className="absolute inset-0 bg-white/20 scale-95 opacity-0 group-active/cta:scale-105 group-active/cta:opacity-100 transition-all duration-150 rounded-xl"></div>
+            </a>
           </div>
         </div>
-      </nav>
-    </div>
+      )}
+    </>
   );
 }
