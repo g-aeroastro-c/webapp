@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { maxGeneratorDuration, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 
 
@@ -40,7 +40,7 @@ export const MenuItem = ({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          {active === item && (
+          {active === value && (
             <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
               <motion.div
                 transition={{ duration: 0.3 }}
