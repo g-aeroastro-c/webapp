@@ -1,56 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export function NavbarDemo() {
   return (
-    <>
-      {/* Custom CSS for rich animations */}
-      <style jsx global>{`
-        @keyframes slideInRight {
-          from {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-        
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        
-        .animate-slideInRight {
-          animation: slideInRight 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        
-        .animate-fadeIn {
-          animation: fadeIn 300ms ease-out forwards;
-        }
-        
-        /* Custom gradient borders for enhanced visual appeal */
-        .border-gradient-to-r {
-          background: linear-gradient(90deg, transparent, rgba(156, 163, 175, 0.5), transparent);
-          height: 1px;
-        }
-      `}</style>
-      <div className="relative w-full flex items-center justify-center">
-        <Navbar className="top-2" />
-      </div>
-    </>
+    <div className="relative w-full flex items-center justify-center">
+      <Navbar className="top-2" />
+    </div>
   );
 }
 
 function Navbar({ className }: { className?: string }) {
-  const [active, setActive] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -62,24 +24,28 @@ function Navbar({ className }: { className?: string }) {
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#09C0F9]/5 via-transparent to-[#09C0F9]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>        {/* Desktop Logo with Refined Micro Interactions */}
         <div className="hidden md:flex items-center z-20 group/logo cursor-pointer">
           <div className="relative">
-            <img
-              src="./gaacLogo.png"
+            <Image
+              src="/gaacLogo.png"
               alt="GITAM Aero Astro Club"
+              width={56}
+              height={56}
               className="h-14 w-14 transition-all duration-200 ease-out group-hover/logo:scale-105"
+              priority
             />
             {/* Subtle pulse ring on hover */}
             <div className="absolute inset-0 rounded-full bg-[#09C0F9]/20 scale-90 opacity-0 group-hover/logo:scale-110 group-hover/logo:opacity-100 transition-all duration-300 blur-sm"></div>
             <div className="absolute inset-0 rounded-full border border-[#09C0F9]/30 scale-100 opacity-0 group-hover/logo:scale-125 group-hover/logo:opacity-100 transition-all duration-500"></div>
           </div>
-        </div>
-
-        {/* Mobile Centered Logo - Larger and More Prominent */}
+        </div>        {/* Mobile Centered Logo - Larger and More Prominent */}
         <div className="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 group/logo cursor-pointer">
           <div className="relative">
-            <img
-              src="./gaacLogo.png"
+            <Image
+              src="/gaacLogo.png"
               alt="GITAM Aero Astro Club"
+              width={64}
+              height={64}
               className="h-16 w-16 transition-all duration-300 ease-out group-hover/logo:scale-105"
+              priority
             />
             {/* Enhanced pulse ring for mobile */}
             <div className="absolute inset-0 rounded-full bg-[#09C0F9]/25 scale-90 opacity-0 group-hover/logo:scale-115 group-hover/logo:opacity-100 transition-all duration-400 blur-sm"></div>
@@ -202,24 +168,25 @@ function Navbar({ className }: { className?: string }) {
       </div>      {/* Mobile Menu Overlay with Smooth Fade Animation */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fadeIn"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 ease-out"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}      {/* Mobile Menu with Enhanced Animations */}
       {mobileMenuOpen && (
         <div 
-          className="fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-[#1A1D21] to-[#151719] border-l border-gray-800/50 shadow-2xl z-50 animate-slideInRight"
+          className="fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-[#1A1D21] to-[#151719] border-l border-gray-800/50 shadow-2xl z-50 transform translate-x-0 transition-transform duration-400 ease-out"
         >
           {/* Sophisticated swipe indicator with pulse */}
           <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-16 bg-gradient-to-b from-transparent via-[#09C0F9]/50 to-transparent rounded-r-full animate-pulse"></div>
           
           {/* Enhanced Mobile Menu Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-800/30 bg-gradient-to-r from-transparent to-[#09C0F9]/5">
-            <div className="flex items-center space-x-3 group/header">
+          <div className="flex items-center justify-between p-6 border-b border-gray-800/30 bg-gradient-to-r from-transparent to-[#09C0F9]/5">            <div className="flex items-center space-x-3 group/header">
               <div className="relative">
-                <img
-                  src="./gaacLogo.png"
+                <Image
+                  src="/gaacLogo.png"
                   alt="GAAC"
+                  width={40}
+                  height={40}
                   className="w-10 h-10 transition-all duration-300 group-hover/header:scale-110 group-hover/header:rotate-6"
                 />
                 {/* Subtle glow effect on logo */}
@@ -323,12 +290,10 @@ function Navbar({ className }: { className?: string }) {
                 <svg className="w-4 h-4 text-gray-600 group-hover/link:text-[#09C0F9] opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all duration-300 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </a>
-
-              {/* Elegant divider with gradient */}
+              </a>              {/* Elegant divider with gradient */}
               <div className="my-6 relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gradient-to-r from-transparent via-gray-700/50 to-transparent"></div>
+                  <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700/50 to-transparent"></div>
                 </div>
                 <div className="relative flex justify-center">
                   <span className="px-4 text-xs text-gray-500 bg-gradient-to-b from-[#1A1D21] to-[#151719]">Authentication</span>
