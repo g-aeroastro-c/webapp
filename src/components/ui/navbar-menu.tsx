@@ -1,7 +1,17 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+
+
+
+const transition = {
+  type: "spring",
+  mass: 0.5,
+  damping: 11.5,
+  stiffness: 100,
+  restDelta: 0.001,
+  restSpeed: 0.001,
+};
 
 export const MenuItem = ({
   setActive,
@@ -79,9 +89,10 @@ export const ProductItem = ({
   description: string;
   href: string;
   src: string;
-}) => {  return (
+}) => {
+  return (
     <a href={href} className="flex space-x-2">
-      <Image
+      <img
         src={src}
         width={140}
         height={70}
@@ -100,7 +111,7 @@ export const ProductItem = ({
   );
 };
 
-export const HoveredLink = ({ children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+export const HoveredLink = ({ children, ...rest }: any) => {
   return (
     <a
       {...rest}

@@ -1,0 +1,9 @@
+@echo off
+cd /d "c:\Users\vvspe\projects\gaac\webapp"
+echo Cleaning build cache...
+if exist .next rmdir /s /q .next
+echo Installing dependencies...
+npm install
+echo Starting development server...
+npm run dev
+pause
