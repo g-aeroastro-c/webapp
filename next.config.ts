@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
+  output: "export", // 🔥 This enables static export with `next export`
 };
 
 export default nextConfig;

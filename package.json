@@ -34,4 +34,12 @@
     "tw-animate-css": "^1.3.4",
     "typescript": "^5"
   }
+  "scripts": {
+  "dev": "next dev --turbopack",
+  "build": "next build",
+  "export": "next export",
+  "start": "next start",
+  "lint": "next lint"
+}
+
 }
