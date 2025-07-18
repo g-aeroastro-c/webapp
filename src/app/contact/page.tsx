@@ -24,7 +24,9 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    console.log('Form submitted:', formData);
+    console.log('
+      
+      submitted:', formData);
   };
 
   const toggleFaq = (index: number) => {
@@ -230,110 +232,126 @@ export default function ContactPage() {
 
             {/* Right Side - Contact Form */}
             <div className="bg-white/5 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-white/10">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300">First Name</label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      placeholder="Enter First Name"
-                      className="w-full px-4 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 text-sm sm:text-base"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300">Last Name</label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      placeholder="Enter Last Name"
-                      className="w-full px-4 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 text-sm sm:text-base"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-300">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Enter your Email"
-                    className="w-full px-4 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 text-sm sm:text-base"
-                    required
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-300">Phone Number</label>
-                  <div className="flex gap-2">
-                    <select 
-                      value={selectedCountry}
-                      onChange={(e) => setSelectedCountry(e.target.value)}
-                      className="px-3 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 text-sm sm:text-base"
-                    >
-                      <option value="+91" className="bg-gray-800">🇮🇳 +91</option>
-                      <option value="+1" className="bg-gray-800">🇺🇸 +1</option>
-                      <option value="+44" className="bg-gray-800">🇬🇧 +44</option>
-                    </select>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="Enter Phone Number"
-                      className="flex-1 px-4 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 text-sm sm:text-base"
-                      required
-                    />
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-300">Message</label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    placeholder="Enter your Message"
-                    rows={4}
-                    className="w-full px-4 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 resize-none text-sm sm:text-base"
-                    required
-                  />
-                </div>
-                
-                <div className="flex items-start space-x-3">
-                  <input
-                    type="checkbox"
-                    id="terms"
-                    className="mt-1 w-4 h-4 text-[#09C0F9] bg-transparent border-gray-600 rounded focus:ring-[#09C0F9]/50 focus:ring-2"
-                    required
-                  />
-                  <label htmlFor="terms" className="text-xs sm:text-sm text-gray-400 leading-relaxed">
-                    I agree with{' '}
-                    <a href="#" className="text-[#09C0F9] hover:text-[#0EA5E9] transition-colors">
-                      Terms of Use
-                    </a>{' '}
-                    and{' '}
-                    <a href="#" className="text-[#09C0F9] hover:text-[#0EA5E9] transition-colors">
-                      Privacy Policy
-                    </a>
-                  </label>
-                </div>
-                
-                <button
-                  type="submit"
-                  className="w-full py-3 sm:py-4 bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] text-black font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25 text-sm sm:text-base"
-                >
-                  Send Message
-                </button>
-              </form>
+              <form
+  onSubmit={handleSubmit}
+  className="space-y-6"
+  name="club_contact_form"     // ✨ ADD THIS: Name for Netlify to identify your form
+  method="POST"                // ✨ ADD THIS: Specifies the HTTP method for form submission
+  data-netlify="true"          // ✨ ADD THIS: Tells Netlify to process this form
+  netlify-honeypot="bot-field" // ✨ ADD THIS: For basic spam protection
+>
+  {/* ✨ ADD THIS: Hidden honeypot field for spam protection. Place it directly inside the form. */}
+  <p style={{ display: 'none' }}>
+    <label>
+      Don’t fill this out if you’re human: <input name="bot-field" />
+    </label>
+  </p>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-gray-300">First Name</label>
+      <input
+        type="text"
+        name="firstName" // Already present, which is great!
+        value={formData.firstName}
+        onChange={handleInputChange}
+        placeholder="Enter First Name"
+        className="w-full px-4 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 text-sm sm:text-base"
+        required
+      />
+    </div>
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-gray-300">Last Name</label>
+      <input
+        type="text"
+        name="lastName" // Already present, great!
+        value={formData.lastName}
+        onChange={handleInputChange}
+        placeholder="Enter Last Name"
+        className="w-full px-4 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 text-sm sm:text-base"
+        required
+      />
+    </div>
+  </div>
+
+  <div className="space-y-2">
+    <label className="text-sm font-medium text-gray-300">Email</label>
+    <input
+      type="email"
+      name="email" // Already present, great!
+      value={formData.email}
+      onChange={handleInputChange}
+      placeholder="Enter your Email"
+      className="w-full px-4 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 text-sm sm:text-base"
+      required
+    />
+  </div>
+
+  <div className="space-y-2">
+    <label className="text-sm font-medium text-gray-300">Phone Number</label>
+    <div className="flex gap-2">
+      <select
+        value={selectedCountry}
+        onChange={(e) => setSelectedCountry(e.target.value)}
+        className="px-3 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 text-sm sm:text-base"
+        name="countryCode" // ✨ ADD THIS: Netlify will capture this as 'countryCode'
+      >
+        <option value="+91" className="bg-gray-800">🇮🇳 +91</option>
+        <option value="+1" className="bg-gray-800">🇺🇸 +1</option>
+        <option value="+44" className="bg-gray-800">🇬🇧 +44</option>
+      </select>
+      <input
+        type="tel"
+        name="phone" // Already present, great!
+        value={formData.phone}
+        onChange={handleInputChange}
+        placeholder="Enter Phone Number"
+        className="flex-1 px-4 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 text-sm sm:text-base"
+        required
+      />
+    </div>
+  </div>
+
+  <div className="space-y-2">
+    <label className="text-sm font-medium text-gray-300">Message</label>
+    <textarea
+      name="message" // Already present, great!
+      value={formData.message}
+      onChange={handleInputChange}
+      placeholder="Enter your Message"
+      rows={4}
+      className="w-full px-4 py-3 sm:py-4 bg-white/10 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 transition-all duration-300 resize-none text-sm sm:text-base"
+      required
+    ></textarea>
+  </div>
+
+  <div className="flex items-start space-x-3">
+    <input
+      type="checkbox"
+      id="terms"
+      name="termsAgreed" // ✨ ADD THIS: Netlify will capture this as 'termsAgreed' (value will be 'on' if checked)
+      className="mt-1 w-4 h-4 text-[#09C0F9] bg-transparent border-gray-600 rounded focus:ring-[#09C0F9]/50 focus:ring-2"
+      required
+    />
+    <label htmlFor="terms" className="text-xs sm:text-sm text-gray-400 leading-relaxed">
+      I agree with{' '}
+      <a href="#" className="text-[#09C0F9] hover:text-[#0EA5E9] transition-colors">
+        Terms of Use
+      </a>{' '}
+      and{' '}
+      <a href="#" className="text-[#09C0F9] hover:text-[#0EA5E9] transition-colors">
+        Privacy Policy
+      </a>
+    </label>
+  </div>
+
+  <button
+    type="submit"
+    className="w-full py-3 sm:py-4 bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] text-black font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25 text-sm sm:text-base"
+  >
+    Send Message
+  </button>
+</form>
             </div>
           </div>
         </div>
