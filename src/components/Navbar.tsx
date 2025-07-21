@@ -64,6 +64,107 @@ function Navbar({ className }: { className?: string }) {
             {/* Minimal underline */}
             <div className="absolute bottom-1 left-1/2 w-0 h-px bg-[#09C0F9] group-hover/link:w-6 group-hover/link:left-1/2 group-hover/link:-translate-x-1/2 transition-all duration-250"></div>
           </a>
+          {/* Teams Dropdown */}
+          <div className="relative group/teams">
+            <button
+              className="relative text-[#FAFAFA]/90 hover:text-[#FAFAFA] transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg group/link overflow-hidden flex items-center space-x-1"
+              onMouseEnter={() => setActive("teams")}
+            >
+              <span className="relative z-10 font-medium text-sm">Teams</span>
+              <svg className="w-4 h-4 transition-transform duration-200 group-hover/teams:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+              <div className="absolute inset-0 bg-white/5 scale-95 opacity-0 group-hover/link:scale-100 group-hover/link:opacity-100 transition-all duration-200 rounded-lg"></div>
+              <div className="absolute bottom-1 left-1/2 w-0 h-px bg-[#09C0F9] group-hover/link:w-6 group-hover/link:left-1/2 group-hover/link:-translate-x-1/2 transition-all duration-250"></div>
+            </button>
+            
+            {/* Dropdown Menu */}
+            <div 
+              className={cn(
+                "absolute top-full left-0 mt-2 w-56 bg-[#17191C]/95 backdrop-blur-md rounded-xl border border-gray-800/50 shadow-2xl transition-all duration-300 z-50",
+                active === "teams" ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
+              )}
+              onMouseLeave={() => setActive(null)}
+            >
+              <div className="p-2">
+                <a
+                  href="/teams"
+                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group/dropdown"
+                >
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#09C0F9]/20 to-[#0EA5E9]/20 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">🏠</span>
+                  </div>
+                  <div>
+                    <div className="font-medium text-sm">Team Homepage</div>
+                    <div className="text-xs text-gray-500">Overview of all teams</div>
+                  </div>
+                </a>
+                
+                <a
+                  href="/teams/robotics"
+                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group/dropdown"
+                >
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#09C0F9]/20 to-[#0EA5E9]/20 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">🤖</span>
+                  </div>
+                  <div>
+                    <div className="font-medium text-sm">Robotics Team</div>
+                    <div className="text-xs text-gray-500">Build autonomous systems</div>
+                  </div>
+                </a>
+                
+                <a
+                  href="/teams/programming"
+                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group/dropdown"
+                >
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#09C0F9]/20 to-[#0EA5E9]/20 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">💻</span>
+                  </div>
+                  <div>
+                    <div className="font-medium text-sm">Programming Team</div>
+                    <div className="text-xs text-gray-500">Software development</div>
+                  </div>
+                </a>
+                
+                <a
+                  href="/teams/astronomy"
+                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group/dropdown"
+                >
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#09C0F9]/20 to-[#0EA5E9]/20 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">🔭</span>
+                  </div>
+                  <div>
+                    <div className="font-medium text-sm">Astronomy Team</div>
+                    <div className="text-xs text-gray-500">Space exploration</div>
+                  </div>
+                </a>
+                
+                <div className="my-2 h-px bg-gradient-to-r from-transparent via-gray-700/50 to-transparent"></div>
+                
+                <a
+                  href="#executive-body"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const section = document.getElementById("executive-body");
+                    if (section) {
+                      section.scrollIntoView({ behavior: "smooth" });
+                    }
+                    setActive(null);
+                  }}
+                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group/dropdown"
+                >
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#09C0F9]/20 to-[#0EA5E9]/20 rounded-lg flex items-center justify-center">
+                    <span className="text-lg">👥</span>
+                  </div>
+                  <div>
+                    <div className="font-medium text-sm">Executive Body</div>
+                    <div className="text-xs text-gray-500">Leadership team</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          
           <a
             href="/projects"
             className="relative text-[#FAFAFA]/90 hover:text-[#FAFAFA] transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg group/link overflow-hidden"
@@ -218,6 +319,72 @@ function Navbar({ className }: { className?: string }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </a>
+
+              {/* Teams Section */}
+              <div className="space-y-1">
+                <div className="flex items-center space-x-4 px-4 py-3 text-gray-400">
+                  <div className="relative">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <span className="font-semibold text-base">Teams</span>
+                </div>
+                
+                <div className="ml-6 space-y-1">
+                  <a
+                    href="/teams"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/sublink"
+                  >
+                    <span className="text-lg">🏠</span>
+                    <span className="text-sm group-hover/sublink:text-[#09C0F9] transition-colors">Team Homepage</span>
+                  </a>
+                  
+                  <a
+                    href="/teams/robotics"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/sublink"
+                  >
+                    <span className="text-lg">🤖</span>
+                    <span className="text-sm group-hover/sublink:text-[#09C0F9] transition-colors">Robotics Team</span>
+                  </a>
+                  
+                  <a
+                    href="/teams/programming"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/sublink"
+                  >
+                    <span className="text-lg">💻</span>
+                    <span className="text-sm group-hover/sublink:text-[#09C0F9] transition-colors">Programming Team</span>
+                  </a>
+                  
+                  <a
+                    href="/teams/astronomy"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/sublink"
+                  >
+                    <span className="text-lg">🔭</span>
+                    <span className="text-sm group-hover/sublink:text-[#09C0F9] transition-colors">Astronomy Team</span>
+                  </a>
+                  
+                  <a
+                    href="#executive-body"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const section = document.getElementById("executive-body");
+                      if (section) {
+                        section.scrollIntoView({ behavior: "smooth" });
+                      }
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/sublink"
+                  >
+                    <span className="text-lg">👥</span>
+                    <span className="text-sm group-hover/sublink:text-[#09C0F9] transition-colors">Executive Body</span>
+                  </a>
+                </div>
+              </div>
 
               <a
                 href="/projects"
