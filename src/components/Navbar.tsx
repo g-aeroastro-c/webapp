@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export function NavbarDemo() {
@@ -13,6 +12,7 @@ export function NavbarDemo() {
 }
 
 function Navbar({ className }: { className?: string }) {
+  const [active, setActive] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -23,29 +23,23 @@ function Navbar({ className }: { className?: string }) {
         {/* Subtle glow effect on navbar hover */}
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#09C0F9]/5 via-transparent to-[#09C0F9]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>        {/* Desktop Logo with Refined Micro Interactions */}
         <div className="hidden md:flex items-center z-20 group/logo cursor-pointer">
-          <div className="relative">
-            <Image
+          <div className="relative">            <img
               src="/gaacLogo.png"
               alt="GITAM Aero Astro Club"
-              width={56}
-              height={56}
               className="h-14 w-14 transition-all duration-200 ease-out group-hover/logo:scale-105"
-              priority
             />
             {/* Subtle pulse ring on hover */}
             <div className="absolute inset-0 rounded-full bg-[#09C0F9]/20 scale-90 opacity-0 group-hover/logo:scale-110 group-hover/logo:opacity-100 transition-all duration-300 blur-sm"></div>
             <div className="absolute inset-0 rounded-full border border-[#09C0F9]/30 scale-100 opacity-0 group-hover/logo:scale-125 group-hover/logo:opacity-100 transition-all duration-500"></div>
           </div>
-        </div>        {/* Mobile Centered Logo - Larger and More Prominent */}
+        </div>
+
+        {/* Mobile Centered Logo - Larger and More Prominent */}
         <div className="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 group/logo cursor-pointer">
-          <div className="relative">
-            <Image
+          <div className="relative">            <img
               src="/gaacLogo.png"
               alt="GITAM Aero Astro Club"
-              width={64}
-              height={64}
               className="h-16 w-16 transition-all duration-300 ease-out group-hover/logo:scale-105"
-              priority
             />
             {/* Enhanced pulse ring for mobile */}
             <div className="absolute inset-0 rounded-full bg-[#09C0F9]/25 scale-90 opacity-0 group-hover/logo:scale-115 group-hover/logo:opacity-100 transition-all duration-400 blur-sm"></div>
@@ -87,14 +81,7 @@ function Navbar({ className }: { className?: string }) {
             <div className="absolute bottom-1 left-1/2 w-0 h-px bg-[#09C0F9] group-hover/link:w-6 group-hover/link:left-1/2 group-hover/link:-translate-x-1/2 transition-all duration-250"></div>
           </a>
           <a
-            href="#contact-us"
-            onClick={(e) => {
-              e.preventDefault();
-              const section = document.getElementById("contact-us");
-              if (section) {
-                section.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
+            href="/contact"
             className="relative text-[#FAFAFA]/90 hover:text-[#FAFAFA] transition-all duration-200 cursor-pointer px-4 py-2.5 rounded-lg group/link overflow-hidden"
           >
             <span className="relative z-10 font-medium text-sm">Contact Us</span>
@@ -180,13 +167,11 @@ function Navbar({ className }: { className?: string }) {
           <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-16 bg-gradient-to-b from-transparent via-[#09C0F9]/50 to-transparent rounded-r-full animate-pulse"></div>
           
           {/* Enhanced Mobile Menu Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-800/30 bg-gradient-to-r from-transparent to-[#09C0F9]/5">            <div className="flex items-center space-x-3 group/header">
-              <div className="relative">
-                <Image
+          <div className="flex items-center justify-between p-6 border-b border-gray-800/30 bg-gradient-to-r from-transparent to-[#09C0F9]/5">
+            <div className="flex items-center space-x-3 group/header">
+              <div className="relative">                <img
                   src="/gaacLogo.png"
                   alt="GAAC"
-                  width={40}
-                  height={40}
                   className="w-10 h-10 transition-all duration-300 group-hover/header:scale-110 group-hover/header:rotate-6"
                 />
                 {/* Subtle glow effect on logo */}
@@ -269,15 +254,8 @@ function Navbar({ className }: { className?: string }) {
               </a>
 
               <a
-                href="#contact-us"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const section = document.getElementById("contact-us");
-                  if (section) {
-                    section.scrollIntoView({ behavior: "smooth" });
-                  }
-                  setMobileMenuOpen(false);
-                }}
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center space-x-4 px-4 py-4 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/link focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none transform hover:translate-x-1 active:scale-98"
               >
                 <div className="relative">
