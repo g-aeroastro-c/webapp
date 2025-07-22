@@ -3,6 +3,7 @@ import { Geist, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { NavbarDemo } from "../components/Navbar";
 import { Footer } from "../components/Footer";
+import { EnhancedBackground } from "../components/EnhancedBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${dmSans.variable} antialiased`}
         style={{ margin: 0, padding: 0, backgroundColor: '#0B0C0D' }}
       >
+        <EnhancedBackground />
         <NavbarDemo />
         {children}
         <Footer />

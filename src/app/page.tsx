@@ -1,9 +1,18 @@
+"use client";
+
+import { useEffect } from 'react';
+import { initScrollReveal } from '../lib/utils';
+
 export default function Home() {
+  useEffect(() => {
+    const observer = initScrollReveal();
+    return () => observer?.disconnect();
+  }, []);
+
   return (
     <div 
-      className="min-h-screen bg-gradient-to-br from-[#0B0C0D] via-[#151719] to-[#1C1E21] relative overflow-hidden" 
+      className="min-h-screen relative overflow-hidden" 
       style={{
-        background: 'linear-gradient(to bottom right, #0B0C0D, #151719, #1C1E21)',
         minHeight: '100vh'
       }}
     >
@@ -163,21 +172,21 @@ export default function Home() {
       {/* Features Section */}
       <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 sm:mb-16">
-            <p className="text-[#898A8C] uppercase mb-4 font-dm-sans text-sm tracking-wider">
+          <div className="text-center mb-12 sm:mb-16 scroll-reveal">
+            <p className="text-[#898A8C] uppercase mb-4 font-dm-sans text-sm tracking-wider animate-slide-in-up">
               What We Offer
             </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gradient mb-6 animate-fade-in-scale">
               Explore Our Core Areas
             </h2>
-            <p className="text-gray-300 text-lg max-w-3xl mx-auto">
+            <p className="text-gray-300 text-lg max-w-3xl mx-auto animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
               Dive into cutting-edge technology across three specialized domains
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Robotics */}
-            <div className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 hover:border-[#09C0F9]/30 p-8 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-[#09C0F9]/10">
+            <div className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 hover:border-[#09C0F9]/30 p-8 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-[#09C0F9]/10 scroll-reveal hover-lift glass-morphism">
               <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">🤖</div>
               <h3 className="text-xl font-bold text-white mb-4 group-hover:text-[#09C0F9] transition-colors">
                 Robotics
