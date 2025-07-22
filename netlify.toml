@@ -1,7 +1,14 @@
 [build]
-  command = "npm run build && npm run export"
-  publish = "out"
+  publish = "build"
+  command = "npm run build"
 
+[[redirects]]
+  from = "/old"
+  to = "/new"
+  status = 301
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"

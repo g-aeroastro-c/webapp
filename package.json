@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint"
   },
@@ -13,7 +14,6 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.18.1",
     "lucide-react": "^0.515.0",
-    
     "next": "15.3.3",
     "ngrok": "^5.0.0-beta.2",
     "react": "^19.0.0",
@@ -34,12 +34,4 @@
     "tw-animate-css": "^1.3.4",
     "typescript": "^5"
   }
-  "scripts": {
-  "dev": "next dev --turbopack",
-  "build": "next build",
-  "export": "next export",
-  "start": "next start",
-  "lint": "next lint"
-}
-
 }
