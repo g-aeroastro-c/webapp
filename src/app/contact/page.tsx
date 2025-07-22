@@ -32,7 +32,17 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#141414] text-white">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B0C0D] via-[#151719] to-[#1C1E21] text-white relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#09C0F9]/5 to-transparent"></div>
+      
+      {/* Background pattern overlay */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{ 
+          backgroundImage: `radial-gradient(circle at 1px 1px, #09C0F9 1px, transparent 0)`,
+          backgroundSize: '50px 50px'
+        }}></div>
+      </div>
       {/* Contact Information Section */}
       <section className="relative pt-20 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
