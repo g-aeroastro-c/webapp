@@ -4,7 +4,7 @@ import React from "react";
 import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 import { ArrowUpRight } from "lucide-react";
 
-const Footer = () => {
+const ProjectSec4 = () => {
   return (
     <footer className="footer-container w-full ">
       <div className="footer-links">
@@ -309,4 +309,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default ProjectSec4;

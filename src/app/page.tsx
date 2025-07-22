@@ -1,21 +1,5 @@
-// import React from "react";
-// import TechRev from "@/components/techRev";
-// import Body3 from "@/components/body3";
-// import Footer from "@/components/footer";
-// import Body1 from "@/components/body1";
-// import Body2 from "@/components/body2";
-// export default function Home() {
-//   return (
-//     <div>
-//       <Body1 />
-//       <Body2 />
-//       <Body3 />
-//       <TechRev />
-//       <Footer />
-//     </div>
-//   );
-// }
-
+"use client";
+import React, { useState } from "react";
 export default function Home() {
   return (
     <div

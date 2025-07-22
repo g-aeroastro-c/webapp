@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 
-const Body3 = () => {
+const ProjectSec3 = () => {
   return (
     <section className="bg-[#141414] text-white px-6 py-16 md:px-20 lg:px-32 w-full border-t border-b border-[#262626] relative">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-[#141414] p-3 rounded-xl relative">
@@ -37,7 +37,7 @@ const Body3 = () => {
         {/* Card 2 */}
         <div className="p-6 flex flex-col items-start">
           <Image
-            src="/spaceexplorationebook.png"
+            src="/spaceexplorationebook.svg"
             alt="Space Exploration Ebook"
             width={600}
             height={400}
@@ -89,4 +89,4 @@ const Body3 = () => {
   );
 };
 
-export default Body3;
+export default ProjectSec3;

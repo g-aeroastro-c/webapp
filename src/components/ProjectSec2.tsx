@@ -2,7 +2,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { use } from "react";
 
-const Body2 = () => {
+const ProjectSec2 = () => {
   return (
     <section className="max-w-[1600px] mx-auto px-6 py-16 flex flex-col gap-16">
       {/* Quantum Computing Whitepaper */}
@@ -125,4 +125,4 @@ const Body2 = () => {
   );
 };
 
-export default Body2;
+export default ProjectSec2;
