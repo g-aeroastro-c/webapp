@@ -1,218 +1,150 @@
+import React from 'react';
+import Link from 'next/link';
+import { Bot, Code, Telescope, Users } from 'lucide-react';
+
 export default function TeamsPage() {
   return (
-    <div 
-      className="min-h-screen bg-gradient-to-br from-[#0B0C0D] via-[#151719] to-[#1C1E21] relative overflow-hidden" 
-      style={{
-        background: 'linear-gradient(to bottom right, #0B0C0D, #151719, #1C1E21)',
-        minHeight: '100vh'
-      }}
-    >
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#09C0F9]/5 to-transparent"></div>
+      <div className="absolute inset-0 bg-[url('/api/placeholder/1920/1080')] bg-cover bg-center opacity-5" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
       
-      {/* Main Content */}
-      <main className="relative z-10 min-h-screen px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 pb-16">
-        <div className="max-w-7xl mx-auto">
-          {/* Hero Section */}
-          <div className="text-center mb-16 sm:mb-20">
-            <p 
-              className="text-center uppercase mb-6 font-dm-sans"
-              style={{
-                color: '#898A8C',
-                fontSize: '14px',
-                fontWeight: 400,
-                lineHeight: '20px',
-                letterSpacing: '0.98px'
-              }}
-            >
-              GAAC TEAMS
-            </p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 leading-tight tracking-tight">
-              Our Specialized
-              <br />
-              <span className="text-[#09C0F9]">Teams</span>
-            </h1>
-            <p className="text-gray-300 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
-              Explore our three core teams, each dedicated to pushing the boundaries of innovation 
-              in their respective domains through collaborative projects and cutting-edge research.
-            </p>
-          </div>
+      {/* Animated Grid Background */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="h-full w-full bg-grid-white/[0.05] bg-[size:50px_50px]" />
+      </div>
 
-          {/* Teams Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            {/* Robotics Team */}
-            <div className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 hover:border-[#09C0F9]/30 p-8 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-[#09C0F9]/10">
-              <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">🤖</div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#09C0F9] transition-colors">
-                Robotics Team
-              </h3>
-              <p className="text-gray-300 mb-6 leading-relaxed">
-                Building autonomous systems, robotic arms, and intelligent machines that solve real-world problems through innovative engineering and programming.
-              </p>
-              <ul className="space-y-3 text-sm text-gray-400 mb-8">
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Autonomous Navigation Systems
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Machine Learning Integration
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Hardware Design & Prototyping
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Sensor Integration & Control
-                </li>
-              </ul>
-              <a
-                href="/teams/robotics"
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] text-black font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25"
-              >
-                Explore Team
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-            </div>
-
-            {/* Programming Team */}
-            <div className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 hover:border-[#09C0F9]/30 p-8 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-[#09C0F9]/10">
-              <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">💻</div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#09C0F9] transition-colors">
-                Programming Team
-              </h3>
-              <p className="text-gray-300 mb-6 leading-relaxed">
-                Mastering modern programming languages and frameworks to create innovative software solutions and cutting-edge applications.
-              </p>
-              <ul className="space-y-3 text-sm text-gray-400 mb-8">
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Full-Stack Web Development
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  AI/ML Applications & Research
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Open Source Contributions
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Mobile App Development
-                </li>
-              </ul>
-              <a
-                href="/teams/programming"
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] text-black font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25"
-              >
-                Explore Team
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-            </div>
-
-            {/* Astronomy Team */}
-            <div className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 hover:border-[#09C0F9]/30 p-8 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-[#09C0F9]/10">
-              <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">🔭</div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-[#09C0F9] transition-colors">
-                Astronomy Team
-              </h3>
-              <p className="text-gray-300 mb-6 leading-relaxed">
-                Exploring the cosmos through observation, data analysis, and space technology research to unlock the mysteries of the universe.
-              </p>
-              <ul className="space-y-3 text-sm text-gray-400 mb-8">
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Telescope Operations & Imaging
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Astronomical Data Analysis
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Space Research Projects
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-[#09C0F9] rounded-full mr-3"></div>
-                  Astrophotography & Observation
-                </li>
-              </ul>
-              <a
-                href="/teams/astronomy"
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] text-black font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25"
-              >
-                Explore Team
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
+      <div className="relative z-10 container mx-auto px-6 py-16">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <div className="flex justify-center mb-6">
+            <div className="p-4 bg-blue-500/20 rounded-full border border-blue-400/30 backdrop-blur-sm">
+              <Users className="h-12 w-12 text-blue-400" />
             </div>
           </div>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Our Teams
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Discover the passionate teams that drive innovation and exploration at GITAM Aero Astro Club. 
+            Each team brings unique expertise to push the boundaries of aerospace technology.
+          </p>
+        </div>
 
-          {/* Team Stats */}
-          <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 p-8 mb-16">
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">Team Statistics</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-[#09C0F9] mb-2">150+</div>
-                <div className="text-gray-300 text-sm">Active Members</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-[#09C0F9] mb-2">30+</div>
-                <div className="text-gray-300 text-sm">Ongoing Projects</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-[#09C0F9] mb-2">15+</div>
-                <div className="text-gray-300 text-sm">Awards Won</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-[#09C0F9] mb-2">50+</div>
-                <div className="text-gray-300 text-sm">Workshops Conducted</div>
+        {/* Teams Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          {/* Robotics Team */}
+          <Link href="/teams/robotics" className="group block">
+            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-400/20 backdrop-blur-sm hover:border-red-400/40 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/20">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-red-500/5 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 bg-red-500/20 rounded-xl border border-red-400/30">
+                    <Bot className="h-8 w-8 text-red-400" />
+                  </div>
+                  <div className="h-2 w-2 bg-red-400 rounded-full animate-pulse" />
+                </div>
+                
+                <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-red-300 transition-colors">
+                  Robotics Team
+                </h2>
+                <p className="text-gray-300 leading-relaxed mb-6">
+                  Building autonomous systems and robotic solutions for aerospace applications. 
+                  From rovers to drones, we create the machines of tomorrow.
+                </p>
+                
+                <div className="flex items-center text-red-400 group-hover:text-red-300 transition-colors">
+                  <span className="font-medium">Explore Robotics</span>
+                  <svg className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
 
-          {/* Join Teams CTA */}
-          <div className="text-center">
-            <h3 className="text-2xl font-bold text-white mb-4">Ready to Join a Team?</h3>
-            <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Choose your passion and become part of our innovative community. Each team offers unique opportunities for growth and learning.
+          {/* Programming Team */}
+          <Link href="/teams/programming" className="group block">
+            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-400/20 backdrop-blur-sm hover:border-green-400/40 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/20">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 bg-green-500/20 rounded-xl border border-green-400/30">
+                    <Code className="h-8 w-8 text-green-400" />
+                  </div>
+                  <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse" />
+                </div>
+                
+                <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-green-300 transition-colors">
+                  Programming Team
+                </h2>
+                <p className="text-gray-300 leading-relaxed mb-6">
+                  Developing cutting-edge software solutions for aerospace missions. 
+                  From flight control systems to data analysis tools.
+                </p>
+                
+                <div className="flex items-center text-green-400 group-hover:text-green-300 transition-colors">
+                  <span className="font-medium">View Projects</span>
+                  <svg className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          {/* Astronomy Team */}
+          <Link href="/teams/astronomy" className="group block">
+            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-400/20 backdrop-blur-sm hover:border-purple-400/40 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3 bg-purple-500/20 rounded-xl border border-purple-400/30">
+                    <Telescope className="h-8 w-8 text-purple-400" />
+                  </div>
+                  <div className="h-2 w-2 bg-purple-400 rounded-full animate-pulse" />
+                </div>
+                
+                <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors">
+                  Astronomy Team
+                </h2>
+                <p className="text-gray-300 leading-relaxed mb-6">
+                  Exploring the cosmos through observation, research, and analysis. 
+                  Unlocking the mysteries of space and celestial phenomena.
+                </p>
+                
+                <div className="flex items-center text-purple-400 group-hover:text-purple-300 transition-colors">
+                  <span className="font-medium">Discover Space</span>
+                  <svg className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+
+        {/* Executive Body CTA */}
+        <div className="text-center">
+          <div className="inline-block p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-indigo-500/10 border border-blue-400/20 backdrop-blur-sm hover:border-blue-400/40 transition-all duration-300">
+            <h3 className="text-2xl font-bold text-white mb-4">Meet Our Leadership</h3>
+            <p className="text-gray-300 mb-6 max-w-md">
+              Get to know the passionate individuals who guide and lead GITAM Aero Astro Club.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="/contact"
-                className="px-8 py-4 bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] text-black font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25"
-              >
-                Apply Now
-              </a>
-              <a
-                href="#executive-body"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.location.href = "/#executive-body";
-                }}
-                className="px-8 py-4 border-2 border-[#09C0F9]/50 hover:border-[#09C0F9] text-[#09C0F9] hover:text-white hover:bg-[#09C0F9]/10 rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 font-medium"
-              >
-                Meet Leadership
-              </a>
-            </div>
+            <Link href="/teams/executive" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <Users className="h-5 w-5 mr-2" />
+              Executive Body
+              <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
         </div>
-      </main>
-
-      {/* Background pattern overlay for texture */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{ 
-          backgroundImage: `radial-gradient(circle at 1px 1px, #09C0F9 1px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }}></div>
       </div>
     </div>
   );
 }
+
