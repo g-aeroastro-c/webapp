@@ -723,7 +723,7 @@ export default function Home() {
             </div>
 
             {/* Events Coordinator */}
-            <div className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 hover:border-[#09C0F9]/30 p-8 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-[#09C0F9]/10">
+            {/* <div className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 hover:border-[#09C0F9]/30 p-8 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-[#09C0F9]/10">
               <div className="text-center">
                 <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-[#09C0F9] to-[#0EA5E9] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-black font-bold text-2xl">PT</span>
@@ -765,7 +765,7 @@ export default function Home() {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
