@@ -1,11 +1,21 @@
+"use client";
+
+import { useEffect } from 'react';
+import { initScrollReveal } from '../lib/utils';
+
 export default function Home() {
+  useEffect(() => {
+    const observer = initScrollReveal();
+    return () => observer?.disconnect();
+  }, []);
+
   return (
-    <div
-      className="min-h-screen bg-gradient-to-br from-[#0B0C0D] via-[#151719] to-[#1C1E21] relative overflow-hidden"
+
+    <div 
+      className="min-h-screen relative overflow-hidden" 
       style={{
-        background:
-          "linear-gradient(to bottom right, #0B0C0D, #151719, #1C1E21)",
-        minHeight: "100vh",
+        minHeight: '100vh'
+
       }}
     >
       {/* Background Effects */}
@@ -268,6 +278,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+
 
       {/* Features Section */}
       <section className="relative z-10 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
@@ -769,6 +780,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* Contact Section */}
       <section
