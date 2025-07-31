@@ -60,7 +60,7 @@ export default function ContactPage() {
               </h3>
               <div className="space-y-2 sm:space-y-3">
                 <a
-                  href="mailto:getintouchv2@gaac.in"
+                  href="mailto:aeroastro_vzg@gitam.in"
                   className="flex items-center text-sm sm:text-base text-gray-300 hover:text-[#09C0F9] transition-colors group/link break-all"
                 >
                   <svg
@@ -76,7 +76,7 @@ export default function ContactPage() {
                   </span>
                 </a>
                 <a
-                  href="tel:+917036442464"
+                  href="tel:+918977005232"
                   className="flex items-center text-sm sm:text-base text-gray-300 hover:text-[#09C0F9] transition-colors group/link"
                 >
                   <svg
@@ -86,10 +86,10 @@ export default function ContactPage() {
                   >
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
-                  +91 70138 44384
+                  +91 89770 05232
                 </a>
                 <a
-                  href="tel:+917382236771"
+                  href="tel:+917382338771"
                   className="flex items-center text-sm sm:text-base text-gray-300 hover:text-[#09C0F9] transition-colors group/link"
                 >
                   <svg
@@ -99,7 +99,7 @@ export default function ContactPage() {
                   >
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
-                  +91 95533 16797
+                  +91 73823 38771
                 </a>
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function ContactPage() {
               </h3>
               <div className="space-y-2 sm:space-y-3">
                 <a
-                  href="mailto:getintouchv2@gaac.in"
+                  href="mailto:aeroastro_vzg@gitam.in"
                   className="flex items-center text-sm sm:text-base text-gray-300 hover:text-[#09C0F9] transition-colors group/link break-all"
                 >
                   <svg
@@ -127,7 +127,7 @@ export default function ContactPage() {
                   </span>
                 </a>
                 <a
-                  href="tel:+912635464364"
+                  href="tel:+917013844384"
                   className="flex items-center text-sm sm:text-base text-gray-300 hover:text-[#09C0F9] transition-colors group/link"
                 >
                   <svg
@@ -140,7 +140,7 @@ export default function ContactPage() {
                   +91 70138 44384
                 </a>
                 <a
-                  href="tel:+919533316797"
+                  href="tel:+919553316797"
                   className="flex items-center text-sm sm:text-base text-gray-300 hover:text-[#09C0F9] transition-colors group/link"
                 >
                   <svg
@@ -150,7 +150,7 @@ export default function ContactPage() {
                   >
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
-                  +91 73823 38771
+                  +91 95533 16797
                 </a>
               </div>
             </div>
@@ -331,7 +331,7 @@ export default function ContactPage() {
                     <div>
                       <p className="text-white font-medium">Email</p>
                       <a
-                        href="mailto:getintouchv2@gaac.in"
+                        href="mailto:aeroastro_vzg@gitam.in"
                         className="text-gray-400 hover:text-[#09C0F9] transition-colors text-sm sm:text-base"
                       >
                         aeroastro_vzg@gitam.in
@@ -353,13 +353,13 @@ export default function ContactPage() {
                       <p className="text-white font-medium">Phone</p>
                       <div className="space-y-1">
                         <a
-                          href="tel:+91 70138 44384"
+                          href="tel:+919553316797"
                           className="block text-gray-400 hover:text-[#09C0F9] transition-colors text-sm sm:text-base"
                         >
-                          +91 70138 44384
+                          +91 95533 16797
                         </a>
                         <a
-                          href="tel:+91 73823 38771"
+                          href="tel:+917382338771"
                           className="block text-gray-400 hover:text-[#09C0F9] transition-colors text-sm sm:text-base"
                         >
                           +91 73823 38771

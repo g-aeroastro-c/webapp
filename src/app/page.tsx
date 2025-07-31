@@ -438,12 +438,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 p-6">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-[#09C0F9] to-[#0EA5E9] rounded-full flex items-center justify-center mr-4">
-                  <span className="text-black font-bold">VT</span>
-                </div>
+                {/* <div className="w-12 h-12 bg-gradient-to-br from-[#09C0F9] to-[#0EA5E9] rounded-full flex items-center justify-center mr-4"> */}
+                <span className="text-black font-bold text-2xl">VT</span>
+                {/* </div> */}
                 <div>
                   <div className="text-white font-semibold">Viswa Teja</div>
-                  <div className="text-gray-400 text-sm">3rd Year, CSE</div>
+                  <div className="text-gray-400 text-sm">
+                    MECH AIML , 2020-2024
+                  </div>
                 </div>
               </div>
               <p className="text-gray-300 text-sm leading-relaxed">
@@ -456,13 +458,15 @@ export default function Home() {
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 p-6">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-[#09C0F9] to-[#0EA5E9] rounded-full flex items-center justify-center mr-4">
-                  <span className="text-black font-bold">RB</span>
+                  <span className="text-black font-bold text-2xl">RB</span>
                 </div>
                 <div>
                   <div className="text-white font-semibold">
                     Rithika Bollapragada
                   </div>
-                  <div className="text-gray-400 text-sm">2nd Year, ECE</div>
+                  <div className="text-gray-400 text-sm">
+                    CSE AIML , 2022-2026
+                  </div>
                 </div>
               </div>
               <p className="text-gray-300 text-sm leading-relaxed">
@@ -475,13 +479,15 @@ export default function Home() {
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-gray-800/50 p-6">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-[#09C0F9] to-[#0EA5E9] rounded-full flex items-center justify-center mr-4">
-                  <span className="text-black font-bold">VC</span>
+                  <img
+                    src="/vishal.svg"
+                    alt="Vishal Ch"
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
                 </div>
                 <div>
                   <div className="text-white font-semibold">Vishal Ch</div>
-                  <div className="text-gray-400 text-sm">
-                    4th Year, Mechanical
-                  </div>
+                  <div className="text-gray-400 text-sm">ECE , 2022-2026</div>
                 </div>
               </div>
               <p className="text-gray-300 text-sm leading-relaxed">
