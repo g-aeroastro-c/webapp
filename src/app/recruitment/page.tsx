@@ -1111,26 +1111,68 @@ export default function RecruitmentPage() {
             className="relative z-[101] w-full max-w-5xl mx-auto bg-gradient-to-br from-slate-900/98 via-slate-800/95 to-slate-900/98 border border-emerald-400/20 rounded-3xl shadow-2xl overflow-hidden max-h-[90vh]"
           >
             {/* Header with gradient background */}
-            <div className="relative bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-cyan-500/10 border-b border-emerald-400/20 px-8 py-6">
+            <div className="relative bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-cyan-500/10 border-b border-emerald-400/20 px-4 sm:px-8 py-4 sm:py-6">
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-cyan-500/5" />
-              <div className="relative flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-400/30 flex items-center justify-center">
-                    <CheckCircle2 className="w-6 h-6 text-emerald-300" />
+              <div className="relative">
+                {/* Top row with title and close button */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-400/30 flex items-center justify-center">
+                      <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-300" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+                        Review Your Application ✨
+                      </h3>
+                      <p className="text-emerald-200/80 text-xs sm:text-sm">Please review all details carefully before submitting</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-white flex items-center gap-2">
-                      Review Your Application ✨
-                    </h3>
-                    <p className="text-emerald-200/80 text-sm">Please review all details carefully before submitting</p>
+                  <button 
+                    onClick={()=>setShowReview(false)}
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-200"
+                  >
+                    <X className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </button>
+                </div>
+                
+                {/* Prominent Submit Button Row */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+                  <div className="flex-1">
+                    <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-400/30 rounded-xl px-4 py-3">
+                      <div className="flex items-center gap-2 text-amber-200">
+                        <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+                        <span className="text-sm font-medium">Ready to submit? Review the details below and click Submit when ready!</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 sm:gap-3">
+                    <button 
+                      onClick={()=>setShowReview(false)} 
+                      className="flex-1 sm:flex-none px-4 sm:px-6 py-3 rounded-xl border border-white/20 text-slate-200 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-200 font-medium text-sm"
+                    >
+                      ← Edit
+                    </button>
+                    <button 
+                      onClick={submitApplication} 
+                      disabled={submitting} 
+                      className="flex-1 sm:flex-none px-6 sm:px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold shadow-lg hover:from-emerald-600 hover:to-teal-700 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 text-sm"
+                    >
+                      {submitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          <span className="hidden sm:inline">Submitting...</span>
+                          <span className="sm:hidden">Submitting...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="hidden sm:inline">Submit Application</span>
+                          <span className="sm:hidden">Submit</span>
+                          <Rocket className="w-4 h-4" />
+                        </>
+                      )}
+                    </button>
                   </div>
                 </div>
-                <button 
-                  onClick={()=>setShowReview(false)}
-                  className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-200"
-                >
-                  <X className="w-5 h-5" />
-                </button>
               </div>
             </div>
 
@@ -1310,18 +1352,18 @@ export default function RecruitmentPage() {
             </div>
 
             {/* Action Footer */}
-            <div className="border-t border-emerald-400/20 bg-gradient-to-r from-emerald-500/5 to-teal-500/5 px-8 py-6">
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-slate-400">
-                  Review all information carefully. Once submitted, changes cannot be made.
+            <div className="border-t border-emerald-400/20 bg-gradient-to-r from-emerald-500/5 to-teal-500/5 px-4 sm:px-8 py-4 sm:py-6">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="text-xs sm:text-sm text-slate-400 text-center sm:text-left">
+                  ⚠️ Review all information carefully. Once submitted, changes cannot be made.
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
                   <motion.button 
                     initial={{ opacity: 0, x: 10 }} 
                     animate={{ opacity: 1, x: 0 }} 
                     transition={{ delay: 0.5 }}
                     onClick={()=>setShowReview(false)} 
-                    className="px-6 py-3 rounded-xl border border-white/20 text-slate-200 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-200 font-medium"
+                    className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl border border-white/20 text-slate-200 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-200 font-medium text-sm"
                   >
                     ← Edit Application
                   </motion.button>
@@ -1331,16 +1373,18 @@ export default function RecruitmentPage() {
                     transition={{ delay: 0.6 }}
                     onClick={submitApplication} 
                     disabled={submitting} 
-                    className="px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold shadow-lg hover:from-emerald-600 hover:to-teal-700 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2"
+                    className="flex-1 sm:flex-none px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold shadow-lg hover:from-emerald-600 hover:to-teal-700 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 text-sm"
                   >
                     {submitting ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Submitting...
+                        <span className="hidden sm:inline">Submitting...</span>
+                        <span className="sm:hidden">Submitting...</span>
                       </>
                     ) : (
                       <>
-                        Submit Application
+                        <span className="hidden sm:inline">Submit Application</span>
+                        <span className="sm:hidden">Submit</span>
                         <Rocket className="w-4 h-4" />
                       </>
                     )}
