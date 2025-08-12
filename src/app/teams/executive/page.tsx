@@ -99,7 +99,7 @@ export default function ExecutivePage() {
         ))}
       </div>
       
-      <div className="relative z-10 container mx-auto px-6 py-8">
+      <div className="relative z-10 container mx-auto px-6 pt-24 sm:pt-32 pb-16">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}

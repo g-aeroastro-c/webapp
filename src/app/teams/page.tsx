@@ -14,7 +14,7 @@ export default function TeamsPage() {
         <div className="h-full w-full bg-grid-white/[0.05] bg-[size:50px_50px]" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-6 py-16">
+      <div className="relative z-10 container mx-auto px-6 py-16 pt-24 sm:pt-32">
         {/* Header Section */}
         <div className="text-center mb-16">
           <div className="flex justify-center mb-6">
