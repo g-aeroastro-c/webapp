@@ -88,6 +88,23 @@ src/
 4. **Open in browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
+   ### Environment & Database
+
+   1. Create a Supabase project and copy your URL and anon key.
+   2. Create a `.env.local` in the project root (same folder as package.json) using `env.example` as a template:
+
+      - NEXT_PUBLIC_SUPABASE_URL
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY
+      - SUPABASE_SERVICE_ROLE_KEY (server-only, optional but recommended for admin APIs)
+      - ALLOWLIST_ADMINS (comma-separated admin emails)
+      - NEXT_PUBLIC_ALLOWED_EMAIL_DOMAIN (optional, e.g. gitam.edu)
+
+   3. In Supabase SQL editor, run the contents of `supabase/schema.sql` to create tables and RLS policies used by the app:
+
+      - profiles, allowed_emails, audit_events, recruitment_applications
+
+   4. Start the dev server and sign in. After a successful sign-in, the app will set cookies via `/api/session-cookie` and the middleware will allow access to protected pages. Admins can open `/admin` to manage recruitment applications.
+
 ### Build for Production
 
 ```bash

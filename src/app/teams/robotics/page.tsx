@@ -12,7 +12,7 @@ export default function RoboticsPage() {
       <div className="absolute top-0 left-0 w-72 h-72 bg-purple-600/20 rounded-full filter blur-3xl animate-pulse"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-600/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
       
-      <div className="relative z-10 container mx-auto px-6 py-8">
+      <div className="relative z-10 container mx-auto px-6 pt-24 sm:pt-32 pb-16">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -143,7 +143,7 @@ export default function RoboticsPage() {
         >
           <h2 className="text-3xl font-bold text-white mb-4">Join Our Team</h2>
           <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-            Whether you're passionate about mechanical design, programming, or electronics, we welcome motivated individuals 
+            Whether you&apos;re passionate about mechanical design, programming, or electronics, we welcome motivated individuals 
             ready to push the boundaries of robotics technology.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

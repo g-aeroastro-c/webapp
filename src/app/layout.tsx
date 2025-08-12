@@ -21,7 +21,11 @@ export const metadata: Metadata = {
   description: "Join the GITAM Aero Astro Club - A passionate community exploring Robotics, Programming, and Astronomy through innovative projects and learning.",
   keywords: "GITAM, Aero, Astro, Club, Robotics, Programming, Astronomy, GAAC",
   authors: [{ name: "GITAM Aero Astro Club" }],
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -38,8 +42,7 @@ export default function RootLayout({
         <EnhancedBackground />
         <NavbarDemo />
         {children}
-        <Footer />
-        <Footer />
+  <Footer />
       </body>
     </html>
   );

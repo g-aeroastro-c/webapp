@@ -12,7 +12,7 @@ export default function ProgrammingPage() {
       <div className="absolute top-0 right-0 w-72 h-72 bg-blue-600/20 rounded-full filter blur-3xl animate-pulse"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-violet-600/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
       
-      <div className="relative z-10 container mx-auto px-6 py-8">
+      <div className="relative z-10 container mx-auto px-6 pt-24 sm:pt-32 pb-16">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -33,7 +33,7 @@ export default function ProgrammingPage() {
           </div>
           
           <p className="text-xl text-slate-300 max-w-3xl">
-            Crafting elegant solutions and building tomorrow's digital infrastructure with cutting-edge technologies.
+            Crafting elegant solutions and building tomorrow&apos;s digital infrastructure with cutting-edge technologies.
           </p>
         </motion.div>
 
@@ -200,7 +200,7 @@ export default function ProgrammingPage() {
         >
           <h2 className="text-3xl font-bold text-white mb-4">Join Our Development Team</h2>
           <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-            Whether you're a seasoned developer or just starting your coding journey, we welcome passionate individuals 
+            Whether you&apos;re a seasoned developer or just starting your coding journey, we welcome passionate individuals 
             who want to create impactful software solutions and grow their skills.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
