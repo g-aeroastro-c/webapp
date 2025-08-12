@@ -143,7 +143,7 @@ export default function RoboticsPage() {
         >
           <h2 className="text-3xl font-bold text-white mb-4">Join Our Team</h2>
           <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-            Whether you're passionate about mechanical design, programming, or electronics, we welcome motivated individuals 
+            Whether you&apos;re passionate about mechanical design, programming, or electronics, we welcome motivated individuals 
             ready to push the boundaries of robotics technology.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

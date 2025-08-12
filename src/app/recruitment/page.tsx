@@ -27,7 +27,6 @@ export default function RecruitmentPage() {
     branch: string;
     year: Year;
     phone: string;
-    whatsapp_phone: string;
     email: string;
     team_preference: Team;
     team_specific: Record<string, unknown>;
@@ -37,7 +36,6 @@ export default function RecruitmentPage() {
     branch: "",
     year: YEAR_OPTIONS[0],
     phone: "",
-    whatsapp_phone: "",
     email: "",
     team_preference: TEAM_OPTIONS[0],
     team_specific: {},
@@ -153,7 +151,7 @@ export default function RecruitmentPage() {
         email: form.email,
         track: form.team_preference,
       };
-      const payload = { ...form, whatsapp_phone: form.whatsapp_phone || form.phone };
+      const payload = { ...form, whatsapp_phone: form.phone };
       const res = await axios.post("/api/recruitment", payload);
       if (res.status === 200) {
         setMessage(null);
@@ -166,7 +164,6 @@ export default function RecruitmentPage() {
           branch: "",
           year: YEAR_OPTIONS[0],
           phone: "",
-          whatsapp_phone: "",
           email: "",
           team_preference: TEAM_OPTIONS[0],
           team_specific: {},
@@ -339,96 +336,188 @@ export default function RecruitmentPage() {
       </motion.section>
 
       {/* Application Form */}
-  <motion.section initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="relative z-30 mb-16 sm:mb-20">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 sm:mb-4 gap-2">
-          <h2 className="text-xl sm:text-2xl font-bold text-white">Application Form ✍️</h2>
-          <span className="text-xs px-2 py-1 rounded bg-white/10 border border-white/15 text-slate-300 w-fit">⏱️ Approx. 3–5 mins</span>
+      <motion.section initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="relative z-30 mb-16 sm:mb-20">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-3">
+          <div className="flex items-center gap-3">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">Application Form</h2>
+            <span className="text-2xl">✍️</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 font-medium">
+              ⏱️ 3–5 mins
+            </span>
+            <span className="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 font-medium">
+              📝 Auto-save
+            </span>
+          </div>
         </div>
-  <div className="relative z-30 bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-6 md:p-8 backdrop-blur-sm">
-          <form onSubmit={handleOpenReview} className="grid gap-4 sm:gap-5">
-            {/* Section: Applicant details */}
-            <div className="col-span-1 -mb-1">
-              <h3 className="text-sm font-semibold text-slate-200 flex items-center gap-2 mb-3">👤 Applicant details <span className="text-[10px] sm:text-[11px] font-normal text-slate-400">Tell us how to reach you</span></h3>
+
+        {/* Enhanced Form Container */}
+        <div className="relative bg-gradient-to-br from-white/8 via-white/5 to-white/8 border border-white/15 rounded-3xl backdrop-blur-md overflow-hidden">
+          {/* Subtle background pattern */}
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-transparent to-cyan-500/5"></div>
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-400/30 to-transparent"></div>
+          
+          <div className="relative p-6 sm:p-8 md:p-10 lg:p-12">
+            <form onSubmit={handleOpenReview} className="space-y-8 sm:space-y-10 md:space-y-12">
+              
+              {/* Section: Applicant Details */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-4 pb-4 border-b border-white/10">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-400/30 flex items-center justify-center">
+                    <span className="text-lg sm:text-xl">👤</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-white">Personal Information</h3>
+                    <p className="text-sm text-slate-400">Tell us how to reach you</p>
+                  </div>
+                </div>
+
+                {/* Enhanced Grid Layout for Desktop and Mobile */}
+                <div className="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                  {/* Full Name */}
+                  <div className="group lg:col-span-1">
+                    <label className="block text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                      <span className="text-base">👤</span>
+                      Full Name
+                    </label>
+                    <div className="relative">
+                      <input 
+                        value={form.full_name} 
+                        onChange={(e)=>setForm({...form, full_name: e.target.value})} 
+                        placeholder="Enter your full name" 
+                        className="w-full px-4 py-4 sm:py-5 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400/50 hover:border-white/25 transition-all duration-300 group-hover:bg-white/10 touch-manipulation text-sm sm:text-base" 
+                        required 
+                      />
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    </div>
+                  </div>
+
+                  {/* Registration Number */}
+                  <div className="group lg:col-span-1">
+                    <label className="block text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                      <span className="text-base">🪪</span>
+                      Registration Number
+                    </label>
+                    <div className="relative">
+                      <input 
+                        value={form.registration_number} 
+                        onChange={(e)=>setForm({...form, registration_number: e.target.value})} 
+                        placeholder="e.g., 1223XXXXX" 
+                        className="w-full px-4 py-4 sm:py-5 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400/50 hover:border-white/25 transition-all duration-300 group-hover:bg-white/10 touch-manipulation text-sm sm:text-base" 
+                        required 
+                      />
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    </div>
+                  </div>
+
+                  {/* Branch */}
+                  <div className="group lg:col-span-1">
+                    <label className="block text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                      <span className="text-base">🏷️</span>
+                      Branch
+                    </label>
+                    <div className="relative">
+                      <input 
+                        value={form.branch} 
+                        onChange={(e)=>setForm({...form, branch: e.target.value})} 
+                        placeholder="e.g., CSE / ECE / Mechanical" 
+                        className="w-full px-4 py-4 sm:py-5 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400/50 hover:border-white/25 transition-all duration-300 group-hover:bg-white/10 touch-manipulation text-sm sm:text-base" 
+                        required 
+                      />
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    </div>
+                  </div>
+
+                  {/* Year of Study */}
+                  <div className="group md:col-span-1">
+                    <label className="block text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                      <span className="text-base">🎓</span>
+                      Year of Study
+                    </label>
+                    <div className="relative">
+                      <select 
+                        value={form.year} 
+                        onChange={(e)=>setForm({...form, year: e.target.value as Year})} 
+                        className="w-full px-4 py-4 sm:py-5 rounded-xl bg-white/5 border border-white/15 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400/50 hover:border-white/25 transition-all duration-300 group-hover:bg-white/10 touch-manipulation text-sm sm:text-base appearance-none cursor-pointer"
+                      >
+                        {YEAR_OPTIONS.map((y) => <option key={y} value={y} className="bg-slate-900 text-white">{y}</option>)}
+                      </select>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                        <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    </div>
+                  </div>
+
+                  {/* Phone Number */}
+                  <div className="group md:col-span-1">
+                    <label className="block text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                      <span className="text-base">📞</span>
+                      Phone Number
+                    </label>
+                    <div className="relative">
+                      <input 
+                        value={form.phone} 
+                        onChange={(e)=>setForm({...form, phone: e.target.value})} 
+                        placeholder="+91 98765 43210"
+                        type="tel"
+                        className="w-full px-4 py-4 sm:py-5 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400/50 hover:border-white/25 transition-all duration-300 group-hover:bg-white/10 touch-manipulation text-sm sm:text-base" 
+                        required 
+                      />
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                    </div>
+                    <p className="text-xs text-slate-400 mt-2">Prefer your WhatsApp-enabled number for faster updates.</p>
+                  </div>
+
+              {/* Email Address */}
+              <div className="group">
+                <label className="block text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                  <span className="text-base">📧</span>
+                  Email Address
+                </label>
+                <div className="relative">
+                  <input 
+                    type="email" 
+                    value={form.email} 
+                    onChange={(e)=>setForm({...form, email: e.target.value})} 
+                    placeholder="yourname@gitam.in" 
+                    className="w-full px-4 py-4 sm:py-5 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400/50 hover:border-white/25 transition-all duration-300 group-hover:bg-white/10 touch-manipulation text-sm sm:text-base" 
+                    required 
+                  />
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </div>
+              </div>
+
+              {/* Team Preference */}
+              <div className="group md:col-span-2">
+                <label className="block text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                  <span className="text-base">🎯</span>
+                  Preferred Track
+                </label>
+                <div className="relative">
+                  <select 
+                    value={form.team_preference} 
+                    onChange={(e)=>{
+                      const value = e.target.value as Team;
+                      setForm(prev=>({ ...prev, team_preference: value, team_specific: {} }))
+                    }} 
+                    className="w-full px-4 py-4 sm:py-5 rounded-xl bg-white/5 border border-white/15 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-400/50 hover:border-white/25 transition-all duration-300 group-hover:bg-white/10 touch-manipulation text-sm sm:text-base appearance-none cursor-pointer"
+                  >
+                    {TEAM_OPTIONS.map((t) => <option key={t} value={t} className="bg-slate-900 text-white">{t}</option>)}
+                  </select>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </div>
+              </div>
             </div>
-            {/* Base fields */}
-            <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">👤 Full Name</label>
-                <input 
-                  value={form.full_name} 
-                  onChange={(e)=>setForm({...form, full_name: e.target.value})} 
-                  placeholder="Jane Doe" 
-                  className="px-3 sm:px-4 py-3 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-400/30 transition-all duration-200 touch-manipulation" 
-                  required 
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">🪪 Registration Number</label>
-                <input 
-                  value={form.registration_number} 
-                  onChange={(e)=>setForm({...form, registration_number: e.target.value})} 
-                  placeholder="e.g., 1223XXXXX" 
-                  className="px-3 sm:px-4 py-3 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-400/30 transition-all duration-200 touch-manipulation" 
-                  required 
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">🏷️ Branch</label>
-                <input 
-                  value={form.branch} 
-                  onChange={(e)=>setForm({...form, branch: e.target.value})} 
-                  placeholder="e.g., CSE / ECE / Mechanical" 
-                  className="px-3 sm:px-4 py-3 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-400/30 transition-all duration-200 touch-manipulation" 
-                  required 
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">🎓 Year of Study</label>
-                <select 
-                  value={form.year} 
-                  onChange={(e)=>setForm({...form, year: e.target.value as Year})} 
-                  className="px-3 sm:px-4 py-3 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-400/30 transition-all duration-200 touch-manipulation appearance-none"
-                >
-                  {YEAR_OPTIONS.map((y) => <option key={y} value={y} className="bg-slate-900">{y}</option>)}
-                </select>
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">📞 Phone Number</label>
-                <input 
-                  value={form.phone} 
-                  onChange={(e)=>setForm({...form, phone: e.target.value})} 
-                  placeholder="+91 98765 43210" 
-                  type="tel"
-                  className="px-3 sm:px-4 py-3 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-400/30 transition-all duration-200 touch-manipulation" 
-                  required 
-                />
-                <span className="text-[10px] sm:text-[11px] text-slate-400">Prefer your WhatsApp-enabled number for faster updates.</span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">✉️ Email</label>
-                <input 
-                  type="email" 
-                  value={form.email} 
-                  onChange={(e)=>setForm({...form, email: e.target.value})} 
-                  placeholder="you@example.com" 
-                  className="px-3 sm:px-4 py-3 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-400/30 transition-all duration-200 touch-manipulation" 
-                  required 
-                />
-              </div>
-              <div className="flex flex-col gap-2 md:col-span-2">
-                <label className="text-xs font-semibold text-slate-300 uppercase tracking-wide">🎯 Preferred Track</label>
-                <select 
-                  value={form.team_preference} 
-                  onChange={(e)=>{
-                    const value = e.target.value as Team;
-                    setForm(prev=>({ ...prev, team_preference: value, team_specific: {} }))
-                  }} 
-                  className="px-3 sm:px-4 py-3 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-400/30 transition-all duration-200 touch-manipulation appearance-none"
-                >
-                  {TEAM_OPTIONS.map((t) => <option key={t} value={t} className="bg-slate-900">{t}</option>)}
-                </select>
-              </div>
-            </div>
+          </div>
 
             {/* Dynamic section per track - placeholders for now */}
             <div className="md:col-span-2 mt-2">
@@ -996,12 +1085,7 @@ export default function RecruitmentPage() {
             </div>
           </form>
         </div>
-      </motion.section>
-                Review your application �
-              </button>
-            </div>
-          </form>
-        </div>
+      </div>
       </motion.section>
 
       {/* Notes / Help */}

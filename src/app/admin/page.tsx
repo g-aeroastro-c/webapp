@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import axios from '@/lib/axios'
 import { STATUS_OPTIONS, TEAM_OPTIONS, YEAR_OPTIONS } from '@/types/recruitment'
 import { motion } from 'framer-motion'
-import { Eye, EyeOff, User, Mail, Phone, Calendar, BookOpen, Award, ExternalLink, Edit3, Save, X } from 'lucide-react'
+import { X } from 'lucide-react'
 
 interface AppRow {
   id: string
@@ -301,7 +301,7 @@ export default function AdminDashboard() {
                     {/* Team-specific responses */}
                     {app.team_specific && Object.keys(app.team_specific).length > 0 && (
                       <button
-                        onClick={() => setSelectedTeamSpecific(app.team_specific)}
+                        onClick={() => setSelectedTeamSpecific(app.team_specific || null)}
                         className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 rounded-lg hover:from-cyan-500/30 hover:to-blue-500/30 transition-all duration-300 text-sm"
                       >
                         📋 View Team-Specific Responses

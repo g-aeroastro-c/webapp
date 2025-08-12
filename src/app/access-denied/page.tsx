@@ -1,10 +1,10 @@
 "use client";
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-export default function AccessDeniedPage() {
+function AccessDeniedContent() {
   const search = useSearchParams();
   const reason = search.get('reason');
   const redirect = search.get('redirect') || '/';
@@ -13,8 +13,8 @@ export default function AccessDeniedPage() {
   const reasonText: Record<string, string> = {
     unauthenticated: 'You need to sign in to access that page.',
     domain: 'Your email domain is not permitted.',
-  allowlist: 'Your email address is not on the approved allowlist. Please contact an administrator.',
-  admin: 'Administrator privileges required.'
+    allowlist: 'Your email address is not on the approved allowlist. Please contact an administrator.',
+    admin: 'Administrator privileges required.'
   };
 
   return (
@@ -29,5 +29,27 @@ export default function AccessDeniedPage() {
         </div>
       </motion.div>
     </main>
+  );
+}
+
+export default function AccessDeniedPage() {
+  return (
+    <Suspense fallback={
+      <main className="max-w-md mx-auto px-4 py-24 text-center">
+        <div className="space-y-6">
+          <div className="animate-pulse">
+            <div className="h-6 bg-white/10 rounded-full mx-auto mb-4 w-32"></div>
+            <div className="h-8 bg-white/10 rounded mb-4"></div>
+            <div className="h-4 bg-white/10 rounded mb-6 w-3/4 mx-auto"></div>
+            <div className="space-y-3">
+              <div className="h-12 bg-white/10 rounded-xl"></div>
+              <div className="h-12 bg-white/10 rounded-xl"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    }>
+      <AccessDeniedContent />
+    </Suspense>
   );
 }

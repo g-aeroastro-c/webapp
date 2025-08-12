@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import LoadingSpinner from '@/components/LoadingSpinner'
+import { LoadingSpinner } from '@/components/LoadingSpinner'
 import axios from '@/lib/axios'
 import { motion } from 'framer-motion'
 import { LogOut, User, Award, Calendar } from 'lucide-react'
@@ -74,14 +74,24 @@ export default function Dashboard() {
         }
         
         const user = session.user
-        const { data: profRows } = await supabase
+        
+        // Check admin status first
+        const { data: profileRows } = await supabase
           .from('profiles')
-          .select('full_name,team,year,skills,interests,created_at')
+          .select('full_name,team,year,skills,interests,created_at,is_admin')
           .eq('id', user.id)
           .limit(1)
         
-        const p = profRows?.[0]
-        const fullName = p?.full_name || user.user_metadata.full_name || user.user_metadata.name || user.email?.split('@')[0] || 'Member'
+        const p = profileRows?.[0]
+        const isAdmin = p?.is_admin
+        
+        // Redirect non-admin users
+        if (!isAdmin) {
+          router.replace('/access-denied?reason=admin')
+          return
+        }
+        
+        const fullName = p?.full_name || user.user_metadata.full_name || user.user_metadata.name || user.email?.split('@')[0] || 'Admin'
         const profileComplete = !!(p?.team && p?.year)
         
         if (!profileComplete) { 
@@ -235,7 +245,7 @@ export default function Dashboard() {
             <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
               Hi {profile?.full_name}
             </h1>
-            <p className="text-slate-400 mt-1 text-sm">Welcome to your GAAC membership dashboard.</p>
+            <p className="text-slate-400 mt-1 text-sm">Welcome to your GAAC admin dashboard.</p>
           </div>
         </div>
         <button 

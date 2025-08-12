@@ -33,7 +33,7 @@ export default function ProgrammingPage() {
           </div>
           
           <p className="text-xl text-slate-300 max-w-3xl">
-            Crafting elegant solutions and building tomorrow's digital infrastructure with cutting-edge technologies.
+            Crafting elegant solutions and building tomorrow&apos;s digital infrastructure with cutting-edge technologies.
           </p>
         </motion.div>
 
@@ -200,7 +200,7 @@ export default function ProgrammingPage() {
         >
           <h2 className="text-3xl font-bold text-white mb-4">Join Our Development Team</h2>
           <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-            Whether you're a seasoned developer or just starting your coding journey, we welcome passionate individuals 
+            Whether you&apos;re a seasoned developer or just starting your coding journey, we welcome passionate individuals 
             who want to create impactful software solutions and grow their skills.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

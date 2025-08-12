@@ -67,8 +67,9 @@ export default function TrackApplication() {
     try {
       const res = await axios.post('/api/track', { email: email.trim().toLowerCase() })
       setApplications(res.data.applications || [])
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Failed to track application')
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { error?: string } } }
+      setError(error.response?.data?.error || 'Failed to track application')
       setApplications([])
     } finally {
       setLoading(false)
@@ -151,7 +152,7 @@ export default function TrackApplication() {
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">No Applications Found</h3>
               <p className="text-slate-400">
-                We couldn't find any applications for this email address.
+                We couldn&apos;t find any applications for this email address.
                 <br />
                 Please double-check your email or contact us if you need assistance.
               </p>

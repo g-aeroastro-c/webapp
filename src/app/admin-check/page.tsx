@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-export default function AdminCheckPage() {
+function AdminCheckContent() {
   const params = useSearchParams();
   const router = useRouter();
   const [redirect, setRedirect] = useState('/admin');
@@ -23,7 +23,7 @@ export default function AdminCheckPage() {
     <main className="relative z-30 max-w-xl mx-auto px-4 md:px-6 pt-28 pb-10">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
         <h1 className="text-2xl font-bold text-white">Who are you?</h1>
-  <p className="mt-2 text-slate-300 text-sm">This area is for GAAC admins only. Please sign in with your GITAM email.</p>
+        <p className="mt-2 text-slate-300 text-sm">This area is for GAAC admins only. Please sign in with your GITAM email.</p>
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             onClick={goSignin}
@@ -45,5 +45,26 @@ export default function AdminCheckPage() {
         </p>
       </motion.div>
     </main>
+  );
+}
+
+export default function AdminCheckPage() {
+  return (
+    <Suspense fallback={
+      <main className="relative z-30 max-w-xl mx-auto px-4 md:px-6 pt-28 pb-10">
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
+          <div className="animate-pulse">
+            <div className="h-8 bg-white/10 rounded mb-4"></div>
+            <div className="h-4 bg-white/10 rounded mb-6"></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="h-12 bg-white/10 rounded-xl"></div>
+              <div className="h-12 bg-white/10 rounded-xl"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    }>
+      <AdminCheckContent />
+    </Suspense>
   );
 }
