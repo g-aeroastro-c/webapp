@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export function NavbarDemo() {
@@ -23,10 +24,13 @@ function Navbar({ className }: { className?: string }) {
         {/* Subtle glow effect on navbar hover */}
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#09C0F9]/5 via-transparent to-[#09C0F9]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>        {/* Desktop Logo with Refined Micro Interactions */}
         <div className="hidden md:flex items-center z-20 group/logo cursor-pointer">
-          <div className="relative">            <img
+          <div className="relative">            <Image
               src="/gaacLogo.png"
               alt="GITAM Aero Astro Club"
+              width={56}
+              height={56}
               className="h-14 w-14 transition-all duration-200 ease-out group-hover/logo:scale-105"
+              priority
             />
             {/* Subtle pulse ring on hover */}
             <div className="absolute inset-0 rounded-full bg-[#09C0F9]/20 scale-90 opacity-0 group-hover/logo:scale-110 group-hover/logo:opacity-100 transition-all duration-300 blur-sm"></div>
@@ -36,10 +40,13 @@ function Navbar({ className }: { className?: string }) {
 
         {/* Mobile Centered Logo - Larger and More Prominent */}
         <div className="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 group/logo cursor-pointer">
-          <div className="relative">            <img
+          <div className="relative">            <Image
               src="/gaacLogo.png"
               alt="GITAM Aero Astro Club"
+              width={64}
+              height={64}
               className="h-16 w-16 transition-all duration-300 ease-out group-hover/logo:scale-105"
+              priority
             />
             {/* Enhanced pulse ring for mobile */}
             <div className="absolute inset-0 rounded-full bg-[#09C0F9]/25 scale-90 opacity-0 group-hover/logo:scale-115 group-hover/logo:opacity-100 transition-all duration-400 blur-sm"></div>
@@ -48,10 +55,10 @@ function Navbar({ className }: { className?: string }) {
         </div>{/* Desktop Menu with Refined Hover Effects */}
         <div className="hidden md:flex items-center space-x-1">
           <a
-            href="#about-us"
+            href="#about-club"
             onClick={(e) => {
               e.preventDefault();
-              const section = document.getElementById("about-us");
+              const section = document.getElementById("about-club");
               if (section) {
                 section.scrollIntoView({ behavior: "smooth" });
               }
@@ -191,31 +198,32 @@ function Navbar({ className }: { className?: string }) {
           </a>
         </div>        {/* Desktop Auth Buttons with Refined Interactions */}
         <div className="hidden md:flex items-center space-x-3">
+        </div>        {/* Desktop Right Callout: Recruitment Live + Hub */}
+        <div className="hidden md:flex items-center gap-2">
           <a
-            href="/signin"
-            className="relative text-[#FAFAFA]/90 hover:text-[#FAFAFA] transition-all duration-200 cursor-pointer px-4 py-2 rounded-lg group/signin font-medium text-sm"
+            href="/recruitment"
+            className="relative inline-flex items-center gap-2 pl-2 pr-3 py-2 rounded-full border border-emerald-400/30 bg-gradient-to-r from-emerald-500/15 to-teal-600/15 text-emerald-200 hover:text-white hover:border-emerald-400/50 hover:from-emerald-500/25 hover:to-teal-600/25 transition-all duration-300 shadow-[0_8px_32px_rgba(16,185,129,0.15)]"
           >
-            <span className="relative z-10">Sign In</span>
-            {/* Subtle background on hover */}
-            <div className="absolute inset-0 bg-white/8 opacity-0 group-hover/signin:opacity-100 transition-opacity duration-200 rounded-lg"></div>
-            {/* Minimal border effect */}
-            <div className="absolute inset-0 border border-transparent group-hover/signin:border-[#09C0F9]/20 rounded-lg transition-colors duration-200"></div>
-          </a>          <a
-            href="/signup"
-            className="relative px-6 py-2.5 rounded-full bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] text-black font-bold text-sm transition-all duration-300 group/signup overflow-hidden active:scale-95 shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25"
+            <span className="inline-flex w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.8)]"></span>
+            <span className="font-semibold text-sm tracking-wide">Recruitment Live</span>
+            <span className="text-base">🚀</span>
+          </a>
+          <a
+            href="/track"
+            className="relative inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-cyan-400/30 bg-gradient-to-r from-cyan-500/10 to-blue-600/10 text-cyan-200 hover:text-white hover:border-cyan-400/50 hover:from-cyan-500/20 hover:to-blue-600/20 transition-all duration-300 text-sm"
+            title="Track Application"
           >
-            {/* Animated shimmer effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover/signup:translate-x-full transition-transform duration-700 ease-in-out"></div>
-            
-            <span className="relative z-10 flex items-center space-x-2">
-              <span>Sign Up Now</span>
-              <svg className="w-4 h-4 group-hover/signup:translate-x-0.5 group-hover/signup:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </span>
-            
-            {/* Subtle pulse on active */}
-            <div className="absolute inset-0 bg-white/20 scale-95 opacity-0 group-active/signup:scale-105 group-active/signup:opacity-100 transition-all duration-150 rounded-full"></div>
+            <span className="text-base">🔍</span>
+            <span className="font-medium">Track</span>
+          </a>
+          <a
+            href="/admin-check?redirect=/admin"
+            className="relative inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 text-slate-200 hover:text-white hover:border-white/25 bg-white/5 hover:bg-white/10 transition-all duration-200 text-sm"
+            aria-label="Admin Hub"
+            title="Admin Hub"
+          >
+            <span className="text-base">🔑</span>
+            <span className="font-medium">Hub</span>
           </a>
         </div>        {/* Mobile Menu Button with Rich Animations */}
         <div className="md:hidden flex items-center">
@@ -270,9 +278,11 @@ function Navbar({ className }: { className?: string }) {
           {/* Enhanced Mobile Menu Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-800/30 bg-gradient-to-r from-transparent to-[#09C0F9]/5">
             <div className="flex items-center space-x-3 group/header">
-              <div className="relative">                <img
+              <div className="relative">                <Image
                   src="/gaacLogo.png"
                   alt="GAAC"
+                  width={40}
+                  height={40}
                   className="w-10 h-10 transition-all duration-300 group-hover/header:scale-110 group-hover/header:rotate-6"
                 />
                 {/* Subtle glow effect on logo */}
@@ -296,10 +306,10 @@ function Navbar({ className }: { className?: string }) {
           <nav className="flex-1 px-6 py-6">
             <div className="space-y-2">
               <a
-                href="#about-us"
+                href="#about-club"
                 onClick={(e) => {
                   e.preventDefault();
-                  const section = document.getElementById("about-us");
+                  const section = document.getElementById("about-club");
                   if (section) {
                     section.scrollIntoView({ behavior: "smooth" });
                   }
@@ -315,6 +325,24 @@ function Navbar({ className }: { className?: string }) {
                   <div className="absolute inset-0 bg-[#09C0F9]/20 rounded-full scale-0 group-hover/link:scale-150 transition-transform duration-300 blur-sm"></div>
                 </div>
                 <span className="font-semibold text-base group-hover/link:text-[#09C0F9] transition-colors duration-300">About Us</span>
+                <svg className="w-4 h-4 text-gray-600 group-hover/link:text-[#09C0F9] opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all duration-300 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+
+              {/* Admin Hub (mobile) */}
+              <a
+                href="/admin-check?redirect=/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-2 flex items-center space-x-4 px-4 py-4 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/link focus:ring-2 focus:ring-[#09C0F9]/40 focus:outline-none"
+              >
+                <div className="relative">
+                  <svg className="w-6 h-6 text-gray-500 group-hover/link:text-[#09C0F9] transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 11-4 0 2 2 0 014 0zm-6 7a6 6 0 1112 0v1a3 3 0 01-3 3H9a3 3 0 01-3-3v-1z" />
+                  </svg>
+                  <div className="absolute inset-0 bg-[#09C0F9]/20 rounded-full scale-0 group-hover/link:scale-150 transition-transform duration-300 blur-sm"></div>
+                </div>
+                <span className="font-semibold text-base">Admin Hub</span>
                 <svg className="w-4 h-4 text-gray-600 group-hover/link:text-[#09C0F9] opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all duration-300 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -436,51 +464,45 @@ function Navbar({ className }: { className?: string }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </a>              {/* Elegant divider with gradient */}
-              <div className="my-6 relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700/50 to-transparent"></div>
-                </div>
-                <div className="relative flex justify-center">
-                  <span className="px-4 text-xs text-gray-500 bg-gradient-to-b from-[#1A1D21] to-[#151719]">Authentication</span>
-                </div>
-              </div>
-
+              {/* Recruitment CTA inline for mobile list */}
               <a
-                href="/signin"
+                href="/recruitment"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center space-x-4 px-4 py-4 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/5 hover:to-[#09C0F9]/5 active:bg-white/10 transition-all duration-300 group/link focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none transform hover:translate-x-1 active:scale-98"
+                className="mt-4 flex items-center space-x-4 px-4 py-4 rounded-xl text-emerald-200 hover:text-white bg-gradient-to-r from-emerald-500/10 to-teal-600/10 hover:from-emerald-500/20 hover:to-teal-600/20 border border-emerald-400/20 hover:border-emerald-400/40 transition-all duration-300 group/link focus:ring-2 focus:ring-emerald-500/40 focus:outline-none"
               >
                 <div className="relative">
-                  <svg className="w-6 h-6 text-gray-500 group-hover/link:text-[#09C0F9] transition-all duration-300 group-hover/link:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                  <svg className="w-6 h-6 text-emerald-400 group-hover/link:text-emerald-300 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <div className="absolute inset-0 bg-[#09C0F9]/20 rounded-full scale-0 group-hover/link:scale-150 transition-transform duration-300 blur-sm"></div>
+                  <div className="absolute inset-0 bg-emerald-500/20 rounded-full scale-0 group-hover/link:scale-150 transition-transform duration-300 blur-sm"></div>
                 </div>
-                <span className="font-semibold text-base group-hover/link:text-[#09C0F9] transition-colors duration-300">Sign In</span>
-                <svg className="w-4 h-4 text-gray-600 group-hover/link:text-[#09C0F9] opacity-0 group-hover/link:opacity-100 group-hover/link:translate-x-1 transition-all duration-300 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+                <span className="font-semibold text-base">Recruitment is Live</span>
+                <span className="ml-auto">🚀</span>
               </a>
             </div>
           </nav>          {/* Enhanced Mobile CTA Button with Rich Microanimations */}
-          <div className="p-6 border-t border-gray-800/30 bg-gradient-to-r from-transparent to-[#09C0F9]/5">
+          <div className="p-6 border-t border-gray-800/30 bg-gradient-to-r from-transparent to-emerald-500/10">
             <a
-              href="/signup"
+              href="/recruitment"
               onClick={() => setMobileMenuOpen(false)}
-              className="relative flex items-center justify-center w-full py-4 px-6 bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] active:from-[#0284C7] active:to-[#0369A1] text-black font-bold rounded-xl transition-all duration-300 active:scale-95 group/cta focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25 overflow-hidden"
+              className="relative flex items-center justify-center w-full py-4 px-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-teal-600 hover:to-emerald-600 text-white font-bold rounded-xl transition-all duration-300 active:scale-95 group/cta focus:ring-2 focus:ring-emerald-500/50 focus:outline-none shadow-lg hover:shadow-xl hover:shadow-emerald-500/25 overflow-hidden"
             >
-              {/* Dynamic background shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-700 ease-in-out"></div>
-              
               <span className="relative z-10 flex items-center space-x-2">
-                <span className="text-lg">Sign Up Now</span>
-                <svg className="w-5 h-5 group-hover/cta:translate-x-1 group-hover/cta:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+                <span className="text-lg">Apply Now – Recruitment Live</span>
+                <span>🚀</span>
               </span>
-              
-              {/* Pulse effect on active */}
-              <div className="absolute inset-0 bg-white/20 scale-95 opacity-0 group-active/cta:scale-105 group-active/cta:opacity-100 transition-all duration-150 rounded-xl"></div>
+            </a>
+            
+            <a
+              href="/track"
+              onClick={() => setMobileMenuOpen(false)}
+              className="relative flex items-center justify-center w-full py-3 px-6 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 border border-cyan-400/30 text-cyan-200 hover:text-white hover:border-cyan-400/50 hover:from-cyan-500/30 hover:to-blue-600/30 font-semibold rounded-xl transition-all duration-300 active:scale-95 group/track focus:ring-2 focus:ring-cyan-500/50 focus:outline-none"
+            >
+              <span className="flex items-center space-x-2">
+                <span>🔍</span>
+                <span>Track Application</span>
+              </span>
             </a>
           </div>
         </div>

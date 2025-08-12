@@ -2,8 +2,15 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useSearchParams, useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabaseClient';
+import axios from 'axios';
+import Image from 'next/image';
 
 export default function SignInPage() {
+  const params = useSearchParams();
+  const router = useRouter();
+  const redirect = params.get('redirect') || '/dashboard';
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,6 +31,46 @@ export default function SignInPage() {
     e.preventDefault();
     console.log('Sign in attempt:', formData);
   };
+
+  const signInWithGoogle = async () => {
+    // Enforce GITAM domain on the Google OAuth screen
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+    const callback = `${siteUrl}/auth/callback?redirect=${encodeURIComponent(redirect)}`;
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: callback,
+        queryParams: {
+          // This hints Google to use a specific hosted domain
+          hd: 'gitam.in',
+          prompt: 'select_account',
+        },
+      },
+    });
+    if (error) console.error('OAuth error:', error.message);
+  };
+
+  // After OAuth redirect back, if sb-access-token cookies exist, exchange for gaac cookies and move to redirect
+  React.useEffect(() => {
+    const authFlag = params.get('auth');
+    if (authFlag === '1') {
+      // Try to fetch Supabase session
+      supabase.auth.getSession().then(async ({ data }) => {
+        const session = data.session;
+        const token = session?.access_token;
+        if (token) {
+          try {
+            const res = await axios.post('/api/session-cookie', null, { headers: { Authorization: `Bearer ${token}` } });
+            if (res.status === 200) {
+              router.replace(redirect);
+            }
+          } catch (e) {
+            console.error('Cookie exchange failed', e);
+          }
+        }
+      });
+    }
+  }, [params, redirect, router]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0B0C0D] via-[#151719] to-[#1C1E21] relative overflow-hidden">
@@ -49,10 +96,13 @@ export default function SignInPage() {
           >
             <div className="flex justify-center mb-6">
               <div className="relative">
-                <img
+                <Image
                   src="/gaacLogo.png"
                   alt="GAAC Logo"
+                  width={64}
+                  height={64}
                   className="h-16 w-16 transition-all duration-300"
+                  priority
                 />
                 <div className="absolute inset-0 rounded-full bg-[#09C0F9]/20 scale-75 opacity-0 animate-pulse"></div>
               </div>
@@ -182,6 +232,7 @@ export default function SignInPage() {
               <div className="grid grid-cols-2 gap-4">
                 <button
                   type="button"
+                  onClick={signInWithGoogle}
                   className="flex items-center justify-center px-4 py-3 bg-white/10 hover:bg-white/20 border border-gray-700/50 hover:border-[#09C0F9]/30 rounded-xl transition-all duration-300 group"
                 >
                   <svg className="w-5 h-5 text-white group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
@@ -213,7 +264,7 @@ export default function SignInPage() {
             className="text-center"
           >
             <p className="text-gray-300">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <a href="/signup" className="text-[#09C0F9] hover:text-[#0EA5E9] transition-colors font-medium">
                 Sign up here
               </a>

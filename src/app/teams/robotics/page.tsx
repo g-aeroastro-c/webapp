@@ -12,7 +12,7 @@ export default function RoboticsPage() {
       <div className="absolute top-0 left-0 w-72 h-72 bg-purple-600/20 rounded-full filter blur-3xl animate-pulse"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-600/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
       
-      <div className="relative z-10 container mx-auto px-6 py-8">
+      <div className="relative z-10 container mx-auto px-6 pt-24 sm:pt-32 pb-16">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
