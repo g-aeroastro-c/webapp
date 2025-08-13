@@ -12,7 +12,7 @@ const AstronomyTeamPage = () => {
           Astronomy Team
         </h1>
         {/* Intro text, same level as title for consistent layering */}
-        <p className="mb-8 text-xl relative z-40">
+        <p className="mb-8 text-xl relative">
           Welcome to the Astronomy Team page. Our team is dedicated to exploring
           the wonders of the universe and sharing our knowledge with others.
           Join us in our celestial journey!
