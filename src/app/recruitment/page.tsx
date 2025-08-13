@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ClipboardList, Rocket, Send, Users, CheckCircle2, BadgeCheck, Info, ShieldCheck, HelpCircle, Phone, Mail, MessageCircle, X, User } from "lucide-react";
 import axios from "@/lib/axios";
@@ -40,6 +40,27 @@ export default function RecruitmentPage() {
     team_preference: TEAM_OPTIONS[0],
     team_specific: {},
   });
+
+  // Enhanced keyboard navigation for modals
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (showReview) setShowReview(false);
+        else if (showThankYou) setShowThankYou(false);
+        else if (showHelp) setShowHelp(false);
+      }
+    };
+
+    if (showReview || showThankYou || showHelp) {
+      document.addEventListener('keydown', handleKeyDown);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [showReview, showThankYou, showHelp]);
 
   const canSubmit = useMemo(() => {
     return (
@@ -598,7 +619,7 @@ export default function RecruitmentPage() {
                                 type="radio"
                                 name="raptor_interest"
                                 className="accent-emerald-500"
-                                checked={Boolean(form.team_specific.raptor_interest) === opt.val}
+                                checked={form.team_specific.raptor_interest === opt.val}
                                 onChange={()=>setForm({...form, team_specific: { ...form.team_specific, raptor_interest: opt.val }})}
                               />
                               <span className="text-slate-200 text-sm">{opt.label}</span>
@@ -1102,16 +1123,17 @@ export default function RecruitmentPage() {
 
       {/* Enhanced Review Modal */}
       {showReview && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 pt-20 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[100] flex items-start justify-center backdrop-blur-sm overflow-y-auto overscroll-contain scroll-smooth">
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-slate-900/90 to-black/80" onClick={()=>setShowReview(false)} />
-          <motion.div 
-            initial={{ opacity: 0, y: 20, scale: 0.95 }} 
-            animate={{ opacity: 1, y: 0, scale: 1 }} 
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="relative z-[101] w-full max-w-5xl mx-auto bg-gradient-to-br from-slate-900/98 via-slate-800/95 to-slate-900/98 border border-emerald-400/20 rounded-3xl shadow-2xl overflow-hidden max-h-[90vh]"
-          >
-            {/* Header with gradient background */}
-            <div className="relative bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-cyan-500/10 border-b border-emerald-400/20 px-4 sm:px-8 py-4 sm:py-6">
+          <div className="relative z-[101] w-full max-w-5xl mx-auto min-h-screen flex items-start justify-center p-4 pt-8 pb-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20, scale: 0.95 }} 
+              animate={{ opacity: 1, y: 0, scale: 1 }} 
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="w-full bg-gradient-to-br from-slate-900/98 via-slate-800/95 to-slate-900/98 border border-emerald-400/20 rounded-3xl shadow-2xl overflow-hidden my-8 max-h-[calc(100vh-4rem)] flex flex-col"
+            >
+              {/* Header with gradient background */}
+            <div className="relative bg-gradient-to-r from-emerald-500/10 via-teal-500/10 to-cyan-500/10 border-b border-emerald-400/20 px-4 sm:px-8 py-4 sm:py-6 flex-shrink-0">
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-cyan-500/5" />
               <div className="relative">
                 {/* Top row with title and close button */}
@@ -1177,7 +1199,7 @@ export default function RecruitmentPage() {
             </div>
 
             {/* Content Area */}
-            <div className="max-h-[70vh] overflow-y-auto px-8 py-6">
+            <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-6 overscroll-contain scroll-smooth">
               <div className="space-y-8">
                 {/* Applicant Details Card */}
                 <motion.div 
@@ -1352,7 +1374,7 @@ export default function RecruitmentPage() {
             </div>
 
             {/* Action Footer */}
-            <div className="border-t border-emerald-400/20 bg-gradient-to-r from-emerald-500/5 to-teal-500/5 px-4 sm:px-8 py-4 sm:py-6">
+            <div className="border-t border-emerald-400/20 bg-gradient-to-r from-emerald-500/5 to-teal-500/5 px-4 sm:px-8 py-4 sm:py-6 flex-shrink-0">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-xs sm:text-sm text-slate-400 text-center sm:text-left">
                   ⚠️ Review all information carefully. Once submitted, changes cannot be made.
@@ -1392,15 +1414,16 @@ export default function RecruitmentPage() {
                 </div>
               </div>
             </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       )}
 
       {/* Thank You Overlay */}
       {showThankYou && (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center">
+        <div className="fixed inset-0 z-[80] flex items-start justify-center overflow-y-auto overscroll-contain scroll-smooth p-4 pt-8 pb-8">
           <div className="absolute inset-0 bg-black/80" onClick={()=>setShowThankYou(false)} />
-          <motion.div initial={{ opacity: 0, y: 20, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.35 }} className="relative z-[81] w-full max-w-2xl mx-auto bg-gradient-to-b from-slate-900/95 to-slate-900/90 border border-white/10 rounded-2xl shadow-2xl p-8">
+          <motion.div initial={{ opacity: 0, y: 20, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.35 }} className="relative z-[81] w-full max-w-2xl mx-auto bg-gradient-to-b from-slate-900/95 to-slate-900/90 border border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 my-8">
             <div className="flex items-start gap-4">
               <div className="shrink-0 w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center">
                 <CheckCircle2 className="w-7 h-7 text-emerald-300" />
@@ -1476,13 +1499,13 @@ export default function RecruitmentPage() {
 
       {/* Help Modal */}
       {showHelp && (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[80] flex items-start justify-center overflow-y-auto overscroll-contain scroll-smooth p-4 pt-8 pb-8">
           <div className="absolute inset-0 bg-black/80" onClick={() => setShowHelp(false)} />
           <motion.div 
             initial={{ opacity: 0, y: 20, scale: 0.98 }} 
             animate={{ opacity: 1, y: 0, scale: 1 }} 
             transition={{ duration: 0.35 }}
-            className="relative z-[81] w-full max-w-3xl mx-auto bg-gradient-to-b from-slate-900/95 to-slate-900/90 border border-white/10 rounded-2xl shadow-2xl p-8 max-h-[80vh] overflow-y-auto"
+            className="relative z-[81] w-full max-w-3xl mx-auto bg-gradient-to-b from-slate-900/95 to-slate-900/90 border border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 my-8"
           >
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-2xl font-bold text-white flex items-center gap-3">

@@ -2,89 +2,190 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Users, Crown, Mail, Linkedin, Star, Award, Target, Heart, ArrowRight, Calendar, DollarSign, Settings } from "lucide-react";
+import { Crown, Mail, Linkedin, Star, Award, Target, Heart, ArrowRight, X, Shield, FileText, Eye, Database, Calendar, Sparkles, Users } from "lucide-react";
 import Image from "next/image";
-import clubData from "@/data/clubData.json";
+import { useClubData, ClubDataUtils } from "@/lib/clubData";
+import type { TimelineEvent } from "@/types/clubData";
 
-// Strongly typed interfaces for club data (can be moved to a separate types file later)
-interface Executive {
-  id: string;
-  name: string;
-  image?: string;
-  position: string;
-  department: string;
-  year: string;
-  bio: string;
-  email: string;
-  linkedin?: string;
-  achievements: string[];
-  color?: string; // legacy field still present in JSON
+// Enhanced Timeline Card Component with Micro-interactions
+interface TimelineCardProps {
+  event: TimelineEvent;
+  index: number;
+  isLeft: boolean;
 }
-interface Member {
-  id: string;
-  name: string;
-  team: string;
-  role: string;
-  year: string;
-  email?: string;
-  linkedin?: string;
-  avatar?: string;
-  skills?: string[];
-}
-interface Founder {
-  name: string;
-  image?: string;
-  title: string;
-  bio: string;
-  email: string;
-}
-interface ClubData {
-  founder: Founder;
-  executives: Executive[];
-  members: Member[];
-}
+
+const TimelineCard: React.FC<TimelineCardProps> = ({ event, index, isLeft }) => {
+  const ref = React.useRef(null);
+  
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: isLeft ? -50 : 50, y: 20 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ 
+        duration: 0.6, 
+        delay: 0.1 * index,
+        type: "spring",
+        stiffness: 100 
+      }}
+      className={`relative flex items-center ${
+        isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+      } flex-col md:gap-8`}
+    >
+      {/* Enhanced Timeline dot with hover effects */}
+      <motion.div 
+        className="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-6 h-6 z-20 group cursor-pointer"
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <div className="relative w-full h-full">
+          {/* Outer glow ring */}
+          <motion.div 
+            className={`absolute inset-0 rounded-full bg-gradient-to-r ${event.color} opacity-30`}
+            animate={{ scale: [1, 1.5, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
+          {/* Main dot */}
+          <div className="relative w-full h-full bg-slate-900 rounded-full border-2 border-white/20 flex items-center justify-center overflow-hidden">
+            <motion.div 
+              className={`absolute inset-1 rounded-full bg-gradient-to-r ${event.color}`}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            />
+            <span className="relative z-10 text-xs">{event.icon}</span>
+          </div>
+          {/* Pulse effect */}
+          <motion.div 
+            className={`absolute inset-0 rounded-full bg-gradient-to-r ${event.color} opacity-40`}
+            animate={{ scale: [1, 2, 1], opacity: [0.4, 0, 0.4] }}
+            transition={{ duration: 3, repeat: Infinity, delay: index * 0.5 }}
+          />
+        </div>
+      </motion.div>
+      
+      {/* Enhanced Content card */}
+      <motion.div 
+        className={`w-full md:w-5/12 ml-14 md:ml-0`}
+        whileHover={{ y: -5 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        <motion.div 
+          className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 overflow-hidden group cursor-pointer"
+          whileHover={{ 
+            borderColor: "rgba(255, 255, 255, 0.3)",
+            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)"
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Background gradient overlay */}
+          <motion.div 
+            className={`absolute inset-0 bg-gradient-to-r ${event.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+          />
+          
+          {/* Floating decorative elements */}
+          <div className={`absolute top-2 ${isLeft ? 'right-2' : 'left-2'} opacity-0 group-hover:opacity-30 transition-opacity duration-500`}>
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            >
+              <Sparkles className="h-4 w-4 text-white/50" />
+            </motion.div>
+          </div>
+          
+          {/* Year badge with enhanced styling */}
+          <motion.div 
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${event.color} text-white text-sm font-bold mb-4 shadow-lg ${!isLeft ? 'md:ml-auto' : ''}`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <motion.span 
+              className="text-lg"
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              {event.icon}
+            </motion.span>
+            {event.year}
+          </motion.div>
+          
+          {/* Title with gradient hover effect */}
+          <motion.h3 
+            className={`text-xl font-bold text-white mb-3 group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-cyan-200 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 ${!isLeft ? 'md:text-right' : ''}`}
+          >
+            {event.title}
+          </motion.h3>
+          
+          <p className={`text-slate-300 text-sm leading-relaxed mb-4 group-hover:text-slate-200 transition-colors duration-300 ${!isLeft ? 'md:text-right' : ''}`}>
+            {event.description}
+          </p>
+          
+          {/* Enhanced Achievements list with proper alignment */}
+          <div className="space-y-2">
+            <motion.h4 
+              className={`text-sm font-semibold text-cyan-300 mb-3 flex items-center gap-2 ${!isLeft ? 'md:justify-end md:flex-row-reverse md:gap-2' : ''}`}
+              whileHover={{ x: isLeft ? 5 : -5 }}
+            >
+              <Award className="h-3 w-3" />
+              <span>Key Achievements:</span>
+            </motion.h4>
+            <div className="space-y-2">
+              {event.achievements.map((achievement: string, achievementIndex: number) => (
+                <motion.div
+                  key={achievementIndex}
+                  initial={{ opacity: 0, x: isLeft ? -10 : 10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * achievementIndex }}
+                  className={`text-xs text-slate-400 flex items-start gap-3 group/item hover:text-slate-300 transition-colors duration-200 ${!isLeft ? 'md:flex-row-reverse md:text-right' : ''}`}
+                >
+                  <motion.span 
+                    className="text-cyan-400 mt-1 group-hover/item:text-cyan-300"
+                    whileHover={{ scale: 1.5, rotate: 180 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    •
+                  </motion.span>
+                  <span className="flex-1">{achievement}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Progress indicator */}
+          <motion.div 
+            className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${event.color} opacity-50`}
+            initial={{ width: "0%" }}
+            whileInView={{ width: "100%" }}
+            transition={{ duration: 1, delay: 0.5 }}
+          />
+        </motion.div>
+      </motion.div>
+      
+      {/* Enhanced Connection line */}
+      <motion.div 
+        className={`hidden md:block absolute ${
+          isLeft ? 'left-1/2 right-6' : 'left-6 right-1/2'
+        } top-1/2 h-px bg-gradient-to-r ${event.color} opacity-30`}
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        style={{ 
+          transformOrigin: isLeft ? 'left' : 'right',
+          top: '50%'
+        }}
+      />
+      
+      {/* Empty space for alternating layout */}
+      <div className="hidden md:block w-5/12"></div>
+    </motion.div>
+  );
+};
 
 export default function Home() {
-  // Data sourced from centralized JSON
-  const { executives, founder, members: jsonMembers } = clubData as ClubData;
+  // Enhanced data from centralized source with utilities
+  const { founder, executives, timeline } = useClubData();
 
-  const [search, setSearch] = React.useState("");
-  const [teamFilter, setTeamFilter] = React.useState<string>("All");
-  const [yearFilter, setYearFilter] = React.useState<string>("All");
-  const [sortKey, setSortKey] = React.useState<string>("name");
-  const [page, setPage] = React.useState(1);
-  const pageSize = 9;
-
-  const teams = React.useMemo(() => Array.from(new Set(jsonMembers.map(m => m.team))), [jsonMembers]);
-  const years = React.useMemo(() => Array.from(new Set(jsonMembers.map(m => m.year))), [jsonMembers]);
-
-  const filtered = React.useMemo(() => {
-    return jsonMembers
-      .filter(m => m.name.toLowerCase().includes(search.toLowerCase()) || m.role.toLowerCase().includes(search.toLowerCase()))
-      .filter(m => (teamFilter === 'All' ? true : m.team === teamFilter))
-      .filter(m => (yearFilter === 'All' ? true : m.year === yearFilter))
-      .sort((a, b) => {
-        if (sortKey === 'name') return a.name.localeCompare(b.name);
-        if (sortKey === 'team') return a.team.localeCompare(b.team);
-        if (sortKey === 'year') return a.year.localeCompare(b.year);
-        return 0;
-      });
-  }, [jsonMembers, search, teamFilter, yearFilter, sortKey]);
-
-  const totalPages = Math.ceil(filtered.length / pageSize) || 1;
-  const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
-
-  React.useEffect(() => { setPage(1); }, [search, teamFilter, yearFilter, sortKey]);
-
-  // Role style configuration for dynamic banners & avatars
-  const roleStyles: Record<string, { gradient: string; ring: string; icon: React.ReactNode }> = {
-    President: { gradient: "from-yellow-500 via-amber-400 to-orange-500", ring: "ring-yellow-400/60", icon: <Crown className="h-6 w-6 text-white" /> },
-    "Vice President": { gradient: "from-purple-500 via-fuchsia-500 to-pink-500", ring: "ring-fuchsia-400/60", icon: <Star className="h-6 w-6 text-white" /> },
-    "Technical Lead": { gradient: "from-emerald-500 via-green-500 to-teal-500", ring: "ring-emerald-400/60", icon: <Settings className="h-6 w-6 text-white" /> },
-    Secretary: { gradient: "from-blue-500 via-cyan-500 to-sky-500", ring: "ring-sky-400/60", icon: <Mail className="h-6 w-6 text-white" /> },
-    Treasurer: { gradient: "from-indigo-500 via-blue-600 to-violet-600", ring: "ring-indigo-400/60", icon: <DollarSign className="h-6 w-6 text-white" /> },
-    "Events Coordinator": { gradient: "from-teal-500 via-cyan-500 to-emerald-500", ring: "ring-teal-400/60", icon: <Calendar className="h-6 w-6 text-white" /> },
-  };
+  const [showPrivacyModal, setShowPrivacyModal] = React.useState(false);
 
   return (
     <div 
@@ -126,27 +227,93 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Email Signup */}
-          <div className="w-full max-w-lg mx-auto mb-12 px-4 sm:px-0">
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                aria-label="Email address"
-                className="flex-1 px-4 sm:px-5 py-3 sm:py-4 rounded-xl bg-white/10 border border-gray-700/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#09C0F9]/50 focus:border-[#09C0F9]/50 backdrop-blur-sm transition-all duration-300 text-sm sm:text-base min-h-[48px]"
-              />
-              <button className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-[#09C0F9] to-[#0EA5E9] hover:from-[#0EA5E9] hover:to-[#0284C7] text-black font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl hover:shadow-[#09C0F9]/25 text-sm sm:text-base whitespace-nowrap">
-                Join Us
-              </button>
+          {/* Recruitment Live Section */}
+          <div className="w-full max-w-2xl mx-auto mb-12 px-3 sm:px-4 lg:px-0">
+            {/* Live Recruitment Banner */}
+            <div className="mb-6 text-center">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/20 via-green-500/20 to-teal-500/20 border border-emerald-400/40 backdrop-blur-sm mb-3 animate-pulse">
+                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></div>
+                <span className="text-emerald-300 text-xs sm:text-sm font-semibold">🚀 RECRUITMENT 2025 IS LIVE!</span>
+                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></div>
+              </div>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 px-2">
+                Join the Future of Innovation
+              </h3>
+              <p className="text-gray-300 text-xs sm:text-sm md:text-base px-2 leading-relaxed">
+                Ready to explore robotics, programming, astronomy, and more? Apply now and become part of GAAC&apos;s mission to push the boundaries of technology and space exploration.
+              </p>
+            </div>
+
+            {/* Enhanced CTA Section */}
+            <div className="relative">
+              {/* Background glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#09C0F9]/20 via-emerald-500/20 to-[#0EA5E9]/20 rounded-xl sm:rounded-2xl blur-xl"></div>
+              
+              {/* Main content */}
+              <div className="relative bg-gradient-to-r from-white/10 via-white/5 to-white/10 border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 backdrop-blur-md">
+                <div className="text-center mb-4 sm:mb-6">
+                  <div className="flex items-center justify-center gap-2 mb-2 sm:mb-3">
+                    <span className="text-xl sm:text-2xl">✨</span>
+                    <h4 className="text-base sm:text-lg md:text-xl font-bold text-white">Ready to Apply?</h4>
+                    <span className="text-xl sm:text-2xl">🚀</span>
+                  </div>
+                  <p className="text-slate-300 text-xs sm:text-sm mb-3 sm:mb-4 px-2 leading-relaxed">
+                    Join teams in <span className="text-cyan-300 font-semibold">Stargazers (Astronomy)</span>, <span className="text-rose-300 font-semibold">Robusta (Robotics)</span>, <span className="text-purple-300 font-semibold">Programmers</span>, and <span className="text-amber-300 font-semibold">Core Team</span>
+                  </p>
+                </div>
+
+                {/* Application Steps Preview */}
+                <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
+                  <div className="text-center p-2 sm:p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-base sm:text-lg mb-1">📝</div>
+                    <div className="text-[10px] sm:text-xs text-slate-300">Fill Application</div>
+                  </div>
+                  <div className="text-center p-2 sm:p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-base sm:text-lg mb-1">🎯</div>
+                    <div className="text-[10px] sm:text-xs text-slate-300">Get Shortlisted</div>
+                  </div>
+                  <div className="text-center p-2 sm:p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div className="text-base sm:text-lg mb-1">🎉</div>
+                    <div className="text-[10px] sm:text-xs text-slate-300">Join the Team</div>
+                  </div>
+                </div>
+
+                {/* CTA Button */}
+                <div className="text-center">
+                  <a
+                    href="/recruitment"
+                    className="inline-flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-gradient-to-r from-emerald-500 via-[#09C0F9] to-teal-600 hover:from-emerald-600 hover:via-[#0EA5E9] hover:to-teal-700 text-white font-bold text-sm sm:text-base md:text-lg rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-2xl hover:shadow-emerald-500/25 group relative overflow-hidden touch-manipulation"
+                  >
+                    {/* Button glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-cyan-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <span className="relative z-10">Apply for Recruitment 2025</span>
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+                    
+                    {/* Animated sparkles */}
+                    <div className="absolute top-1 right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/80 rounded-full opacity-0 group-hover:opacity-100 animate-ping" style={{ animationDelay: '0.1s' }}></div>
+                    <div className="absolute bottom-1 left-1 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white/60 rounded-full opacity-0 group-hover:opacity-100 animate-ping" style={{ animationDelay: '0.3s' }}></div>
+                  </a>
+                  
+                  <p className="text-[10px] sm:text-xs text-slate-400 mt-3 sm:mt-4 flex items-center justify-center gap-1 px-2">
+                    <span className="w-1 h-1 bg-emerald-400 rounded-full animate-pulse"></span>
+                    Application takes only 3-5 minutes
+                    <span className="w-1 h-1 bg-emerald-400 rounded-full animate-pulse"></span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <p className="text-gray-400 text-xs sm:text-sm px-4 sm:px-0">
-            We care about your data in our{" "}
-            <a href="#" className="text-[#09C0F9] hover:text-[#0EA5E9] hover:underline transition-colors duration-200">
+          <p className="text-gray-400 text-[10px] sm:text-xs md:text-sm px-4 sm:px-0 text-center leading-relaxed">
+            🔒 Your application data is secure. Read our{" "}
+            <button 
+              onClick={() => setShowPrivacyModal(true)}
+              className="text-[#09C0F9] hover:text-[#0EA5E9] hover:underline transition-colors duration-200 underline decoration-dotted cursor-pointer"
+            >
               privacy policy
-            </a>
-            .
+            </button>
+            {" "}for more details.
           </p>
         </div>
 
@@ -261,6 +428,203 @@ export default function Home() {
           </p>
         </motion.section>
 
+        {/* Club Evolution Timeline - Enhanced with Micro-interactions */}
+        <motion.section 
+          id="timeline" 
+          initial={{ opacity: 0, y: 24 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.6, delay: 0.1 }} 
+          className="mb-24"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/30 text-purple-300 text-sm font-medium mb-6">
+            <Calendar className="h-4 w-4" /> Our Journey
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-purple-300 via-pink-200 to-blue-300 bg-clip-text text-transparent mb-6">
+            Evolution Timeline
+          </h2>
+          <p className="text-slate-300 text-lg max-w-3xl leading-relaxed mb-12">
+            From humble beginnings in 2020 to becoming a premier technical club - witness our journey of innovation, growth, and technological excellence.
+          </p>
+          
+          <div className="relative">
+            {/* Enhanced Timeline line with animated gradient */}
+            <div className="absolute left-6 md:left-1/2 md:-translate-x-0.5 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-400/30 via-pink-400/30 to-blue-400/30 md:opacity-60">
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-b from-purple-400 via-pink-400 to-blue-400 opacity-50"
+                animate={{ 
+                  opacity: [0.3, 0.8, 0.3],
+                  scaleY: [1, 1.02, 1]
+                }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+              />
+            </div>
+            
+            {/* Floating background particles */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <motion.div 
+                className="absolute top-10 left-10 w-2 h-2 bg-purple-400/30 rounded-full"
+                animate={{ 
+                  y: [0, -20, 0],
+                  opacity: [0.3, 0.7, 0.3]
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.div 
+                className="absolute top-32 right-16 w-1.5 h-1.5 bg-pink-400/40 rounded-full"
+                animate={{ 
+                  y: [0, -15, 0],
+                  x: [0, 10, 0],
+                  opacity: [0.4, 0.8, 0.4]
+                }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              />
+              <motion.div 
+                className="absolute top-64 left-20 w-1 h-1 bg-blue-400/35 rounded-full"
+                animate={{ 
+                  y: [0, -25, 0],
+                  opacity: [0.3, 0.6, 0.3]
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              />
+              <motion.div 
+                className="absolute bottom-32 right-10 w-2.5 h-2.5 bg-purple-300/25 rounded-full"
+                animate={{ 
+                  y: [0, -18, 0],
+                  x: [0, -12, 0],
+                  opacity: [0.2, 0.6, 0.2]
+                }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              />
+            </div>
+            
+            {/* Enhanced Timeline events */}
+            <div className="space-y-8 md:space-y-16">
+              {timeline.map((event: TimelineEvent, index: number) => (
+                <TimelineCard 
+                  key={event.year} 
+                  event={event} 
+                  index={index} 
+                  isLeft={index % 2 === 0}
+                />
+              ))}
+            </div>
+            
+            {/* Enhanced Future indicator with micro-interactions */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="relative flex items-center justify-center mt-12"
+            >
+              <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 w-6 h-6 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full animate-pulse z-10 flex items-center justify-center">
+                <ArrowRight className="h-3 w-3 text-white" />
+              </div>
+              <div className="ml-16 md:ml-0 md:text-center">
+                <motion.div 
+                  className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-xl p-6 backdrop-blur-sm hover:scale-105 transition-all duration-300 cursor-pointer group"
+                  whileHover={{ 
+                    borderColor: "rgba(6, 182, 212, 0.8)",
+                    boxShadow: "0 0 30px rgba(6, 182, 212, 0.2)"
+                  }}
+                >
+                  <div className="flex items-center gap-3 justify-center md:justify-start">
+                    <div className="h-5 w-5 text-cyan-400 group-hover:animate-pulse">🚀</div>
+                    <p className="text-cyan-300 font-medium">The Future Awaits...</p>
+                  </div>
+                  <p className="text-slate-400 text-sm mt-2">Next generation of aerospace innovation continues</p>
+                  <div className="flex gap-2 mt-3 justify-center md:justify-start">
+                    <motion.div 
+                      className="w-2 h-2 bg-cyan-400 rounded-full"
+                      animate={{ opacity: [0.4, 1, 0.4] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    />
+                    <motion.div 
+                      className="w-2 h-2 bg-blue-400 rounded-full"
+                      animate={{ opacity: [0.4, 1, 0.4] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+                    />
+                    <motion.div 
+                      className="w-2 h-2 bg-purple-400 rounded-full"
+                      animate={{ opacity: [0.4, 1, 0.4] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: 1 }}
+                    />
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+            
+            {/* Timeline End Marker & Section Breaker */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="flex flex-col items-center mt-16 mb-8"
+            >
+              {/* Rotating Spark Animation */}
+              <motion.div
+                className="w-12 h-12 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg mb-6"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 180, 360]
+                }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <motion.div
+                  animate={{ rotate: [0, -180, -360] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  className="text-xl"
+                >
+                  ✨
+                </motion.div>
+              </motion.div>
+              
+              {/* Cool Section Breaker */}
+              <div className="flex items-center gap-4 w-full max-w-md">
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent flex-1"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 1.5, delay: 1.5 }}
+                />
+                <motion.div
+                  className="flex gap-1"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 1.8 }}
+                >
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
+                </motion.div>
+                <motion.div 
+                  className="h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent flex-1"
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 1.5, delay: 1.5 }}
+                />
+              </div>
+              
+              {/* End Message */}
+              <motion.p 
+                className="text-slate-500 text-sm mt-4 font-medium tracking-wide"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 2 }}
+              >
+                Journey Continues...
+              </motion.p>
+            </motion.div>
+          </div>
+        </motion.section>
+
         {/* Values, Mission & Goals */}
         <motion.section id="values-mission" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} className="mb-24">
           <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-3"><Target className="h-6 w-6 text-cyan-400" /> Values, Mission & Goals</h2>
@@ -288,71 +652,415 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* Executive / Leadership Team */}
-        <motion.section id="executive-body" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }} className="mb-24">
-          <div className="flex items-center mb-10">
-            <Crown className="h-10 w-10 text-yellow-400 mr-4" />
-            <h2 className="text-3xl font-bold text-white">Executive Body</h2>
+        {/* Executive Leadership Team - iOS Style Cards */}
+        <motion.section 
+          id="executive-body" 
+          initial={{ opacity: 0, y: 24 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.6, delay: 0.25 }} 
+          className="mb-24"
+        >
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-amber-500/10 via-yellow-500/10 to-orange-500/10 border border-amber-400/30 mb-6">
+              <Crown className="h-6 w-6 text-amber-400" />
+              <span className="text-amber-300 font-semibold text-sm uppercase tracking-wider">Leadership Team</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-300 via-yellow-200 to-orange-300 bg-clip-text text-transparent mb-4">
+              Executive Body
+            </h2>
+            <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed">
+              Meet the visionary leaders driving innovation and excellence at GAAC. Our executive team combines technical expertise with strategic leadership to guide the club towards new horizons.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {executives.map((executive, index) => (
-              <motion.div key={executive.name} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.08 * index }} className="group">
-                <div className="relative bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/15 hover:border-white/40 transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
-                  {/* Decorative gradient banner */}
-                  <div className={`h-28 relative overflow-hidden`}>                  
-                    <div className={`absolute inset-0 bg-gradient-to-r ${roleStyles[executive.position]?.gradient || executive.color} opacity-90`}></div>
-                    {/* Animated accent shapes */}
-                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-pulse" />
-                    <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-white/5 rounded-full blur-3xl" />
-                    {/* Center Icon */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-40 group-hover:opacity-60 transition-opacity">
-                      <div className="scale-125">{roleStyles[executive.position]?.icon || <Users className="h-10 w-10 text-white" />}</div>
+
+          {/* Executive Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+            {executives.map((executive, index) => {
+              // Get role styling using the utility function
+              const roleStyle = ClubDataUtils.getExecutiveRoleStyle(executive.position);
+              
+              return (
+                <motion.div 
+                  key={executive.name} 
+                  initial={{ opacity: 0, y: 30, scale: 0.95 }} 
+                  animate={{ opacity: 1, y: 0, scale: 1 }} 
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: 0.1 * index,
+                    type: "spring",
+                    stiffness: 100
+                  }} 
+                  className="group"
+                >
+                  {/* iOS Style Card Container */}
+                  <div className="relative bg-gradient-to-br from-white/[0.12] via-white/[0.08] to-white/[0.04] backdrop-blur-xl rounded-3xl border border-white/[0.15] shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] hover:border-white/[0.3] hover:bg-gradient-to-br hover:from-white/[0.18] hover:via-white/[0.14] hover:to-white/[0.08] overflow-hidden group-hover:backdrop-blur-lg">
+                    
+                    {/* Card Background Pattern */}
+                    <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `radial-gradient(circle at 20% 80%, ${roleStyle.gradient.includes('yellow') ? '#FCD34D' : roleStyle.gradient.includes('purple') ? '#A855F7' : roleStyle.gradient.includes('blue') ? '#3B82F6' : '#10B981'}20 0%, transparent 50%),
+                                         radial-gradient(circle at 80% 20%, ${roleStyle.gradient.includes('yellow') ? '#F59E0B' : roleStyle.gradient.includes('purple') ? '#8B5CF6' : roleStyle.gradient.includes('blue') ? '#1D4ED8' : '#059669'}15 0%, transparent 50%)`,
+                      }} />
                     </div>
-                    {/* Avatar */}
-                    <div className="absolute -bottom-8 left-5 flex items-end gap-3">
-                      <div className={`w-24 h-24 rounded-2xl ring-4 ${roleStyles[executive.position]?.ring || 'ring-cyan-400/50'} shadow-2xl overflow-hidden bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/30 group-hover:scale-105 transition-transform`}>                      
-                        {executive.image ? (
-                          <Image src={executive.image} alt={executive.name} width={96} height={96} className="w-full h-full object-cover" />
-                        ) : (
-                          <span className="text-white text-2xl font-semibold tracking-wide">{executive.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</span>
+
+                    {/* Top Section with Role Badge and Picture */}
+                    <div className="relative p-8 pb-4">
+                      {/* Floating Role Badge */}
+                      <div className="absolute top-6 right-6 z-20">
+                        <div className={`px-4 py-2 rounded-full bg-gradient-to-r ${roleStyle.gradient} shadow-lg backdrop-blur-sm flex items-center gap-2`}>
+                          <span className="text-white text-sm">{roleStyle.icon}</span>
+                          <span className="text-white text-xs font-bold uppercase tracking-wider">EB (2025-26)</span>
+                        </div>
+                      </div>
+
+                      {/* Profile Picture */}
+                      <div className="flex justify-center mb-6">
+                        <div className="relative">
+                          {/* Glow Effect */}
+                          <div className={`absolute inset-0 bg-gradient-to-r ${roleStyle.gradient} rounded-3xl blur-xl opacity-40 scale-110 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500`} />
+                          
+                          {/* Picture Container */}
+                          <div className={`relative w-32 h-32 rounded-3xl bg-gradient-to-br ${roleStyle.gradient} p-1 shadow-2xl group-hover:shadow-3xl transition-all duration-500`}>
+                            <div className="w-full h-full rounded-[1.4rem] overflow-hidden bg-white/20 group-hover:bg-white/30 transition-all duration-500">
+                              {executive.image ? (
+                                <Image 
+                                  src={executive.image} 
+                                  alt={executive.name} 
+                                  width={128} 
+                                  height={128} 
+                                  className="w-full h-full object-cover group-hover:scale-105 group-hover:brightness-110 group-hover:contrast-110 transition-all duration-500" 
+                                />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-800 group-hover:from-slate-600 group-hover:to-slate-700 transition-all duration-500">
+                                  <span className="text-white text-3xl font-bold group-hover:scale-105 transition-transform duration-500">
+                                    {executive.name.split(' ').map(w=>w[0]).slice(0,2).join('')}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Online Status Indicator */}
+                          <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-3 border-white shadow-lg">
+                            <div className="w-full h-full bg-green-400 rounded-full animate-pulse" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Name and Position */}
+                      <div className="text-center">
+                        <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">
+                          {executive.name}
+                        </h3>
+                        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${roleStyle.gradient} bg-opacity-20 border border-white/20`}>
+                          <span className="text-lg">{roleStyle.icon}</span>
+                          <span className="text-white text-sm font-semibold">
+                            {executive.position}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="px-8 pb-8">
+                      {/* Academic Info */}
+                      <div className="flex items-center justify-center gap-4 mb-6">
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 backdrop-blur-sm">
+                          <span className="text-cyan-400 text-xs">🎓</span>
+                          <span className="text-white text-xs font-medium">{executive.department}</span>
+                        </div>
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 backdrop-blur-sm">
+                          <span className="text-emerald-400 text-xs">📅</span>
+                          <span className="text-white text-xs font-medium">{executive.year}</span>
+                        </div>
+                      </div>
+
+                      {/* Bio */}
+                      <p className="text-slate-300 text-sm leading-relaxed text-center mb-6 line-clamp-3">
+                        {executive.bio}
+                      </p>
+
+                      {/* Achievements */}
+                      <div className="mb-6">
+                        <div className="flex items-center justify-center gap-2 mb-3">
+                          <Award className="h-4 w-4 text-amber-400" />
+                          <span className="text-white font-semibold text-sm">Key Achievements</span>
+                        </div>
+                        <div className="space-y-2">
+                          {executive.achievements.slice(0, 2).map((achievement, i) => (
+                            <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
+                              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 mt-1.5 flex-shrink-0" />
+                              <span className="text-slate-300 text-xs leading-relaxed flex-1">
+                                {achievement}
+                              </span>
+                            </div>
+                          ))}
+                          {executive.achievements.length > 2 && (
+                            <div className="text-center">
+                              <span className="text-slate-400 text-xs">
+                                +{executive.achievements.length - 2} more achievements
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Contact Actions */}
+                      <div className="flex items-center justify-center gap-3">
+                        <a 
+                          href={`mailto:${executive.email}`} 
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 text-cyan-300 hover:from-cyan-500/30 hover:to-blue-500/30 hover:border-cyan-400/50 transition-all duration-300 group/mail"
+                          title="Send Email"
+                        >
+                          <Mail className="h-4 w-4 group-hover/mail:scale-110 transition-transform" />
+                          <span className="text-xs font-medium">Email</span>
+                        </a>
+                        {executive.linkedin && (
+                          <a 
+                            href={executive.linkedin} 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-400/30 text-blue-300 hover:from-blue-600/30 hover:to-indigo-600/30 hover:border-blue-400/50 transition-all duration-300 group/linkedin"
+                            title="LinkedIn Profile"
+                          >
+                            <Linkedin className="h-4 w-4 group-hover/linkedin:scale-110 transition-transform" />
+                            <span className="text-xs font-medium">LinkedIn</span>
+                          </a>
                         )}
                       </div>
                     </div>
+
+                    {/* Bottom Accent Line */}
+                    <div className={`h-1 bg-gradient-to-r ${roleStyle.gradient} opacity-60`} />
                   </div>
-                  {/* Card Content */}
-                  <div className="pt-12 px-5 pb-5 relative">
-                    {/* Floating role badge */}
-                    <div className="absolute top-2 right-2 text-[10px] px-2 py-1 rounded-full bg-black/30 backdrop-blur-md border border-white/15 text-white/80 uppercase tracking-wide flex items-center gap-1">
-                      {roleStyles[executive.position]?.icon && <span className="scale-75 opacity-70">{roleStyles[executive.position].icon}</span>}
-                      {executive.position}
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Team Leadership Message */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-16 text-center"
+          >
+            <div className="max-w-3xl mx-auto p-8 rounded-2xl bg-gradient-to-r from-amber-500/10 via-yellow-500/10 to-orange-500/10 border border-amber-400/20 backdrop-blur-sm">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <Crown className="h-6 w-6 text-amber-400" />
+                <span className="text-amber-300 font-bold text-lg">Leadership Excellence</span>
+                <Crown className="h-6 w-6 text-amber-400" />
+              </div>
+              <p className="text-slate-300 leading-relaxed">
+                Our executive team represents the pinnacle of student leadership at GITAM, combining technical expertise, 
+                visionary thinking, and collaborative spirit to drive GAAC towards unprecedented achievements in aerospace, 
+                robotics, programming, and astronomy.
+              </p>
+            </div>
+          </motion.div>
+        </motion.section>
+
+        {/* Team Leads Section */}
+        <motion.section 
+          id="team-leads" 
+          initial={{ opacity: 0, y: 24 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.6, delay: 0.3 }} 
+          className="mb-24"
+        >
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-teal-500/10 border border-blue-400/30 mb-5">
+              <Users className="h-5 w-5 text-blue-400" />
+              <span className="text-blue-300 font-semibold text-sm uppercase tracking-wider">Team Leadership</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-300 via-cyan-200 to-teal-300 bg-clip-text text-transparent mb-3">
+              Team Leads
+            </h2>
+            <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed">
+              Dedicated leaders spearheading our specialized teams, bringing technical expertise and vision to drive innovation across all domains.
+            </p>
+          </div>
+
+          {/* Team Leads Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {ClubDataUtils.getActiveTeamLeads().map((teamLead, index) => (
+              <motion.div 
+                key={teamLead.name} 
+                initial={{ opacity: 0, y: 20, scale: 0.95 }} 
+                animate={{ opacity: 1, y: 0, scale: 1 }} 
+                transition={{ 
+                  duration: 0.5, 
+                  delay: 0.1 * index,
+                  type: "spring",
+                  stiffness: 120
+                }} 
+                className="group"
+              >
+                {/* Card Container */}
+                <div className="relative bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] backdrop-blur-lg rounded-2xl border border-white/[0.12] shadow-xl hover:shadow-2xl transition-all duration-400 hover:scale-[1.02] hover:border-white/[0.25] overflow-hidden">
+                  
+                  {/* Card Background Pattern */}
+                  <div className="absolute inset-0 opacity-15 group-hover:opacity-30 transition-opacity duration-400">
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `radial-gradient(circle at 30% 70%, #3B82F620 0%, transparent 50%),
+                                       radial-gradient(circle at 70% 30%, #06B6D415 0%, transparent 50%)`,
+                    }} />
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative p-6">
+                    {/* Role Badge */}
+                    <div className="flex justify-end mb-4">
+                      <div className="px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-400/30">
+                        <span className="text-blue-300 text-xs font-bold uppercase tracking-wider">TL (2025-26)</span>
+                      </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-white leading-tight">{executive.name}</h3>
-                    <p className="text-sm font-medium text-cyan-300 mb-1">{executive.position}</p>
-                    <p className="text-[10px] uppercase tracking-wide text-slate-400 mb-3">{executive.department} • {executive.year}</p>
-                    <p className="text-xs text-slate-300 leading-relaxed mb-3">{executive.bio}</p>
-                    <div className="mb-3">
-                      <h4 className="text-[11px] font-semibold text-white mb-1 flex items-center"><Award className="h-3 w-3 mr-1 text-yellow-400" /> Key Achievements</h4>
-                      <ul className="space-y-1">
-                        {executive.achievements.map((a,i)=> (
-                          <li key={i} className="text-[11px] text-slate-300 flex items-center"><span className="w-1 h-1 rounded-full bg-cyan-400 mr-2" />{a}</li>
+
+                    {/* Profile Picture */}
+                    <div className="flex justify-center mb-4">
+                      <div className="relative">
+                        {/* Glow Effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-30 scale-105 group-hover:opacity-50 group-hover:scale-110 transition-all duration-400" />
+                        
+                        {/* Picture Container */}
+                        <div className="relative w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 p-1 shadow-lg group-hover:shadow-xl transition-all duration-400">
+                          <div className="w-full h-full rounded-[1.1rem] overflow-hidden bg-white/15 group-hover:bg-white/25 transition-all duration-400">
+                            {teamLead.image ? (
+                              <Image 
+                                src={teamLead.image} 
+                                alt={teamLead.name} 
+                                width={96} 
+                                height={96} 
+                                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-400" 
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-700 to-slate-800 group-hover:from-slate-600 group-hover:to-slate-700 transition-all duration-400">
+                                <span className="text-white text-xl font-bold group-hover:scale-105 transition-transform duration-400">
+                                  {teamLead.name.split(' ').map(w=>w[0]).slice(0,2).join('')}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Status Indicator */}
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white shadow-md">
+                          <div className="w-full h-full bg-green-400 rounded-full animate-pulse" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Name and Position */}
+                    <div className="text-center mb-4">
+                      <h3 className="text-lg font-bold text-white mb-1 tracking-tight">
+                        {teamLead.name}
+                      </h3>
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-400/20">
+                        <span className="text-blue-400 text-sm">👨‍💼</span>
+                        <span className="text-white text-sm font-medium">
+                          {teamLead.position}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Academic Info */}
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/8 backdrop-blur-sm">
+                        <span className="text-cyan-400 text-xs">🎓</span>
+                        <span className="text-white text-xs font-medium">{teamLead.department}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/8 backdrop-blur-sm">
+                        <span className="text-emerald-400 text-xs">📅</span>
+                        <span className="text-white text-xs font-medium">{teamLead.year}</span>
+                      </div>
+                    </div>
+
+                    {/* Bio */}
+                    <p className="text-slate-300 text-sm leading-relaxed text-center mb-4 line-clamp-3">
+                      {teamLead.bio}
+                    </p>
+
+                    {/* Achievements */}
+                    <div className="mb-4">
+                      <div className="space-y-1.5">
+                        {teamLead.achievements.slice(0, 2).map((achievement, i) => (
+                          <div key={i} className="flex items-start gap-2 p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-white/8">
+                            <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 mt-1.5 flex-shrink-0" />
+                            <span className="text-slate-300 text-xs leading-relaxed flex-1">
+                              {achievement}
+                            </span>
+                          </div>
                         ))}
-                      </ul>
+                        {teamLead.achievements.length > 2 && (
+                          <div className="text-center">
+                            <span className="text-slate-400 text-xs">
+                              +{teamLead.achievements.length - 2} more
+                            </span>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 pt-3 border-t border-white/10">
-                      <a href={`mailto:${executive.email}`} className="p-1.5 bg-white/10 rounded-md hover:bg-white/20 transition" title="Email"><Mail className="h-4 w-4 text-cyan-300" /></a>
-                      <a href={executive.linkedin} className="p-1.5 bg-white/10 rounded-md hover:bg-white/20 transition" title="LinkedIn"><Linkedin className="h-4 w-4 text-cyan-300" /></a>
+
+                    {/* Contact Actions */}
+                    <div className="flex items-center justify-center gap-2">
+                      {teamLead.email && teamLead.email !== '#' && (
+                        <a 
+                          href={`mailto:${teamLead.email}`} 
+                          className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 text-cyan-300 hover:from-cyan-500/30 hover:to-blue-500/30 hover:border-cyan-400/50 transition-all duration-300 group/mail"
+                          title="Send Email"
+                        >
+                          <Mail className="h-3.5 w-3.5 group-hover/mail:scale-110 transition-transform" />
+                          <span className="text-xs font-medium">Email</span>
+                        </a>
+                      )}
+                      {teamLead.linkedin && teamLead.linkedin !== '#' && (
+                        <a 
+                          href={teamLead.linkedin} 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-400/30 text-blue-300 hover:from-blue-600/30 hover:to-indigo-600/30 hover:border-blue-400/50 transition-all duration-300 group/linkedin"
+                          title="LinkedIn Profile"
+                        >
+                          <Linkedin className="h-3.5 w-3.5 group-hover/linkedin:scale-110 transition-transform" />
+                          <span className="text-xs font-medium">LinkedIn</span>
+                        </a>
+                      )}
                     </div>
                   </div>
+
+                  {/* Bottom Accent Line */}
+                  <div className="h-1 bg-gradient-to-r from-blue-500 to-cyan-500 opacity-60" />
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {/* Team Leadership Message */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-12 text-center"
+          >
+            <div className="max-w-2xl mx-auto p-6 rounded-xl bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-teal-500/10 border border-blue-400/20 backdrop-blur-sm">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <Users className="h-5 w-5 text-blue-400" />
+                <span className="text-blue-300 font-bold text-base">Collaborative Leadership</span>
+              </div>
+              <p className="text-slate-300 leading-relaxed text-sm">
+                Our team leads work closely with the executive body to foster innovation and collaboration across specialized domains, 
+                ensuring each team achieves excellence while contributing to GAAC&apos;s collective success.
+              </p>
+            </div>
+          </motion.div>
         </motion.section>
 
-        {/* Members Directory */}
+        {/* Members Directory - Commented out for next development phase */}
+        {/* 
         <motion.section id="members" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }} className="mb-24">
           <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3"><Users className="h-7 w-7 text-cyan-400" /> Club Members Directory</h2>
-          {/* Controls */}
           <div className="grid gap-4 md:grid-cols-4 mb-6">
             <input
               value={search}
@@ -362,7 +1070,7 @@ export default function Home() {
             />
             <select value={teamFilter} onChange={e => setTeamFilter(e.target.value)} className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-cyan-400/50 text-sm text-white">
               <option value="All">All Teams</option>
-              {teams.map(t => <option key={t} value={t}>{t}</option>)}
+              {teams.map(team => <option key={team.id} value={team.shortName}>{team.shortName}</option>)}
             </select>
             <select value={yearFilter} onChange={e => setYearFilter(e.target.value)} className="w-full px-3 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-cyan-400/50 text-sm text-white">
               <option value="All">All Years</option>
@@ -374,15 +1082,12 @@ export default function Home() {
               <option value="year">Sort: Year</option>
             </select>
           </div>
-          {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {paginated.map(m => {
-              const teamColorMap: Record<string, string> = {
-                Robotics: "from-rose-500 to-orange-500",
-                Programming: "from-cyan-500 to-blue-600",
-                Astronomy: "from-indigo-500 to-purple-600",
-              };
-              const gradient = teamColorMap[m.team] || "from-slate-500 to-slate-700";
+              const teamColors = ClubDataUtils.getTeamColors(m.team);
+              const teamDisplayName = ClubDataUtils.getTeamDisplayName(m.team);
+              const gradient = teamColors.gradient;
+              
               return (
                 <div key={m.id} className="relative bg-white/5 border border-white/10 rounded-xl p-4 hover:border-cyan-400/40 transition group overflow-hidden">
                   <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br ${gradient} mix-blend-overlay`} />
@@ -392,7 +1097,7 @@ export default function Home() {
                     </div>
                     <div className="flex-1">
                       <span className="block text-sm font-semibold text-white leading-tight">{m.name}</span>
-                      <span className="text-[10px] uppercase tracking-wide text-cyan-300/80">{m.team}</span>
+                      <span className="text-[10px] uppercase tracking-wide text-cyan-300/80">{teamDisplayName}</span>
                     </div>
                   </div>
                   <p className="text-[11px] text-slate-300 flex items-center gap-1 relative"><ArrowRight className="h-3 w-3 text-cyan-300" /> {m.role}</p>
@@ -410,7 +1115,6 @@ export default function Home() {
               );
             })}
           </div>
-          {/* Pagination */}
           <div className="flex items-center justify-between mt-6 text-xs text-slate-400">
             <span>Showing {(page-1)*pageSize + 1}-{Math.min(page*pageSize, filtered.length)} of {filtered.length}</span>
             <div className="flex gap-2">
@@ -420,6 +1124,7 @@ export default function Home() {
             </div>
           </div>
         </motion.section>
+        */}
 
         {/* Founder */}
         <motion.section id="founder" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.45 }} className="mb-10">
@@ -480,6 +1185,201 @@ export default function Home() {
           backgroundSize: '50px 50px'
         }}></div>
       </div>
+
+      {/* Privacy Policy Modal */}
+      {showPrivacyModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="absolute inset-0 bg-black/80" onClick={() => setShowPrivacyModal(false)} />
+          <motion.div 
+            initial={{ opacity: 0, y: 20, scale: 0.95 }} 
+            animate={{ opacity: 1, y: 0, scale: 1 }} 
+            transition={{ duration: 0.3 }}
+            className="relative z-[101] w-full max-w-4xl max-h-[90vh] mx-auto bg-gradient-to-br from-slate-900/98 via-slate-800/95 to-slate-900/98 border border-cyan-400/20 rounded-2xl shadow-2xl overflow-hidden"
+          >
+            {/* Header */}
+            <div className="relative bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 border-b border-cyan-400/20 px-6 py-4">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5" />
+              <div className="relative flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-cyan-300" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Privacy Policy</h3>
+                    <p className="text-cyan-200/80 text-sm">GITAM Aero Astro Club (GAAC)</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setShowPrivacyModal(false)}
+                  className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-200"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="max-h-[70vh] overflow-y-auto px-6 py-6">
+              <div className="space-y-6 text-slate-300">
+                
+                {/* Introduction */}
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <FileText className="w-5 h-5 text-cyan-400" />
+                    <h4 className="text-lg font-semibold text-white">Introduction</h4>
+                  </div>
+                  <p className="text-sm leading-relaxed">
+                    The GITAM Aero Astro Club (GAAC) is committed to protecting your privacy and ensuring the security of your personal information. This privacy policy explains how we collect, use, and safeguard your data when you interact with our club activities, recruitment process, and online platforms.
+                  </p>
+                </section>
+
+                {/* Information We Collect */}
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Database className="w-5 h-5 text-emerald-400" />
+                    <h4 className="text-lg font-semibold text-white">Information We Collect</h4>
+                  </div>
+                  <div className="space-y-3 text-sm">
+                    <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+                      <h5 className="font-medium text-emerald-300 mb-2">Personal Information:</h5>
+                      <ul className="list-disc list-inside space-y-1 text-slate-300 text-xs">
+                        <li>Name, registration number, and contact details</li>
+                        <li>Academic information (branch, year of study)</li>
+                        <li>Email address and phone number</li>
+                        <li>Skills, interests, and project portfolios</li>
+                      </ul>
+                    </div>
+                    <div className="bg-white/5 border border-white/10 rounded-lg p-4">
+                      <h5 className="font-medium text-cyan-300 mb-2">Application Data:</h5>
+                      <ul className="list-disc list-inside space-y-1 text-slate-300 text-xs">
+                        <li>Recruitment application responses</li>
+                        <li>Team preferences and motivations</li>
+                        <li>Previous experience and achievements</li>
+                        <li>Portfolio links and sample work</li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+
+                {/* How We Use Your Information */}
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Target className="w-5 h-5 text-purple-400" />
+                    <h4 className="text-lg font-semibold text-white">How We Use Your Information</h4>
+                  </div>
+                  <div className="grid gap-3 text-sm">
+                    {[
+                      { icon: "🎯", title: "Recruitment Process", desc: "Evaluate applications and conduct interviews for club membership" },
+                      { icon: "📧", title: "Communication", desc: "Send updates about club activities, events, and opportunities" },
+                      { icon: "🔍", title: "Team Assignment", desc: "Match members with appropriate teams based on skills and interests" },
+                      { icon: "📊", title: "Club Analytics", desc: "Improve our programs and understand member engagement" },
+                      { icon: "🤝", title: "Collaboration", desc: "Facilitate project assignments and team collaborations" }
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-start gap-3 bg-white/5 border border-white/10 rounded-lg p-3">
+                        <span className="text-lg">{item.icon}</span>
+                        <div>
+                          <h5 className="font-medium text-white text-sm">{item.title}</h5>
+                          <p className="text-xs text-slate-400">{item.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Data Security */}
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Shield className="w-5 h-5 text-yellow-400" />
+                    <h4 className="text-lg font-semibold text-white">Data Security & Protection</h4>
+                  </div>
+                  <div className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-400/30 rounded-lg p-4">
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <span>All data is stored securely on GITAM-approved platforms</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <span>Access is limited to authorized club executives only</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <span>Data is never shared with third parties without consent</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <span>Regular security audits and data protection measures</span>
+                      </li>
+                    </ul>
+                  </div>
+                </section>
+
+                {/* Your Rights */}
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Eye className="w-5 h-5 text-blue-400" />
+                    <h4 className="text-lg font-semibold text-white">Your Rights</h4>
+                  </div>
+                  <div className="grid gap-2 text-sm">
+                    {[
+                      "Request access to your personal data",
+                      "Correct inaccurate or incomplete information", 
+                      "Request deletion of your data (subject to club requirements)",
+                      "Withdraw consent for non-essential communications",
+                      "Report data protection concerns to club leadership"
+                    ].map((right, index) => (
+                      <div key={index} className="flex items-center gap-2 p-2 bg-white/5 rounded-lg">
+                        <span className="text-blue-400">✓</span>
+                        <span className="text-xs">{right}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Contact Information */}
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Mail className="w-5 h-5 text-cyan-400" />
+                    <h4 className="text-lg font-semibold text-white">Contact Us</h4>
+                  </div>
+                  <div className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-400/30 rounded-lg p-4">
+                    <p className="text-sm mb-3">For any privacy-related questions or concerns, contact us:</p>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-4 h-4 text-cyan-400" />
+                        <a href="mailto:aeroastro_vzg@gitam.in" className="text-cyan-300 hover:underline">aeroastro_vzg@gitam.in</a>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-cyan-400">📱</span>
+                        <span>+91 95533 16797 | +91 73823 38771</span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Last Updated */}
+                <div className="pt-4 border-t border-white/10 text-center">
+                  <p className="text-xs text-slate-400">
+                    Last updated: August 2025 • This policy may be updated to reflect changes in our practices
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="border-t border-cyan-400/20 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 px-6 py-4">
+              <div className="flex justify-end">
+                <button 
+                  onClick={() => setShowPrivacyModal(false)}
+                  className="px-6 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-medium hover:from-cyan-600 hover:to-blue-700 transition-all duration-300"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }
