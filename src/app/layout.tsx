@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   description: "Join the GITAM Aero Astro Club - A passionate community exploring Robotics, Programming, and Astronomy through innovative projects and learning.",
   keywords: "GITAM, Aero, Astro, Club, Robotics, Programming, Astronomy, GAAC",
   authors: [{ name: "GITAM Aero Astro Club" }],
+  icons: {
+    icon: "/gaacLogo.png",
+    shortcut: "/gaacLogo.png",
+    apple: "/gaacLogo.png",
+  },
 };
 
 export const viewport = {

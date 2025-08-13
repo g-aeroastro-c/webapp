@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export function NavbarDemo() {
@@ -44,7 +45,7 @@ function Navbar({ className }: { className?: string }) {
         )}>
         {/* Subtle glow effect on navbar hover */}
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#09C0F9]/5 via-transparent to-[#09C0F9]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>        {/* Enhanced Desktop Logo with Responsive Sizing */}
-        <div className="hidden lg:flex items-center z-20 group/logo cursor-pointer">
+        <Link href="/" className="hidden lg:flex items-center z-20 group/logo cursor-pointer">
           <div className="relative">            <Image
               src="/gaacLogo.png"
               alt="GITAM Aero Astro Club"
@@ -57,10 +58,10 @@ function Navbar({ className }: { className?: string }) {
             <div className="absolute inset-0 rounded-full bg-[#09C0F9]/20 scale-90 opacity-0 group-hover/logo:scale-110 group-hover/logo:opacity-100 transition-all duration-300 blur-sm"></div>
             <div className="absolute inset-0 rounded-full border border-[#09C0F9]/30 scale-100 opacity-0 group-hover/logo:scale-125 group-hover/logo:opacity-100 transition-all duration-500"></div>
           </div>
-        </div>
+        </Link>
 
         {/* Medium Screen Logo - Compact Design */}
-        <div className="hidden md:flex lg:hidden items-center z-20 group/logo cursor-pointer">
+        <Link href="/" className="hidden md:flex lg:hidden items-center z-20 group/logo cursor-pointer">
           <div className="relative">
             <Image
               src="/gaacLogo.png"
@@ -74,7 +75,7 @@ function Navbar({ className }: { className?: string }) {
             <div className="absolute inset-0 rounded-full bg-[#09C0F9]/20 scale-90 opacity-0 group-hover/logo:scale-110 group-hover/logo:opacity-100 transition-all duration-300 blur-sm"></div>
             <div className="absolute inset-0 rounded-full border border-[#09C0F9]/30 scale-100 opacity-0 group-hover/logo:scale-125 group-hover/logo:opacity-100 transition-all duration-500"></div>
           </div>
-        </div>
+        </Link>
 
         {/* Mobile Layout with Leftmost Green Dot */}
         <div className="md:hidden flex items-center justify-between w-full">
@@ -93,7 +94,7 @@ function Navbar({ className }: { className?: string }) {
           </a>
           
           {/* Centered GAAC Logo */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 group/logo cursor-pointer">
+          <Link href="/" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 group/logo cursor-pointer">
             <div className="relative">
               <Image
                 src="/gaacLogo.png"
@@ -107,7 +108,7 @@ function Navbar({ className }: { className?: string }) {
               <div className="absolute inset-0 rounded-full bg-[#09C0F9]/25 scale-90 opacity-0 group-hover/logo:scale-115 group-hover/logo:opacity-100 transition-all duration-400 blur-sm"></div>
               <div className="absolute inset-0 rounded-full border border-[#09C0F9]/40 scale-100 opacity-0 group-hover/logo:scale-130 group-hover/logo:opacity-100 transition-all duration-600"></div>
             </div>
-          </div>
+          </Link>
           
           {/* Right side spacer for balance */}
           <div className="w-10 h-10"></div>
@@ -116,10 +117,10 @@ function Navbar({ className }: { className?: string }) {
         {/* Desktop Menu with Enhanced Spacing and Responsive Behavior */}
         <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
           <a
-            href="#about-club"
+            href="#timeline"
             onClick={(e) => {
               e.preventDefault();
-              const section = document.getElementById("about-club");
+              const section = document.getElementById("timeline");
               if (section) {
                 section.scrollIntoView({ behavior: "smooth" });
               }
@@ -146,89 +147,128 @@ function Navbar({ className }: { className?: string }) {
               <div className="absolute bottom-1 left-1/2 w-0 h-px bg-[#09C0F9] group-hover/link:w-6 group-hover/link:left-1/2 group-hover/link:-translate-x-1/2 transition-all duration-250"></div>
             </button>
             
-            {/* Dropdown Menu */}
+            {/* Enhanced Dropdown Menu */}
             <div 
               className={cn(
-                "absolute top-full left-0 mt-2 w-56 bg-[#17191C]/95 backdrop-blur-md rounded-xl border border-gray-800/50 shadow-2xl transition-all duration-300 z-50",
-                active === "teams" ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
+                "absolute top-full left-0 mt-2 w-72 bg-gradient-to-br from-[#17191C]/98 via-[#1A1C1F]/98 to-[#1C1E21]/98 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl transition-all duration-300 z-50 overflow-hidden",
+                active === "teams" ? "opacity-100 visible translate-y-0 scale-100" : "opacity-0 invisible -translate-y-4 scale-95"
               )}
               onMouseLeave={() => setActive(null)}
             >
-              <div className="p-2">
+              {/* Header */}
+              <div className="px-4 py-3 border-b border-white/10 bg-gradient-to-r from-[#09C0F9]/10 to-purple-500/10">
+                <h3 className="text-white font-semibold text-sm flex items-center gap-2">
+                  <span className="text-[#09C0F9]">🚀</span>
+                  Explore Our Teams
+                </h3>
+                <p className="text-gray-400 text-xs mt-1">Join passionate communities of innovators</p>
+              </div>
+
+              <div className="p-3 space-y-1">
+                {/* Team Homepage */}
                 <a
                   href="/teams"
-                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group/dropdown"
+                  className="flex items-center space-x-3 px-3 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-[#09C0F9]/10 hover:to-purple-500/10 transition-all duration-200 group/dropdown border border-transparent hover:border-[#09C0F9]/20"
                 >
-                  <div className="w-8 h-8 bg-gradient-to-br from-[#09C0F9]/20 to-[#0EA5E9]/20 rounded-lg flex items-center justify-center">
-                    <span className="text-lg">🏠</span>
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#09C0F9]/20 to-purple-500/20 rounded-xl flex items-center justify-center group-hover/dropdown:scale-110 transition-transform duration-200">
+                    <span className="text-xl">🏠</span>
                   </div>
-                  <div>
-                    <div className="font-medium text-sm">Team Homepage</div>
-                    <div className="text-xs text-gray-500">Overview of all teams</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-sm group-hover/dropdown:text-[#09C0F9] transition-colors">Teams Overview</div>
+                    <div className="text-xs text-gray-500 group-hover/dropdown:text-gray-400">Discover all our initiatives</div>
+                  </div>
+                  <div className="opacity-0 group-hover/dropdown:opacity-100 transition-opacity">
+                    <svg className="w-4 h-4 text-[#09C0F9]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </a>
                 
+                {/* Robotics Team */}
                 <a
                   href="/teams/robotics"
-                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group/dropdown"
+                  className="flex items-center space-x-3 px-3 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-rose-500/10 hover:to-pink-500/10 transition-all duration-200 group/dropdown border border-transparent hover:border-rose-400/20"
                 >
-                  <div className="w-8 h-8 bg-gradient-to-br from-[#09C0F9]/20 to-[#0EA5E9]/20 rounded-lg flex items-center justify-center">
-                    <span className="text-lg">🤖</span>
+                  <div className="w-10 h-10 bg-gradient-to-br from-rose-500/20 to-pink-500/20 rounded-xl flex items-center justify-center group-hover/dropdown:scale-110 transition-transform duration-200">
+                    <span className="text-xl">🤖</span>
                   </div>
-                  <div>
-                    <div className="font-medium text-sm">Robotics Team</div>
-                    <div className="text-xs text-gray-500">Build autonomous systems</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-sm group-hover/dropdown:text-rose-400 transition-colors">Robusta (Robotics)</div>
+                    <div className="text-xs text-gray-500 group-hover/dropdown:text-gray-400">Build autonomous systems</div>
+                  </div>
+                  <div className="opacity-0 group-hover/dropdown:opacity-100 transition-opacity">
+                    <svg className="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </a>
                 
+                {/* Programming Team */}
                 <a
                   href="/teams/programming"
-                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group/dropdown"
+                  className="flex items-center space-x-3 px-3 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-violet-500/10 transition-all duration-200 group/dropdown border border-transparent hover:border-purple-400/20"
                 >
-                  <div className="w-8 h-8 bg-gradient-to-br from-[#09C0F9]/20 to-[#0EA5E9]/20 rounded-lg flex items-center justify-center">
-                    <span className="text-lg">💻</span>
+                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500/20 to-violet-500/20 rounded-xl flex items-center justify-center group-hover/dropdown:scale-110 transition-transform duration-200">
+                    <span className="text-xl">💻</span>
                   </div>
-                  <div>
-                    <div className="font-medium text-sm">Programming Team</div>
-                    <div className="text-xs text-gray-500">Software development</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-sm group-hover/dropdown:text-purple-400 transition-colors">Programming Team</div>
+                    <div className="text-xs text-gray-500 group-hover/dropdown:text-gray-400">Software development & AI</div>
+                  </div>
+                  <div className="opacity-0 group-hover/dropdown:opacity-100 transition-opacity">
+                    <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </a>
                 
+                {/* Astronomy Team */}
                 <a
                   href="/teams/astronomy"
-                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group/dropdown"
+                  className="flex items-center space-x-3 px-3 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-blue-500/10 transition-all duration-200 group/dropdown border border-transparent hover:border-cyan-400/20"
                 >
-                  <div className="w-8 h-8 bg-gradient-to-br from-[#09C0F9]/20 to-[#0EA5E9]/20 rounded-lg flex items-center justify-center">
-                    <span className="text-lg">🔭</span>
+                  <div className="w-10 h-10 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center group-hover/dropdown:scale-110 transition-transform duration-200">
+                    <span className="text-xl">🔭</span>
                   </div>
-                  <div>
-                    <div className="font-medium text-sm">Astronomy Team</div>
-                    <div className="text-xs text-gray-500">Space exploration</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-sm group-hover/dropdown:text-cyan-400 transition-colors">StarGazers (Astronomy)</div>
+                    <div className="text-xs text-gray-500 group-hover/dropdown:text-gray-400">Space exploration & research</div>
+                  </div>
+                  <div className="opacity-0 group-hover/dropdown:opacity-100 transition-opacity">
+                    <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </a>
                 
-                <div className="my-2 h-px bg-gradient-to-r from-transparent via-gray-700/50 to-transparent"></div>
+                {/* Separator */}
+                <div className="my-2 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
                 
+                {/* Executive Body */}
                 <a
-                  href="#executive-body"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const section = document.getElementById("executive-body");
-                    if (section) {
-                      section.scrollIntoView({ behavior: "smooth" });
-                    }
-                    setActive(null);
-                  }}
-                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 group/dropdown"
+                  href="/teams/executive"
+                  className="flex items-center space-x-3 px-3 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-amber-500/10 hover:to-yellow-500/10 transition-all duration-200 group/dropdown border border-transparent hover:border-amber-400/20"
                 >
-                  <div className="w-8 h-8 bg-gradient-to-br from-[#09C0F9]/20 to-[#0EA5E9]/20 rounded-lg flex items-center justify-center">
-                    <span className="text-lg">👥</span>
+                  <div className="w-10 h-10 bg-gradient-to-br from-amber-500/20 to-yellow-500/20 rounded-xl flex items-center justify-center group-hover/dropdown:scale-110 transition-transform duration-200">
+                    <span className="text-xl">👑</span>
                   </div>
-                  <div>
-                    <div className="font-medium text-sm">Executive Body</div>
-                    <div className="text-xs text-gray-500">Leadership team</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-sm group-hover/dropdown:text-amber-400 transition-colors">Executive Body</div>
+                    <div className="text-xs text-gray-500 group-hover/dropdown:text-gray-400">Leadership & administration</div>
+                  </div>
+                  <div className="opacity-0 group-hover/dropdown:opacity-100 transition-opacity">
+                    <svg className="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </a>
+              </div>
+
+              {/* Footer */}
+              <div className="px-4 py-3 border-t border-white/10 bg-gradient-to-r from-slate-800/50 to-slate-900/50">
+                <p className="text-gray-400 text-xs text-center">
+                  <span className="text-[#09C0F9]">✨</span> Join us in shaping the future of aerospace technology
+                </p>
               </div>
             </div>
           </div>
@@ -355,14 +395,14 @@ function Navbar({ className }: { className?: string }) {
       )}      {/* Mobile Menu with Enhanced Animations */}
       {mobileMenuOpen && (
         <div 
-          className="fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-[#1A1D21] to-[#151719] border-l border-gray-800/50 shadow-2xl z-50 transform translate-x-0 transition-transform duration-400 ease-out"
+          className="fixed top-0 right-0 h-full w-80 bg-gradient-to-b from-[#1A1D21] to-[#151719] border-l border-gray-800/50 shadow-2xl z-50 transform translate-x-0 transition-transform duration-400 ease-out flex flex-col"
         >
           {/* Sophisticated swipe indicator with pulse */}
           <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-16 bg-gradient-to-b from-transparent via-[#09C0F9]/50 to-transparent rounded-r-full animate-pulse"></div>
           
           {/* Enhanced Mobile Menu Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-800/30 bg-gradient-to-r from-transparent to-[#09C0F9]/5">
-            <div className="flex items-center space-x-3 group/header">
+            <Link href="/" className="flex items-center space-x-3 group/header" onClick={() => setMobileMenuOpen(false)}>
               <div className="relative">                <Image
                   src="/gaacLogo.png"
                   alt="GAAC"
@@ -377,7 +417,7 @@ function Navbar({ className }: { className?: string }) {
                 <h3 className="text-white font-semibold text-base group-hover/header:text-[#09C0F9] transition-colors duration-300">GAAC</h3>
                 <p className="text-gray-400 text-sm group-hover/header:text-gray-300 transition-colors duration-300">Aero Astro Club</p>
               </div>
-            </div>
+            </Link>
             <button
               onClick={() => setMobileMenuOpen(false)}
               className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 active:bg-white/15 flex items-center justify-center transition-all duration-200 focus:ring-2 focus:ring-[#09C0F9]/50 focus:outline-none group/close hover:rotate-90 active:scale-95"
@@ -388,7 +428,7 @@ function Navbar({ className }: { className?: string }) {
               </svg>
             </button>
           </div>          {/* Enhanced Mobile Navigation Links with Rich Interactions */}
-          <nav className="flex-1 px-6 py-6">
+          <nav className="flex-1 overflow-y-auto overscroll-contain px-6 py-6 scroll-smooth">
             <div className="space-y-3">
               {/* Primary Recruitment CTA at Top */}
               <div className="mb-6">
@@ -408,10 +448,10 @@ function Navbar({ className }: { className?: string }) {
 
               {/* Navigation Links with Enhanced Smoothness */}
               <a
-                href="#about-club"
+                href="#timeline"
                 onClick={(e) => {
                   e.preventDefault();
-                  const section = document.getElementById("about-club");
+                  const section = document.getElementById("timeline");
                   if (section) {
                     section.scrollIntoView({ behavior: "smooth" });
                   }
@@ -568,7 +608,7 @@ function Navbar({ className }: { className?: string }) {
               </a>
             </div>
           </nav>          {/* Bottom Track Application Button */}
-          <div className="p-6 border-t border-gray-800/30 bg-gradient-to-r from-transparent to-cyan-500/5">
+          <div className="flex-shrink-0 p-6 border-t border-gray-800/30 bg-gradient-to-r from-transparent to-cyan-500/5">
             <a
               href="/track"
               onClick={() => setMobileMenuOpen(false)}
