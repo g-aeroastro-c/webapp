@@ -43,7 +43,8 @@ const AstronomyTeamPage = () => {
           </div>
         </div>
         {/* Navigation link, z-40 to keep it above everything else for clickability */}
-        <div className="mt-10 relative z-40">
+        {/* Navigation link, no extra z-index needed; parent z-30 is sufficient */}
+        <div className="mt-10 relative">
           <Link href="/teams" className="text-lg underline hover:text-gray-200">
             Back to Teams
           </Link>
