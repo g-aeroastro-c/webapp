@@ -8,7 +8,7 @@ const AstronomyTeamPage = () => {
       {/* Main content wrapper, high z-index to layer over navbars or overlays */}
       <div className="container mx-auto py-20 px-4 text-center relative z-30">
         {/* Title at topmost level to ensure visibility over all elements */}
-        <h1 className="text-5xl font-bold mt-8 mb-8 relative z-40">
+        <h1 className="text-5xl font-bold mt-8 mb-8 relative">
           Astronomy Team
         </h1>
         {/* Intro text, same level as title for consistent layering */}
