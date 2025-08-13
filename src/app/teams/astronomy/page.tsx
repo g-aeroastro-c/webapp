@@ -5,10 +5,10 @@ const AstronomyTeamPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white">
       <div className="container mx-auto py-20 px-4 text-center relative z-30">
-        <h1 className="text-5xl font-bold mt-8 mb-8 relative z-40">
+        <h1 className="text-5xl font-bold mt-8 mb-8 relative z-30">
           Astronomy Team
         </h1>
-        <p className="mb-8 text-xl relative z-20">
+        <p className="mb-8 text-xl relative z-30">
           Welcome to the Astronomy Team page. Our team is dedicated to exploring
           the wonders of the universe and sharing our knowledge with others.
           Join us in our celestial journey!
