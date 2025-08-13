@@ -9,16 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.46.1",
+    "@types/nodemailer": "^6.4.17",
+    "axios": "^1.7.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.18.1",
     "lucide-react": "^0.515.0",
-  "@supabase/supabase-js": "^2.46.1",
-  "@supabase/ssr": "^0.5.2",
-  "axios": "^1.7.7",
-    
     "next": "15.3.3",
     "ngrok": "^5.0.0-beta.2",
+    "nodemailer": "^7.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.3.1"

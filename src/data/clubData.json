@@ -1,225 +1,461 @@
 {
+  "club": {
+    "name": "GITAM Aero Astro Club",
+    "shortName": "GAAC",
+    "established": "2020",
+    "description": "A passionate community of curious individuals dedicated to exploring, learning, and building exciting projects in the fields of Robotics, Programming, and Astronomy.",
+    "logo": "/gaacLogo.png",
+    "lastUpdated": "2025-08-12"
+  },
+  "timeline": [
+    {
+      "year": "2020",
+      "title": "Foundation Year",
+      "description": "GITAM Aero Astro Club was founded by VVS Basanth Pedapati with a vision to create an interdisciplinary platform for aerospace, robotics, and astronomy enthusiasts.",
+      "achievements": [
+        "Club establishment and initial team formation",
+        "First workshop on basic astronomy",
+        "Recruitment of founding members"
+      ],
+      "icon": "🚀",
+      "color": "from-blue-400 to-cyan-500"
+    },
+    {
+      "year": "2021",
+      "title": "Building Foundations",
+      "description": "Expanded our technical capabilities and hosted our first major events. Established core teams for robotics and programming.",
+      "achievements": [
+        "Launched robotics development team",
+        "Organized first stargazing event",
+        "Conducted 5 technical workshops",
+        "Reached 25+ active members"
+      ],
+      "icon": "🔧",
+      "color": "from-cyan-400 to-blue-500"
+    },
+    {
+      "year": "2022",
+      "title": "Technological Advancement",
+      "description": "Year of innovation and project development. Started working on advanced robotics projects and computational astronomy tools.",
+      "achievements": [
+        "First Solid propellant Rocket prototype called RAVEN by Team Raptor",
+        "Developed astronomy simulation software",
+        "Participated in the Inter-college Robotics competition",
+        "Established partnerships with industry mentors"
+      ],
+      "icon": "🤖",
+      "color": "from-purple-400 to-blue-500"
+    },
+    {
+      "year": "2023",
+      "title": "Research & Recognition",
+      "description": "Focused on research projects and gained recognition at national level competitions. Expanded into space technology research.",
+      "achievements": [
+        "Published first research paper",
+        "Participated in national aerospace summit",
+        "Participated in IIT Mandi national wide hackathon",
+        "Received best innovation club award"
+      ],
+      "icon": "🛰️",
+      "color": "from-blue-500 to-indigo-500"
+    },
+    {
+      "year": "2024",
+      "title": "Growth & Collaboration",
+      "description": "Significant expansion in membership and project scope. Established collaborations with other institutions and industry partners.",
+      "achievements": [
+        "Participated in IIT Kanpur national wide Tech Fest",
+        "Launched 8 major projects",
+        "Organized a university level Hackathon \"Technova 2024\"",
+        "Established industry internship program"
+      ],
+      "icon": "🌟",
+      "color": "from-indigo-500 to-purple-500"
+    },
+    {
+      "year": "2025",
+      "title": "Innovation Excellence",
+      "description": "Current year focused on cutting-edge projects, leadership development, and establishing GAAC as a premier technical club.",
+      "achievements": [
+        "Advanced AI-robotics integration projects",
+        "Leadership development programs",
+        "International collaboration initiatives",
+        "Took part in IIT Kharagpur national wide hackathon"
+      ],
+      "icon": "🎯",
+      "color": "from-purple-500 to-pink-500"
+    }
+  ],
   "founder": {
     "id": "founder-1",
     "name": "VVS Basanth Pedapati",
-    "image": "/images/founder.jpg",
-    "title": "Founder & Faculty Mentor",
+    "image": "/members/basanth.svg",
+    "title": "Founder & Mentor",
     "bio": "Established GAAC to cultivate interdisciplinary technological innovation, mentorship, and real-world engineering experience for students.",
-    "email": "vvs.pedapati@gmail.com",
-    "linkedin": "#"
+    "email": "aeroastro.in@outlook.com",
+    "linkedin": "https://www.linkedin.com/in/vvs-basanth/",
+    "department": "Executive Body",
+    "joinedDate": "2020-11-15",
+    "status": "active"
   },
   "executives": [
     {
       "id": "exec-1",
-      "name": "Sarah Johnson",
-      "image": "/images/executives/sarah.jpg",
+      "name": "Sampath Varma Datla",
+      "image": "/members/sampath.svg",
       "position": "President",
-      "department": "Aerospace Engineering",
+      "department": "Computer Science",
       "year": "Final Year",
       "bio": "Leading the club with a passion for space exploration and team building. Specializes in mission planning and organizational development.",
-      "email": "sarah.johnson@student.gitam.edu",
-      "linkedin": "#",
-      "achievements": ["NASA Internship 2023", "Best Leadership Award", "Published Research Paper"],
-      "color": "from-blue-500 to-cyan-500"
+      "email": "sdatla10@gitam.in",
+      "linkedin": "",
+      "achievements": ["Finalist for Robotics Hackathon", "Finalist for IT Hackathon", "Summer School, IIT Delhi"],
+      "joinedDate": "2022-10-01",
+      "status": "active",
+      "priority": 1
     },
     {
       "id": "exec-2",
-      "name": "Michael Chen",
-      "image": "/images/executives/michael.jpg",
-      "position": "Vice President",
-      "department": "Computer Science",
-      "year": "Third Year",
-      "bio": "Bridging technology and aerospace through innovative software solutions. Expert in flight simulation and control systems.",
-      "email": "michael.chen@student.gitam.edu",
-      "linkedin": "#",
-      "achievements": ["Google Summer of Code", "Hackathon Winner", "Open Source Contributor"],
-      "color": "from-purple-500 to-pink-500"
+      "name": "Dil Barash Mohammad",
+      "image": "/members/dil.svg",
+      "position": "Vice President (Operations and Outreach)",
+      "department": "Computer Science Engineering",
+      "year": "Pre-final Year",
+      "bio": "Organizing impactful events and workshops that inspire the next generation of aerospace engineers and researchers.",
+      "email": "dmohamme@gitam.in",
+      "linkedin": "https://in.linkedin.com/in/dilbarash",
+      "achievements": ["JCI Zonal Extempore Runner Up", "International English Olympiad Winner"],
+      "joinedDate": "2024-09-01",
+      "status": "active",
+      "priority": 2
     },
     {
       "id": "exec-3",
-      "name": "Emily Rodriguez",
-      "image": "/images/executives/emily.jpg",
-      "position": "Technical Lead",
-      "department": "Mechanical Engineering",
-      "year": "Final Year",
+      "name": "Narayana Gupta",
+      "image": "/members/narayana.svg",
+      "position": "Vice President (Technical Affairs)",
+      "department": "Computer Science Engineering",
+      "year": "Pre-final Year",
       "bio": "Overseeing technical projects with expertise in robotics and propulsion systems. Passionate about sustainable aerospace technologies.",
-      "email": "emily.rodriguez@student.gitam.edu",
-      "linkedin": "#",
-      "achievements": ["AIAA Design Competition", "Patent Application", "Research Excellence"],
-      "color": "from-green-500 to-emerald-500"
+      "email": "nboddu3@gitam.in",
+      "linkedin": "www.linkedin.com/in/narayana-gupta-boddu",
+      "achievements": ["Second Place in IIT Madras Robo Soccer competition with a custom-built Wi-Fi controlled Robo Car"],
+      "joinedDate": "2024-09-01",
+      "status": "active",
+      "priority": 3
     },
     {
       "id": "exec-4",
-      "name": "David Park",
-      "image": "/images/executives/david.jpg",
+      "name": "B Raagni Moulika ",
+      "image": "/members/raagni.svg",
       "position": "Secretary",
-      "department": "Physics",
-      "year": "Second Year",
+      "department": "BBA Financial Markets ",
+      "year": "Final Year",
       "bio": "Managing communications and documentation with a focus on astrophysics research and outreach programs.",
       "email": "david.park@student.gitam.edu",
       "linkedin": "#",
-      "achievements": ["Science Communication Award", "Research Publication", "Community Outreach"],
-      "color": "from-orange-500 to-red-500"
-    },
-    {
-      "id": "exec-5",
-      "name": "Lisa Wang",
-      "image": "/images/executives/lisa.jpg",
-      "position": "Treasurer",
-      "department": "Business Administration",
-      "year": "Third Year",
-      "bio": "Managing finances and partnerships while bringing business acumen to aerospace projects and sustainability initiatives.",
-      "email": "lisa.wang@student.gitam.edu",
-      "linkedin": "#",
-      "achievements": ["Finance Competition Winner", "Sponsorship Growth", "Budget Optimization"],
-      "color": "from-indigo-500 to-purple-500"
-    },
-    {
-      "id": "exec-6",
-      "name": "James Wilson",
-      "image": "/images/executives/james.jpg",
-      "position": "Events Coordinator",
-      "department": "Marketing",
-      "year": "Second Year",
-      "bio": "Organizing impactful events and workshops that inspire the next generation of aerospace engineers and researchers.",
-      "email": "james.wilson@student.gitam.edu",
-      "linkedin": "#",
-      "achievements": ["Event Excellence Award", "Speaker Coordination", "Community Building"],
-      "color": "from-teal-500 to-cyan-500"
+      "achievements": ["Excellence in Financial Documentation & Budget Management", "Streamlined club communication systems and member onboarding"],
+      "joinedDate": "2024-09-10",
+      "status": "active",
+      "priority": 4
     }
   ],
-  "members": [
+  "teamLeads": [
+    {
+      "id": "lead-1",
+      "name": "Prasanna RDL",
+      "image": "/members/prasanna.svg",
+      "position": "Core Team Lead",
+      "department": "Computer Science Engineering",
+      "year": "Third Year",
+      "bio": "Leading the core team operations including content writing, graphic design, photography, and club operations.",
+      "email": "draghupa3@gitam.in",
+      "linkedin": "https://www.linkedin.com/in/prasanna-rdl/",
+      "achievements": ["Team Leadership", "Content Management", "Event Coordination"],
+      "joinedDate": "2024-09-10",
+      "status": "active",
+      "priority": 1
+    },
+    {
+      "id": "lead-2",
+      "name": "Lanka Geetha Koumudi",
+      "image": "/members/geetha.svg",
+      "position": "StarGazers Team Lead",
+      "department": "TBD",
+      "year": "TBD",
+      "bio": "Leading the StarGazers team in exploring the cosmos through observations, astrophotography, space research, and rocketry projects.",
+      "email": "#",
+      "linkedin": "#",
+      "achievements": ["Astronomy Leadership", "Team Coordination", "Research Projects"],
+      "joinedDate": "2024-09-10",
+      "status": "active",
+      "priority": 2
+    },
+    {
+      "id": "lead-3",
+      "name": "T Kamal Shushank",
+      "image": "/members/kamal.svg",
+      "position": "Programming Team Lead",
+      "department": "Computer Science Engineering",
+      "year": "Third Year",
+      "bio": "Leading the Programming team in building software solutions, web applications, and AI/ML models for club projects.",
+      "email": "glanka@student.gitam.edu ",
+      "linkedin": "https://www.linkedin.com/in/geetha-koumudi-lanka",
+      "achievements": ["Programming Leadership", "Software Development", "Technical Innovation"],
+      "joinedDate": "2024-09-10",
+      "status": "active",
+      "priority": 3
+    }
+  ],
+  "teams": [
+    {
+      "id": "stargazers",
+      "name": "StarGazers (Astronomy, Space and Rocketry)",
+      "shortName": "StarGazers",
+      "description": "Exploring the cosmos through observations, astrophotography, space research, and rocketry projects",
+      "color": {
+        "primary": "#4F46E5",
+        "secondary": "#7C3AED",
+        "gradient": "from-indigo-500 to-purple-600"
+      },
+      "icon": "🔭",
+      "focus": ["Astronomy", "Astrophotography", "Space Research", "Rocketry", "Observation"],
+      "lead": "lead-2"
+    },
+    {
+      "id": "robusta",
+      "name": "Robusta (Robotics & Automation)",
+      "shortName": "Robusta",
+      "description": "Designing, building, and programming robots for competitions and real-world applications",
+      "color": {
+        "primary": "#EF4444",
+        "secondary": "#F97316",
+        "gradient": "from-rose-500 to-orange-500"
+      },
+      "icon": "🤖",
+      "focus": ["Robotics", "Automation", "Hardware", "Control Systems", "Mechatronics"],
+      "lead": "exec-3"
+    },
+    {
+      "id": "programmers",
+      "name": "Programmers (Coding & Development)",
+      "shortName": "Programmers",
+      "description": "Building software solutions, web applications, and AI/ML models for club projects",
+      "color": {
+        "primary": "#06B6D4",
+        "secondary": "#3B82F6",
+        "gradient": "from-cyan-500 to-blue-600"
+      },
+      "icon": "💻",
+      "focus": ["Web Development", "Mobile Apps", "AI/ML", "Data Science", "Software Engineering"],
+      "lead": "lead-3"
+    },
+    {
+      "id": "core-team",
+      "name": "Core Team",
+      "shortName": "Core Team",
+      "description": "Content writing, graphic design, photography, and club operations",
+      "color": {
+        "primary": "#10B981",
+        "secondary": "#059669",
+        "gradient": "from-emerald-500 to-green-600"
+      },
+      "icon": "✨",
+      "focus": ["Content Writing", "Graphic Design", "Photography", "Event Management", "Marketing"],
+      "lead": "lead-1"
+    }
+  ],
+  "_members_commented": "Members section commented out for next development phase - data still to be collected",
+  "_members": [
     {
       "id": "m1",
       "name": "Aarav Patel",
-      "team": "Robotics",
+      "team": "robusta",
       "role": "Hardware Lead",
       "year": "Final Year",
+      "department": "Mechanical Engineering",
       "email": "aarav.patel@gitam.edu",
       "linkedin": "#",
-      "skills": ["CAD", "Mechanisms", "Actuators"],
-      "avatar": ""
+      "skills": ["CAD", "Mechanisms", "Actuators", "3D Printing", "Circuit Design"],
+      "avatar": "",
+      "joinedDate": "2023-09-15",
+      "status": "active",
+      "bio": "Passionate about designing mechanical systems and bringing ideas to life through hardware."
     },
     {
       "id": "m2",
       "name": "Priya Sharma",
-      "team": "Programming",
+      "team": "programmers",
       "role": "Backend Developer",
       "year": "Third Year",
+      "department": "Computer Science",
       "email": "priya.sharma@gitam.edu",
       "linkedin": "#",
-      "skills": ["Node.js", "APIs", "Databases"],
-      "avatar": ""
+      "skills": ["Node.js", "APIs", "Databases", "Cloud Computing", "DevOps"],
+      "avatar": "",
+      "joinedDate": "2024-01-20",
+      "status": "active",
+      "bio": "Building scalable backend systems and exploring cloud technologies."
     },
     {
       "id": "m3",
       "name": "Rahul Verma",
-      "team": "Astronomy",
+      "team": "stargazers",
       "role": "Observation Coordinator",
       "year": "Second Year",
+      "department": "Physics",
       "email": "rahul.verma@gitam.edu",
       "linkedin": "#",
-      "skills": ["Astrophotography", "Data Analysis"],
-      "avatar": ""
+      "skills": ["Astrophotography", "Data Analysis", "Telescope Operations", "Image Processing"],
+      "avatar": "",
+      "joinedDate": "2024-02-10",
+      "status": "active",
+      "bio": "Capturing the beauty of the cosmos and coordinating stargazing sessions."
     },
     {
       "id": "m4",
       "name": "Neha Gupta",
-      "team": "Programming",
-      "role": "UI/UX",
+      "team": "programmers",
+      "role": "UI/UX Designer",
       "year": "Second Year",
+      "department": "Design",
       "email": "neha.gupta@gitam.edu",
       "linkedin": "#",
-      "skills": ["Design Systems", "React", "Accessibility"],
-      "avatar": ""
+      "skills": ["Design Systems", "React", "Accessibility", "Figma", "User Research"],
+      "avatar": "",
+      "joinedDate": "2024-03-05",
+      "status": "active",
+      "bio": "Creating intuitive user experiences and beautiful interfaces."
     },
     {
       "id": "m5",
       "name": "Kiran Rao",
-      "team": "Robotics",
-      "role": "Control Systems",
+      "team": "robusta",
+      "role": "Control Systems Engineer",
       "year": "Third Year",
+      "department": "Electronics",
       "email": "kiran.rao@gitam.edu",
       "linkedin": "#",
-      "skills": ["Embedded", "PID", "Firmware"],
-      "avatar": ""
+      "skills": ["Embedded Systems", "PID Control", "Firmware", "Sensors", "Microcontrollers"],
+      "avatar": "",
+      "joinedDate": "2023-11-12",
+      "status": "active",
+      "bio": "Developing intelligent control systems for autonomous robots."
     },
     {
       "id": "m6",
       "name": "Ishita Menon",
-      "team": "Astronomy",
+      "team": "stargazers",
       "role": "Research Analyst",
       "year": "First Year",
+      "department": "Astrophysics",
       "email": "ishita.menon@gitam.edu",
       "linkedin": "#",
-      "skills": ["Spectroscopy", "Python"],
-      "avatar": ""
+      "skills": ["Spectroscopy", "Python", "Data Visualization", "Research Methods"],
+      "avatar": "",
+      "joinedDate": "2024-07-20",
+      "status": "active",
+      "bio": "Analyzing stellar data and contributing to astronomy research projects."
     },
     {
       "id": "m7",
       "name": "Rohan Das",
-      "team": "Programming",
+      "team": "programmers",
       "role": "Full Stack Developer",
       "year": "Final Year",
+      "department": "Computer Science",
       "email": "rohan.das@gitam.edu",
       "linkedin": "#",
-      "skills": ["Next.js", "DevOps"],
-      "avatar": ""
+      "skills": ["Next.js", "DevOps", "Database Design", "System Architecture"],
+      "avatar": "",
+      "joinedDate": "2023-08-30",
+      "status": "active",
+      "bio": "Building end-to-end applications and managing deployment infrastructure."
     },
     {
       "id": "m8",
       "name": "Sneha Kulkarni",
-      "team": "Robotics",
-      "role": "Electronics",
+      "team": "robusta",
+      "role": "Electronics Specialist",
       "year": "Second Year",
+      "department": "Electronics Engineering",
       "email": "sneha.kulkarni@gitam.edu",
       "linkedin": "#",
-      "skills": ["PCB Design", "Soldering"],
-      "avatar": ""
+      "skills": ["PCB Design", "Soldering", "Circuit Analysis", "Prototyping"],
+      "avatar": "",
+      "joinedDate": "2024-01-15",
+      "status": "active",
+      "bio": "Designing and building electronic circuits for robotics projects."
     },
     {
       "id": "m9",
       "name": "Zain Ali",
-      "team": "Astronomy",
-      "role": "Outreach",
+      "team": "core-team",
+      "role": "Outreach Coordinator",
       "year": "Third Year",
+      "department": "Communications",
       "email": "zain.ali@gitam.edu",
       "linkedin": "#",
-      "skills": ["Public Speaking", "Events"],
-      "avatar": ""
+      "skills": ["Public Speaking", "Event Management", "Content Creation", "Social Media"],
+      "avatar": "",
+      "joinedDate": "2023-10-05",
+      "status": "active",
+      "bio": "Connecting with the community and organizing engaging events."
     },
     {
       "id": "m10",
       "name": "Lavanya R",
-      "team": "Programming",
+      "team": "programmers",
       "role": "Mobile Developer",
       "year": "First Year",
+      "department": "Computer Science",
       "email": "lavanya.r@gitam.edu",
       "linkedin": "#",
-      "skills": ["Flutter", "UI"],
-      "avatar": ""
+      "skills": ["Flutter", "UI Development", "Mobile Design", "Cross-platform"],
+      "avatar": "",
+      "joinedDate": "2024-08-01",
+      "status": "active",
+      "bio": "Developing mobile applications for club projects and events."
     },
     {
       "id": "m11",
       "name": "Harsh Vardhan",
-      "team": "Robotics",
+      "team": "robusta",
       "role": "CAD Designer",
       "year": "First Year",
+      "department": "Mechanical Engineering",
       "email": "harsh.vardhan@gitam.edu",
       "linkedin": "#",
-      "skills": ["Fusion 360", "Simulation"],
-      "avatar": ""
+      "skills": ["Fusion 360", "Simulation", "3D Modeling", "Engineering Drawing"],
+      "avatar": "",
+      "joinedDate": "2024-07-15",
+      "status": "active",
+      "bio": "Creating detailed 3D models and simulations for mechanical components."
     },
     {
       "id": "m12",
       "name": "Meera Nair",
-      "team": "Astronomy",
-      "role": "Data Science",
+      "team": "stargazers",
+      "role": "Data Scientist",
       "year": "Final Year",
+      "department": "Data Science",
       "email": "meera.nair@gitam.edu",
       "linkedin": "#",
-      "skills": ["Python", "Machine Learning"],
-      "avatar": ""
+      "skills": ["Python", "Machine Learning", "Statistical Analysis", "Visualization"],
+      "avatar": "",
+      "joinedDate": "2023-09-20",
+      "status": "active",
+      "bio": "Applying machine learning to astronomical data and space research."
     }
-  ]
+  ],
+  "statistics": {
+    "totalMembers": 0,
+    "totalExecutives": 4,
+    "totalTeamLeads": 3,
+    "totalTeams": 4,
+    "activeProjects": 8,
+    "completedProjects": 15,
+    "eventsOrganized": 25,
+    "lastUpdated": "2025-08-12"
+  }
 }
