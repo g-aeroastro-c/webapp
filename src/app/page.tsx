@@ -227,67 +227,67 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Recruitment Live Section */}
+          {/* Recruitment Closed Section */}
           <div className="w-full max-w-2xl mx-auto mb-12 px-3 sm:px-4 lg:px-0">
-            {/* Live Recruitment Banner */}
+            {/* Recruitment Closed Banner */}
             <div className="mb-6 text-center">
-              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/20 via-green-500/20 to-teal-500/20 border border-emerald-400/40 backdrop-blur-sm mb-3 animate-pulse">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></div>
-                <span className="text-emerald-300 text-xs sm:text-sm font-semibold">🚀 RECRUITMENT 2025 IS LIVE!</span>
-                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></div>
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-red-500/20 via-orange-500/20 to-amber-500/20 border border-red-400/40 backdrop-blur-sm mb-3">
+                <div className="w-2 h-2 bg-red-400 rounded-full"></div>
+                <span className="text-red-300 text-xs sm:text-sm font-semibold">� RECRUITMENT 2025 IS CLOSED</span>
+                <div className="w-2 h-2 bg-red-400 rounded-full"></div>
               </div>
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 px-2">
-                Join the Future of Innovation
+                Thank You for Your Interest
               </h3>
               <p className="text-gray-300 text-xs sm:text-sm md:text-base px-2 leading-relaxed">
-                Ready to explore robotics, programming, astronomy, and more? Apply now and become part of GAAC&apos;s mission to push the boundaries of technology and space exploration.
+                The recruitment for 2025 has ended. Thank you to all applicants! Stay tuned for updates on future opportunities and events with GAAC&apos;s mission in aerospace innovation.
               </p>
             </div>
 
-            {/* Enhanced CTA Section */}
+            {/* Enhanced Status Section */}
             <div className="relative">
               {/* Background glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#09C0F9]/20 via-emerald-500/20 to-[#0EA5E9]/20 rounded-xl sm:rounded-2xl blur-xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 via-orange-500/20 to-amber-500/20 rounded-xl sm:rounded-2xl blur-xl"></div>
               
               {/* Main content */}
               <div className="relative bg-gradient-to-r from-white/10 via-white/5 to-white/10 border border-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 backdrop-blur-md">
                 <div className="text-center mb-4 sm:mb-6">
                   <div className="flex items-center justify-center gap-2 mb-2 sm:mb-3">
-                    <span className="text-xl sm:text-2xl">✨</span>
-                    <h4 className="text-base sm:text-lg md:text-xl font-bold text-white">Ready to Apply?</h4>
-                    <span className="text-xl sm:text-2xl">🚀</span>
+                    <span className="text-xl sm:text-2xl">🔒</span>
+                    <h4 className="text-base sm:text-lg md:text-xl font-bold text-white">Recruitment Closed</h4>
+                    <span className="text-xl sm:text-2xl">�</span>
                   </div>
                   <p className="text-slate-300 text-xs sm:text-sm mb-3 sm:mb-4 px-2 leading-relaxed">
-                    Join teams in <span className="text-cyan-300 font-semibold">Stargazers (Astronomy)</span>, <span className="text-rose-300 font-semibold">Robusta (Robotics)</span>, <span className="text-purple-300 font-semibold">Programmers</span>, and <span className="text-amber-300 font-semibold">Core Team</span>
+                    Applications for <span className="text-red-300 font-semibold">Stargazers (Astronomy)</span>, <span className="text-rose-300 font-semibold">Robusta (Robotics)</span>, <span className="text-purple-300 font-semibold">Programmers</span>, and <span className="text-amber-300 font-semibold">Core Team</span> are no longer being accepted
                   </p>
                 </div>
 
-                {/* Application Steps Preview */}
+                {/* Next Steps Preview */}
                 <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
                   <div className="text-center p-2 sm:p-3 bg-white/5 rounded-lg border border-white/10">
-                    <div className="text-base sm:text-lg mb-1">📝</div>
-                    <div className="text-[10px] sm:text-xs text-slate-300">Fill Application</div>
+                    <div className="text-base sm:text-lg mb-1">�</div>
+                    <div className="text-[10px] sm:text-xs text-slate-300">Processing</div>
                   </div>
                   <div className="text-center p-2 sm:p-3 bg-white/5 rounded-lg border border-white/10">
-                    <div className="text-base sm:text-lg mb-1">🎯</div>
-                    <div className="text-[10px] sm:text-xs text-slate-300">Get Shortlisted</div>
+                    <div className="text-base sm:text-lg mb-1">📧</div>
+                    <div className="text-[10px] sm:text-xs text-slate-300">Results Soon</div>
                   </div>
                   <div className="text-center p-2 sm:p-3 bg-white/5 rounded-lg border border-white/10">
                     <div className="text-base sm:text-lg mb-1">🎉</div>
-                    <div className="text-[10px] sm:text-xs text-slate-300">Join the Team</div>
+                    <div className="text-[10px] sm:text-xs text-slate-300">Stay Tuned</div>
                   </div>
                 </div>
 
-                {/* CTA Button */}
+                {/* Status Button */}
                 <div className="text-center">
                   <a
                     href="/recruitment"
-                    className="inline-flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-gradient-to-r from-emerald-500 via-[#09C0F9] to-teal-600 hover:from-emerald-600 hover:via-[#0EA5E9] hover:to-teal-700 text-white font-bold text-sm sm:text-base md:text-lg rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-2xl hover:shadow-emerald-500/25 group relative overflow-hidden touch-manipulation"
+                    className="inline-flex items-center justify-center gap-2 sm:gap-3 w-full sm:w-auto px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-gradient-to-r from-red-500 via-orange-500 to-amber-600 hover:from-red-600 hover:via-orange-600 hover:to-amber-700 text-white font-bold text-sm sm:text-base md:text-lg rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-2xl hover:shadow-red-500/25 group relative overflow-hidden touch-manipulation"
                   >
                     {/* Button glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-cyan-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-red-400/20 to-orange-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     
-                    <span className="relative z-10">Apply for Recruitment 2025</span>
+                    <span className="relative z-10">View Recruitment Status</span>
                     <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
                     
                     {/* Animated sparkles */}
@@ -296,9 +296,9 @@ export default function Home() {
                   </a>
                   
                   <p className="text-[10px] sm:text-xs text-slate-400 mt-3 sm:mt-4 flex items-center justify-center gap-1 px-2">
-                    <span className="w-1 h-1 bg-emerald-400 rounded-full animate-pulse"></span>
-                    Application takes only 3-5 minutes
-                    <span className="w-1 h-1 bg-emerald-400 rounded-full animate-pulse"></span>
+                    <span className="w-1 h-1 bg-red-400 rounded-full"></span>
+                    Results will be communicated via email
+                    <span className="w-1 h-1 bg-red-400 rounded-full"></span>
                   </p>
                 </div>
               </div>
