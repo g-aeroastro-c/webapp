@@ -79,18 +79,17 @@ function Navbar({ className }: { className?: string }) {
 
         {/* Mobile Layout with Leftmost Green Dot */}
         <div className="md:hidden flex items-center justify-between w-full">
-          {/* Leftmost Flashy Green Dot Button */}
+          {/* Leftmost Recruitment Closed Button */}
           <a
             href="/recruitment"
-            className="relative flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-teal-600 hover:to-emerald-600 transition-all duration-300 active:scale-95 group/flash z-30"
-            aria-label="We're Recruiting"
+            className="relative flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-red-500 to-orange-600 hover:from-orange-600 hover:to-red-600 transition-all duration-300 active:scale-95 group/flash z-30"
+            aria-label="Recruitment Closed"
           >
-            <span className="relative z-10 text-white text-base">🚀</span>
-            {/* Pulsing ring effect */}
-            <div className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75"></div>
-            <div className="absolute inset-0 rounded-full bg-emerald-400/50 animate-pulse"></div>
+            <span className="relative z-10 text-white text-base">�</span>
+            {/* Static ring effect (no pulsing since recruitment is closed) */}
+            <div className="absolute inset-0 rounded-full bg-red-400/30 opacity-50"></div>
             {/* Hover glow effect */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500/30 to-teal-600/30 scale-0 group-hover/flash:scale-150 transition-transform duration-300 blur-sm"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500/30 to-orange-600/30 scale-0 group-hover/flash:scale-150 transition-transform duration-300 blur-sm"></div>
           </a>
           
           {/* Centered GAAC Logo */}
@@ -303,11 +302,11 @@ function Navbar({ className }: { className?: string }) {
         <div className="hidden lg:flex items-center gap-2 xl:gap-3">
           <a
             href="/recruitment"
-            className="relative inline-flex items-center gap-2 pl-2.5 xl:pl-3 pr-3 xl:pr-4 py-2 xl:py-2.5 rounded-full border border-emerald-400/30 bg-gradient-to-r from-emerald-500/15 to-teal-600/15 text-emerald-200 hover:text-white hover:border-emerald-400/50 hover:from-emerald-500/25 hover:to-teal-600/25 transition-all duration-300 shadow-[0_8px_32px_rgba(16,185,129,0.15)]"
+            className="relative inline-flex items-center gap-2 pl-2.5 xl:pl-3 pr-3 xl:pr-4 py-2 xl:py-2.5 rounded-full border border-red-400/30 bg-gradient-to-r from-red-500/15 to-orange-600/15 text-red-200 hover:text-white hover:border-red-400/50 hover:from-red-500/25 hover:to-orange-600/25 transition-all duration-300 shadow-[0_8px_32px_rgba(239,68,68,0.15)]"
           >
-            <span className="inline-flex w-2.5 h-2.5 xl:w-3 xl:h-3 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.8)]"></span>
-            <span className="font-semibold text-sm xl:text-base tracking-wide">We&apos;re Recruiting</span>
-            <span className="text-base xl:text-lg">🚀</span>
+            <span className="inline-flex w-2.5 h-2.5 xl:w-3 xl:h-3 rounded-full bg-red-400 opacity-75 shadow-[0_0_12px_rgba(239,68,68,0.8)]"></span>
+            <span className="font-semibold text-sm xl:text-base tracking-wide">Recruitment Closed</span>
+            <span className="text-base xl:text-lg">�</span>
           </a>
           <a
             href="/track"
@@ -332,11 +331,11 @@ function Navbar({ className }: { className?: string }) {
         <div className="hidden md:flex lg:hidden items-center gap-1.5">
           <a
             href="/recruitment"
-            className="relative inline-flex items-center gap-1.5 pl-2 pr-2.5 py-2 rounded-full border border-emerald-400/30 bg-gradient-to-r from-emerald-500/15 to-teal-600/15 text-emerald-200 hover:text-white hover:border-emerald-400/50 hover:from-emerald-500/25 hover:to-teal-600/25 transition-all duration-300 shadow-[0_8px_32px_rgba(16,185,129,0.15)]"
+            className="relative inline-flex items-center gap-1.5 pl-2 pr-2.5 py-2 rounded-full border border-red-400/30 bg-gradient-to-r from-red-500/15 to-orange-600/15 text-red-200 hover:text-white hover:border-red-400/50 hover:from-red-500/25 hover:to-orange-600/25 transition-all duration-300 shadow-[0_8px_32px_rgba(239,68,68,0.15)]"
           >
-            <span className="inline-flex w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-            <span className="font-semibold text-xs tracking-wide">Recruiting</span>
-            <span className="text-sm">🚀</span>
+            <span className="inline-flex w-2 h-2 rounded-full bg-red-400 opacity-75 shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
+            <span className="font-semibold text-xs tracking-wide">Closed</span>
+            <span className="text-sm">�</span>
           </a>
           <a
             href="/track"
@@ -430,18 +429,18 @@ function Navbar({ className }: { className?: string }) {
           </div>          {/* Enhanced Mobile Navigation Links with Rich Interactions */}
           <nav className="flex-1 overflow-y-auto overscroll-contain px-6 py-6 scroll-smooth">
             <div className="space-y-3">
-              {/* Primary Recruitment CTA at Top */}
+              {/* Primary Recruitment Closed Notice at Top */}
               <div className="mb-6">
                 <a
                   href="/recruitment"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="relative flex items-center justify-center w-full py-4 px-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-teal-600 hover:to-emerald-600 text-white font-bold rounded-2xl transition-all duration-300 active:scale-95 group/cta focus:ring-2 focus:ring-emerald-500/50 focus:outline-none shadow-lg hover:shadow-xl hover:shadow-emerald-500/25 overflow-hidden"
+                  className="relative flex items-center justify-center w-full py-4 px-6 bg-gradient-to-r from-red-500 to-orange-600 hover:from-orange-600 hover:to-red-600 text-white font-bold rounded-2xl transition-all duration-300 active:scale-95 group/cta focus:ring-2 focus:ring-red-500/50 focus:outline-none shadow-lg hover:shadow-xl hover:shadow-red-500/25 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-700 ease-in-out"></div>
                   <span className="relative z-10 flex items-center space-x-3">
-                    <span className="inline-flex w-3 h-3 rounded-full bg-white animate-pulse shadow-[0_0_12px_rgba(255,255,255,0.8)]"></span>
-                    <span className="text-lg font-extrabold">We&apos;re Recruiting</span>
-                    <span className="text-xl">🚀</span>
+                    <span className="inline-flex w-3 h-3 rounded-full bg-white opacity-75 shadow-[0_0_12px_rgba(255,255,255,0.8)]"></span>
+                    <span className="text-lg font-extrabold">Recruitment Closed</span>
+                    <span className="text-xl">�</span>
                   </span>
                 </a>
               </div>
